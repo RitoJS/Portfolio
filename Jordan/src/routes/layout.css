@@ -1,3 +1,17 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+
+html, body {
+    background-color: #C6C1AB;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+#main-background {
+    background-color: #899e97;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+}
