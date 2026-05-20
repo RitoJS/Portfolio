@@ -131,7 +131,7 @@
             y: 50,
             radius: 40,
             startAngle: 0,
-            endAngle: 2 * Math.PI,
+            endAngle: 0.5 * Math.PI,
             clockWise: true
         });
 
