@@ -1,26 +1,15 @@
 <script lang="ts">
+	import type { AnimatedLine } from "$lib/types/animated-line";
+	import type { RotatingCircle } from "$lib/types/rotating-circle";
     import { onMount } from "svelte";
 
-    // TODO: make each type interface in their own files
-    type Point = {
-        x: number;
-        y: number;
-    };
-
-    type AnimatedLine = {
-        start: Point;
-        end: Point;
-        startTime: number | null;
-        phase: "grow" | "shrink";
-        delay: number,
-    }
 
     let canvas: HTMLCanvasElement;
     let frameId: number;
+    // Rotation circle
+    let rotation: number = 0;
 
     const duration = 3500;
-
-    let progress = 0;
 
     const lines: AnimatedLine[] = [
         {
@@ -40,6 +29,25 @@
 
     ]
 
+    const circles: RotatingCircle[] = [
+        {
+            x: 95,
+            y: 50,
+            radius: 100,
+            startAngle: 0,
+            endAngle: 0 + 0.5 * Math.PI,
+            clockWise: true
+        },
+        {
+            x: 60,
+            y: 45,
+            radius: 40,
+            startAngle: 0,
+            endAngle: 0 + 0.5 * Math.PI,
+            clockWise: false
+        }
+    ]
+
 
 
     let ctx : CanvasRenderingContext2D
@@ -54,7 +62,7 @@
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.scale(dpr, dpr);
     }
-    // TODO: Add Types to start/end object
+
     function drawLine(ctx: CanvasRenderingContext2D, line: AnimatedLine, timestamp: number ) {
         const w = canvas.clientWidth;
         const h = canvas.clientHeight;
@@ -107,11 +115,36 @@
     ctx.stroke();
     }
 
-    // TODO: Replace arcParams with a type
-    function drawCircle(progress: number, ctx: CanvasRenderingContext2D,  arcParams: {x: number, y: number, radius: number, startAngle: number, endAngle: number, clockWise: boolean}) {
+    
+    function drawCircle(ctx: CanvasRenderingContext2D,  arcParams: RotatingCircle) {
+
+        ctx.save();
+        rotation += 0.01;
+        // move origin to circle center
+        ctx.translate(arcParams.x, arcParams.y);
+
+        // rotate canvas
+        ctx.rotate(rotation);
+
+        // draw relative to rotated origin
         ctx.beginPath();
-        ctx.arc(arcParams.x, arcParams.y, arcParams.radius, arcParams.startAngle, arcParams.endAngle, arcParams.clockWise );
+
+        ctx.arc(
+            0,
+            0,
+            arcParams.radius,
+            arcParams.startAngle,
+            arcParams.endAngle,
+            arcParams.clockWise
+        );
+
+        ctx.strokeStyle = "#3b82f6";
+        ctx.lineWidth = 8;
+        ctx.lineCap = "round";
+
         ctx.stroke();
+
+        ctx.restore();
     }
 
     function animate(timestamp: number) {
@@ -124,16 +157,11 @@
 
         for (const line of lines) {
             drawLine(ctx, line, timestamp);
-        }
+        };
 
-        drawCircle(progress, ctx, {
-            x: 95,
-            y: 50,
-            radius: 40,
-            startAngle: 0,
-            endAngle: 0.5 * Math.PI,
-            clockWise: true
-        });
+        for (const circle of circles) {
+            drawCircle(ctx, circle);
+        };
 
         frameId = requestAnimationFrame(animate);
     }
