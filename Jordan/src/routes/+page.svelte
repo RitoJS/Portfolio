@@ -9,19 +9,19 @@
     // Rotation circle
     let rotation: number = 0;
 
-    const duration = 3500;
+    const duration = 500;
 
     const lines: AnimatedLine[] = [
         {
-            start: {x: 0.05, y: 0.05},
-            end: {x: 0.8, y: 0.8},
+            start: {x: 0.03, y: 0.05},
+            end: {x: 0.45, y: 0.45},
             startTime: null,
             phase: "grow",
-            delay: 3000 // 3 seconds
+            delay: 7000 // 7 seconds
         },
         {
-            start: {x: 0.45, y: 0.05},
-            end: {x: 0.45, y: 0.45},
+            start: {x: 0.10, y: 0.05},
+            end: {x: 0.60, y: 0.60},
             startTime: null,
             phase: "grow",
             delay: 1000
@@ -105,7 +105,7 @@
 
             if (t >= 1) {
                 line.phase = "grow";
-                line.startTime = timestamp;
+                line.startTime = timestamp + line.delay;
             }
     }
 
