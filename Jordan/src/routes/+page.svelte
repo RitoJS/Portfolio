@@ -20,11 +20,18 @@
             delay: 7000 // 7 seconds
         },
         {
-            start: {x: 0.10, y: 0.05},
+            start: {x: 0.10, y: 0.10},
             end: {x: 0.60, y: 0.60},
             startTime: null,
             phase: "grow",
             delay: 1000
+        },
+        {
+            start: {x: 0.20, y: 0.20},
+            end: {x: 0.80, y: 0.80},
+            startTime: null,
+            phase: "grow",
+            delay: 9000
         }
 
     ]
