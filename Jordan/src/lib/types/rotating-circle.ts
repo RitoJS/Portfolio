@@ -4,5 +4,7 @@ export type RotatingCircle = {
     radius: number,
     startAngle: number,
     endAngle: number,
-    clockWise: boolean
+    clockWise: boolean,
+    angle: number,
+    rotationSpeed: number
 }

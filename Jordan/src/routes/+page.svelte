@@ -6,8 +6,6 @@
 
     let canvas: HTMLCanvasElement;
     let frameId: number;
-    // Rotation circle
-    let rotation: number = 0;
 
     const duration = 500;
 
@@ -20,39 +18,73 @@
             delay: 7000 // 7 seconds
         },
         {
-            start: {x: 0.10, y: 0.10},
-            end: {x: 0.60, y: 0.60},
+            start: {x: 0.75, y: 0.01},
+            end: {x: 0.95, y: 0.50},
             startTime: null,
             phase: "grow",
-            delay: 1000
+            delay: 8000
         },
         {
             start: {x: 0.20, y: 0.20},
             end: {x: 0.80, y: 0.80},
             startTime: null,
             phase: "grow",
-            delay: 9000
+            delay: 5000
+        },
+        {
+            start: {x: 0.03, y: 0.50},
+            end: {x: 0.50, y: 0.95},
+            startTime: null,
+            phase: "grow",
+            delay: 10000
         }
+        
 
     ]
 
     const circles: RotatingCircle[] = [
         {
-            x: 95,
-            y: 50,
-            radius: 100,
+            x: 0.02,
+            y: 0.02,
+            radius: 200,
             startAngle: 0,
             endAngle: 0 + 0.5 * Math.PI,
-            clockWise: true
+            clockWise: true,
+            angle: 0,
+            rotationSpeed: 0.01
         },
         {
-            x: 60,
-            y: 45,
-            radius: 40,
+            x: 0.01,
+            y: 0.04,
+            radius: 120,
             startAngle: 0,
             endAngle: 0 + 0.5 * Math.PI,
-            clockWise: false
-        }
+            clockWise: false,
+            angle: 0,
+            rotationSpeed: 0.03
+        },
+        // Bottom circle
+        {
+            x: 0.90,
+            y: 0.90,
+            radius: 250,
+            startAngle: 0,
+            endAngle: 0 + 0.1 * Math.PI,
+            clockWise: true,
+            angle: 0,
+            rotationSpeed: 0.01
+        },
+        {
+            x: 0.88,
+            y: 0.90,
+            radius: 110,
+            startAngle: 0,
+            endAngle: 0 + 1 * Math.PI,
+            clockWise: false,
+            angle: 0,
+            rotationSpeed: 0.03
+        },
+
     ]
 
 
@@ -60,6 +92,7 @@
     let ctx : CanvasRenderingContext2D
 
     function resizeCanvas(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
+        
         const dpr = window.devicePixelRatio || 1;
         const rect = canvas.getBoundingClientRect();
 
@@ -117,21 +150,27 @@
     }
 
     ctx.strokeStyle = "#3b82f6";
-    ctx.lineWidth = 8;
+    ctx.lineWidth = 2;
     ctx.lineCap = "round";
     ctx.stroke();
     }
 
     
     function drawCircle(ctx: CanvasRenderingContext2D,  arcParams: RotatingCircle) {
+        const w = canvas.clientWidth;
+        const h = canvas.clientHeight;
 
+        // convert percentage -> pixels
+        const x = arcParams.x * w;
+        const y = arcParams.y * h;
+        
         ctx.save();
-        rotation += 0.01;
+        arcParams.angle += arcParams.rotationSpeed;
         // move origin to circle center
-        ctx.translate(arcParams.x, arcParams.y);
+        ctx.translate(x, y);
 
         // rotate canvas
-        ctx.rotate(rotation);
+        ctx.rotate(arcParams.angle);
 
         // draw relative to rotated origin
         ctx.beginPath();
@@ -146,7 +185,7 @@
         );
 
         ctx.strokeStyle = "#3b82f6";
-        ctx.lineWidth = 8;
+        ctx.lineWidth = 2;
         ctx.lineCap = "round";
 
         ctx.stroke();
@@ -184,7 +223,6 @@
 
         const resizeObserver = new ResizeObserver(() => {
             resizeCanvas(canvas, ctx);
-            frameId = requestAnimationFrame(animate);
         });
 
         resizeObserver.observe(canvas);
