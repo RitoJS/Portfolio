@@ -6,6 +6,7 @@
 
     let canvas: HTMLCanvasElement;
     let frameId: number;
+    const style: CSSStyleDeclaration = window.getComputedStyle(document.body);
 
     const duration = 500;
 
@@ -149,7 +150,7 @@
             }
     }
 
-    ctx.strokeStyle = "#3b82f6";
+    ctx.strokeStyle = style.getPropertyValue('--line-canvas-color');
     ctx.lineWidth = 2;
     ctx.lineCap = "round";
     ctx.stroke();
@@ -184,8 +185,8 @@
             arcParams.clockWise
         );
 
-        ctx.strokeStyle = "#3b82f6";
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = style.getPropertyValue('--line-canvas-color');
+        ctx.lineWidth = 4;
         ctx.lineCap = "round";
 
         ctx.stroke();
