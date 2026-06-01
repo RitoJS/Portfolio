@@ -1,4 +1,5 @@
 <script lang="ts">
+	import AnimationLetter from "$lib/components/animation-letter.svelte";
 	import type { AnimatedLine } from "$lib/types/animated-line";
 	import type { RotatingCircle } from "$lib/types/rotating-circle";
     import { onMount } from "svelte";
@@ -6,7 +7,7 @@
 
     let canvas: HTMLCanvasElement;
     let frameId: number;
-    const style: CSSStyleDeclaration = window.getComputedStyle(document.body);
+    let style: CSSStyleDeclaration;
 
     const duration = 500;
 
@@ -214,6 +215,7 @@
     }
 
     onMount(() => {
+        style = window.getComputedStyle(document.body);
         const context = canvas.getContext("2d");
         if (!context) return;
 
@@ -236,5 +238,9 @@
         };
     });
 </script>
-
-<canvas bind:this={canvas} id="main-background"></canvas>
+<main>
+    <canvas bind:this={canvas} id="main-background"></canvas>
+    <h1>
+        <AnimationLetter data="Jordan Sama"/>
+    </h1>
+</main>
