@@ -238,9 +238,12 @@
         };
     });
 </script>
+<header>
+    <h1>JS</h1>
+</header>
 <main>
     <canvas bind:this={canvas} id="main-background"></canvas>
-    <h1>
+    <h2>
         <AnimationLetter data="Jordan Sama" className="title-text"/>
-    </h1>
+    </h2>
 </main>
