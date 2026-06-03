@@ -241,6 +241,6 @@
 <main>
     <canvas bind:this={canvas} id="main-background"></canvas>
     <h1>
-        <AnimationLetter data="Jordan Sama"/>
+        <AnimationLetter data="Jordan Sama" className="title-text"/>
     </h1>
 </main>
