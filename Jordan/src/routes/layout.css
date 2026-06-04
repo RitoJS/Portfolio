@@ -12,6 +12,8 @@
     --default-bg-elements: #afaa96;
     --shadow-elements-color: #979385;
     --default-bg-elements2: #d7d1b9;
+    --default-text-color: #4c4940;
+    --focus-text-color: #beb9a4;
 }
 
 
@@ -20,6 +22,7 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100vh;
+    color: var(--default-text-color);
 }
 
 #main-background {
@@ -32,7 +35,26 @@ html, body {
     left: 0;
 }
 
+.head-menu {
+    height: 6%;
+}
+
+.menu-nav {
+    height: 90%;
+}
+
 .title-text {
     font-size: 3rem;
+}
+
+.selected-block {
+    background-color: var(--default-bg-elements);
+    padding: 15px;
+    width: 15%;
+    .decorator-cube {
+        background-color: var(--bg-block-decorator);
+        width: 35px;
+        margin-right: 1em;
+    }
 }
 

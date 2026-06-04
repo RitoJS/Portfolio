@@ -1,5 +1,6 @@
 <script lang="ts">
 	import AnimationLetter from "$lib/components/animation-letter.svelte";
+	import Menu from "$lib/components/menu.svelte";
 	import type { AnimatedLine } from "$lib/types/animated-line";
 	import type { RotatingCircle } from "$lib/types/rotating-circle";
     import { onMount } from "svelte";
@@ -238,8 +239,11 @@
         };
     });
 </script>
-<header>
+<header class="flex head-menu m-1.5">
     <h1>JS</h1>
+    <nav class="flex justify-around w-full menu-nav">
+        <Menu />
+    </nav>
 </header>
 <main>
     <canvas bind:this={canvas} id="main-background"></canvas>
