@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { flip } from "svelte/animate";
+    import { fade } from "svelte/transition";
 	import AnimationLetter from "$lib/components/animation-letter.svelte";
 	import Menu from "$lib/components/menu.svelte";
 	import type { AnimatedLine } from "$lib/types/animated-line";
@@ -10,7 +12,14 @@
     let frameId: number;
     let style: CSSStyleDeclaration;
 
+
     const duration = 500;
+    //Burger Menu Params
+    let toggleMenu: Boolean = $state(false);
+    let centeredMenu: boolean = $state(false);
+    let resizedMenu: boolean = $state(false);
+    let moveDuration: number = 600; // ms
+    let resizeDuration: number = 400; // ms
 
     const lines: AnimatedLine[] = [
         {
@@ -90,8 +99,34 @@
 
     ]
 
+    //Burger Animations
+    function waiting(time: number) {
+        return new Promise(resolve => setTimeout(resolve, time));
+    }
 
+    async function animateMenu() {
+        const menuIsToggled = !centeredMenu;
+        if (menuIsToggled) {
+            centeredMenu = true;
 
+            await waiting(moveDuration);
+
+            resizedMenu = true;
+
+            await waiting(resizeDuration);
+
+            toggleMenu = !toggleMenu;
+        } else {
+            resizedMenu = false;
+            await waiting(resizeDuration);
+
+            centeredMenu = false;
+            await waiting(moveDuration);
+
+            toggleMenu = !toggleMenu;
+        }
+        
+    }
     let ctx : CanvasRenderingContext2D
 
     function resizeCanvas(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
@@ -239,15 +274,20 @@
         };
     });
 </script>
-<header class="flex head-menu m-1.5">
-    <h1>JS</h1>
-    <nav class="flex justify-around w-full menu-nav">
-        <Menu />
-    </nav>
+<header class="relative md:flex head-menu md:p-1.5">
+    <h1 class="hidden">JS</h1>
+    <div class=" menu-btn absolute md:hidden {centeredMenu ? 'moved': ''} {resizedMenu ? 'resized': ''}" transition:fade={{ duration: 200 }}>
+        <button onclick={animateMenu}>Toggle</button>
+        {#if toggleMenu}
+            <nav class="flex flex-col w-full menu-nav">
+                <Menu />
+            </nav>
+        {/if}
+    </div>
 </header>
 <main>
     <canvas bind:this={canvas} id="main-background"></canvas>
-    <h2>
+    <!--<h2>
         <AnimationLetter data="Jordan Sama" className="title-text"/>
-    </h2>
+    </h2>-->
 </main>

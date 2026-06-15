@@ -7,8 +7,8 @@
     let menu: Menu[] = menuMock;
 </script>
 {#each menu as link, index (index) }
-    <span class="flex selected-block">
+    <div class="flex selected-block">
         <div class="decorator-cube"></div> <a class="w-full pl-4" href={link.link}>{link.label}</a> 
-    </span>
+    </div>
 {/each}
 
