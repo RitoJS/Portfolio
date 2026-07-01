@@ -5,7 +5,7 @@
 	import Menu from "$lib/components/menu.svelte";
 	import type { AnimatedLine } from "$lib/types/animated-line";
 	import type { RotatingCircle } from "$lib/types/rotating-circle";
-    import { onMount } from "svelte";
+    import { onMount, tick } from "svelte";
 
 
     let canvas: HTMLCanvasElement;
@@ -15,9 +15,12 @@
 
     const duration = 500;
     //Burger Menu Params
-    let toggleMenu: Boolean = $state(false);
+    let toggleMenu: boolean = $state(false);
     let centeredMenu: boolean = $state(false);
     let resizedMenu: boolean = $state(false);
+    let optionsMenu = $state({
+        visible: true,
+    });
     let moveDuration: number = 600; // ms
     let resizeDuration: number = 400; // ms
 
@@ -99,7 +102,7 @@
 
     ]
 
-    //Burger Animations
+    // Burger Animations
     function waiting(time: number) {
         return new Promise(resolve => setTimeout(resolve, time));
     }
@@ -116,7 +119,11 @@
             await waiting(resizeDuration);
 
             toggleMenu = !toggleMenu;
+            await tick();
+            optionsMenu = { ...optionsMenu, visible: true };
         } else {
+            optionsMenu = { ...optionsMenu, visible: false };
+            await waiting(800);
             resizedMenu = false;
             await waiting(resizeDuration);
 
@@ -279,8 +286,8 @@
     <div class=" menu-btn absolute md:hidden {centeredMenu ? 'moved': ''} {resizedMenu ? 'resized': ''}" transition:fade={{ duration: 200 }}>
         <button onclick={animateMenu}>Toggle</button>
         {#if toggleMenu}
-            <nav class="flex flex-col w-full menu-nav">
-                <Menu />
+            <nav class="flex flex-col justify-center items-center  w-full menu-nav">
+                <Menu options={optionsMenu} />
             </nav>
         {/if}
     </div>
@@ -288,6 +295,6 @@
 <main>
     <canvas bind:this={canvas} id="main-background"></canvas>
     <!--<h2>
-        <AnimationLetter data="Jordan Sama" className="title-text"/>
-    </h2>-->
+       <AnimationLetter data="Jordan Sama" className="title-text"/>
+    <h2>-->
 </main>
