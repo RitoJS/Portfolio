@@ -6,6 +6,7 @@
 	import type { AnimatedLine } from "$lib/types/animated-line";
 	import type { RotatingCircle } from "$lib/types/rotating-circle";
     import { onMount, tick } from "svelte";
+	import AnimatedBlock from "$lib/components/animated-block.svelte";
 
 
     let canvas: HTMLCanvasElement;
@@ -283,13 +284,12 @@
 </script>
 <header class="relative md:flex head-menu md:p-1.5">
     <h1 class="hidden">JS</h1>
-    <div class=" menu-btn absolute md:hidden {centeredMenu ? 'moved': ''} {resizedMenu ? 'resized': ''}" transition:fade={{ duration: 200 }}>
-        <button onclick={animateMenu}>Toggle</button>
-        {#if toggleMenu}
+    <div class="menu-btn  md:hidden">
+        <AnimatedBlock>
             <nav class="flex flex-col justify-center items-center  w-full menu-nav">
                 <Menu options={optionsMenu} />
             </nav>
-        {/if}
+        </AnimatedBlock>
     </div>
 </header>
 <main>

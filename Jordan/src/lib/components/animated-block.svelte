@@ -66,7 +66,7 @@
 		--resize-duration: {resizeDuration}ms;
 	"
 >
-	<button on:click={toggle}>Toggle</button>
+	<button onclick={toggle}>Toggle</button>
 
 	{#if contentVisible}
 		{@render children?.()}

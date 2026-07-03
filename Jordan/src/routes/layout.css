@@ -53,11 +53,8 @@ html, body {
 }
 
 .menu-btn {
-    background: green;
     padding: 10px;
     margin: 5px;
-    transition: 600ms;
-    transform: translate(0, 0);
     top: 0;
     left: 0;
     width: 15%;
@@ -65,17 +62,6 @@ html, body {
     overflow: hidden;
 }
 
-.menu-btn.moved {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.menu-btn.resized {
-    width: 50%;
-    height: 50%;
-    transition: 400ms;
-}
 
 
 .title-text {
