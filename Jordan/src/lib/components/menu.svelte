@@ -12,9 +12,14 @@
 </script>
 {#if options.visible}
     {#each menu as link, index (index) }
-        <div class="flex selected-block" transition:fly|global={{x: -100, duration: 400, delay: index * 100}} >
-            <div class="decorator-cube"></div> <a class="w-full pl-4" href={link.link}>{link.label}</a> 
+        <div class="flex flex-col w-full h-full selected-hover pt-1 pb-1 justify-center items-center">
+            <hr class="w-full mb-0.5 line-hover " />
+            <div class="flex selected-block" transition:fly|global={{x: -100, duration: 400, delay: index * 100}} >
+                <div class="decorator-cube"></div> <a class="w-full " href={link.link}>{link.label}</a> 
+            </div>
+            <hr class="w-full mt-0.5 line-hover " />
         </div>
+        
     {/each}
 {/if}
 

@@ -70,16 +70,24 @@ html, body {
 
 .selected-block {
     background-color: var(--default-bg-elements);
-    padding: 15px;
-    width: 80%;
-    margin-bottom: 1em;
+    height: 80%;
     font-weight: 500;
 }
 
 .decorator-cube {
     background-color: var(--bg-block-decorator);
     width: 35px;
-    margin-right: 1em;
+    margin: 5px;
+}
+
+.head-separator {
+    border-bottom: 1px solid var(--line-content-separator);
+    opacity: 0.7;
+}
+
+.line-hover {
+    border: 1px solid var(--bg-block-decorator);
+    width: 95%;
 }
 
 
@@ -87,6 +95,7 @@ html, body {
 @media (min-width: 640px) {
     .selected-block {
         width: 60%;
+        margin-bottom: 1em;
     }
 }
 /**Medium size**/
@@ -99,7 +108,11 @@ html, body {
         display: block;
         background-color: var(--bg-block-decorator);
         width: 35px;
-        margin-right: 1em;
+    }
+
+    .selected-block {
+        width: 95%;
+        margin-bottom: 0em;
     }
 }
 

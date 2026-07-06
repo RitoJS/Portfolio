@@ -1,17 +1,39 @@
 <script lang="ts">
-	import { tick } from "svelte";
+	import { tick, onMount } from "svelte";
+
+	type Props = {
+		trigger: import('svelte').Snippet<[boolean]>;
+		children: import('svelte').Snippet;
+		closedWidth?: string;
+		closedHeight?: string;
+		openWidth?: string;
+		openHeight?: string;
+		moveDuration?: number;
+		resizeDuration?: number;
+		startTop?: string | number;
+		startLeft?: string | number;
+		endTop?: string;
+		endLeft?: string;
+		init?: boolean;
+	};
 
 	let {
+		trigger,
 		children,
-		closedWidth = "15%",
+		closedWidth = "15%", 
 		closedHeight = "5%",
 		openWidth = "50%",
 		openHeight = "50%",
 		moveDuration = 600,
-		resizeDuration = 400
-	} = $props();
+		resizeDuration = 400,
+		startTop = 0,
+		startLeft = 0,
+		endTop = "50%",
+		endLeft = "50%",
+		init = false
+	}: Props = $props();
 
-	let centered = $state(false);
+	let moved = $state(false);
 	let resized = $state(false);
 	let contentVisible = $state(false);
 	let block: HTMLDivElement;
@@ -31,8 +53,8 @@
 	}
 
 	async function toggle() {
-		if (!centered) {
-			centered = true;
+		if (!moved) {
+			moved = true;
 			await waitTransitionEnd(block, "transform");
 
 			resized = true;
@@ -46,16 +68,22 @@
 			resized = false;
 			await waitTransitionEnd(block, "width");
 
-			centered = false;
+			moved = false;
 			await waitTransitionEnd(block, "transform");
 		}
 	}
+
+	onMount(() => {
+        if (init) {
+			toggle();
+		}
+    });
 </script>
 
 <div
 	bind:this={block}
 	class="animated-block"
-	class:centered
+	class:moved
 	class:resized
 	style="
 		--closed-width: {closedWidth};
@@ -64,9 +92,17 @@
 		--open-height: {openHeight};
 		--move-duration: {moveDuration}ms;
 		--resize-duration: {resizeDuration}ms;
+		--start-top: {startTop};
+		--start-left: {startLeft};
+		--end-top: {endTop};
+		--end-left: {endLeft};
 	"
->
-	<button onclick={toggle}>Toggle</button>
+>	
+	{#if !init}
+		<button onclick={toggle}>
+			{@render trigger?.(contentVisible)}
+		</button>
+	{/if}
 
 	{#if contentVisible}
 		{@render children?.()}
@@ -76,8 +112,8 @@
 <style>
 	.animated-block {
 		position: absolute;
-		top: 0;
-		left: 0;
+		top: var(--start-top);
+		left: var(--start-left);
 
 		width: var(--closed-width);
 		height: var(--closed-height);
@@ -95,9 +131,9 @@
 			height var(--resize-duration);
 	}
 
-	.animated-block.centered {
-		top: 50%;
-		left: 50%;
+	.animated-block.moved {
+		top: var(--end-top);
+		left: var(--end-left);
 		transform: translate(-50%, -50%);
 	}
 
