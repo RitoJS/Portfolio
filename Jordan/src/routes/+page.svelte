@@ -254,7 +254,7 @@
           closedWidth = "15%" 
             closedHeight = "5%"
             openWidth = "50%"
-            openHeight = "50%"
+            openHeight = "70%"
             moveDuration = {600}
             resizeDuration = {400}
             startTop = {0}
