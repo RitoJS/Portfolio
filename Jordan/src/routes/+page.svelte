@@ -3,6 +3,9 @@
 	import type { AnimatedLine } from "$lib/types/animated-line";
 	import type { RotatingCircle } from "$lib/types/rotating-circle";
     import { onMount } from "svelte";
+    import { getContext } from "svelte";
+
+    const info = getContext<{ text: string | null }>('info');
 
 
     let canvas: HTMLCanvasElement;
@@ -240,7 +243,10 @@
 </script>
 <main>
     <canvas bind:this={canvas} id="main-background"></canvas>
-    <h1>
+    <h1
+        onmouseenter={() => info.text = "C'est mon nom !"}
+	    onmouseleave={() => info.text = null}
+    >
         <AnimationLetter data="Jordan Sama" className="title-text"/>
     </h1>
 </main>
