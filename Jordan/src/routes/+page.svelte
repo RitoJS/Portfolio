@@ -1,15 +1,24 @@
 <script lang="ts">
+    import { flip } from "svelte/animate";
+    import { fade } from "svelte/transition";
 	import AnimationLetter from "$lib/components/animation-letter.svelte";
+	import Menu from "$lib/components/menu.svelte";
 	import type { AnimatedLine } from "$lib/types/animated-line";
 	import type { RotatingCircle } from "$lib/types/rotating-circle";
-    import { onMount } from "svelte";
+    import { onMount, tick } from "svelte";
+	import AnimatedBlock from "$lib/components/animated-block.svelte";
 
 
     let canvas: HTMLCanvasElement;
     let frameId: number;
     let style: CSSStyleDeclaration;
 
+
     const duration = 500;
+    //Burger Menu Params
+    let optionsMenu = $state({
+        visible: true,
+    });
 
     const lines: AnimatedLine[] = [
         {
@@ -89,8 +98,7 @@
 
     ]
 
-
-
+    
     let ctx : CanvasRenderingContext2D
 
     function resizeCanvas(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
@@ -238,9 +246,45 @@
         };
     });
 </script>
+<header class="relative md:flex head-menu md:p-1">
+    <h1 class="hidden">JS</h1>
+    <!--Burger Menu-->
+    <div class="menu-btn  md:hidden">
+        <AnimatedBlock
+          closedWidth = "15%" 
+            closedHeight = "5%"
+            openWidth = "50%"
+            openHeight = "70%"
+            moveDuration = {600}
+            resizeDuration = {400}
+            startTop = {0}
+            startLeft = {0}
+            endTop = "50%"
+            endLeft = "50%"
+            init = {false}
+        > 
+             {#snippet trigger(contentVisible)}
+                {contentVisible ? 'close' : 'Menu'}
+            {/snippet}
+            <nav class="flex flex-col justify-center items-center  w-full menu-nav">
+                <Menu options={optionsMenu} />
+            </nav>
+        </AnimatedBlock>
+    </div>
+
+    <!--Desktop Menu-->
+    <div class="hidden md:block w-full">
+         <nav class="flex justify-around items-center  w-full menu-nav">
+            <Menu options={optionsMenu} />
+        </nav>
+        
+    </div>
+    
+</header>
 <main>
+    <hr class="head-separator"/>
     <canvas bind:this={canvas} id="main-background"></canvas>
-    <h1>
-        <AnimationLetter data="Jordan Sama" className="title-text"/>
-    </h1>
+    <!--<h2>
+       <AnimationLetter data="Jordan Sama" className="title-text"/>
+    <h2>-->
 </main>

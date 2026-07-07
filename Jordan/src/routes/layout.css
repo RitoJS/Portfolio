@@ -12,14 +12,26 @@
     --default-bg-elements: #afaa96;
     --shadow-elements-color: #979385;
     --default-bg-elements2: #d7d1b9;
+    --default-text-color: #4c4940;
+    --focus-text-color: #beb9a4;
 }
 
 
+html {
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
 
 html, body {
     margin: 0;
     padding: 0;
-    height: 100vh;
+    height: 100dvh;
+    color: var(--default-text-color);
+}
+
+.hover-background {
+    transition: 1s;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 #main-background {
@@ -28,9 +40,111 @@ html, body {
     z-index: -1;
     width: 100%;
     height: 100%;
+    top: 0;
+    left: 0;
 }
+
+.head-menu {
+    height: 100%;
+}
+
+.menu-nav {
+    height: 100%;;
+}
+
+.menu-btn {
+    padding: 10px;
+    margin: 5px;
+    top: 0;
+    left: 0;
+    width: 15%;
+    height: 5%;
+    overflow: hidden;
+}
+
+
 
 .title-text {
     font-size: 3rem;
+}
+
+.selected-block {
+    width: 80%;
+    background-color: var(--default-bg-elements);
+    height: 60%;
+    font-weight: 500;
+    background: linear-gradient(to right, var(--focus-elements) 50%, var(--default-bg-elements) 50%);
+    background-size: 200% 100%;
+    background-position:right bottom;
+    transition: 500ms;
+}
+
+.decorator-cube {
+    background-color: var(--bg-block-decorator);
+    width: 35px;
+    height: 35px;
+    margin: 5px;
+    background: linear-gradient(to right, var(--default-bg-elements) 50%, var(--bg-block-decorator) 50%);
+    background-size: 200% 100%;
+    background-position:right bottom;
+    transition: 500ms;
+}
+
+.head-separator {
+    border-bottom: 1px solid var(--line-content-separator);
+    opacity: 0.7;
+}
+
+.selected-hover:hover {
+    color: var(--focus-text-color);
+}
+.selected-hover:hover .line-hover {
+    opacity: 1;
+    width: 95%;
+} 
+
+.selected-hover:hover .selected-block {
+   background-position:left bottom;
+} 
+
+.selected-hover:hover .decorator-cube {
+   background-position:left bottom;
+} 
+
+.line-hover {
+    border: 1px solid var(--bg-block-decorator);
+    width: 0%;
+    opacity: 0;
+    transition: 500ms;
+}
+
+
+/** Small size **/
+@media (min-width: 640px) {
+    .selected-block {
+        width: 60%;
+    }
+    .decorator-cube {
+        height: 35px;
+    }
+}
+/**Medium size**/
+@media (min-width: 768px) {
+    .head-menu {
+        height: 6%;
+    }
+
+    .decorator-cube {
+        display: block;
+        background-color: var(--bg-block-decorator);
+        width: 35px;
+        height: 25px;
+    }
+
+    .selected-block {
+        width: 95%;
+        margin-bottom: 0em;
+        height: 80%;
+    }
 }
 
