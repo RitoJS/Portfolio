@@ -4,7 +4,15 @@
 
     let { data, className, delays = 80 } = $props();
 
-    let letterTabs = $state<AnimatedLetter[]>([]);
+    let letterTabs = $state<AnimatedLetter[]>(
+         Array.from(data as string).map(char => ({
+            letter: char,
+            current: "",
+            show: false,
+            startAt: 0,
+            revealAt: 0
+        }))
+    );
     let rafId: number;
 
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -50,7 +58,14 @@
     }
 
     onMount(() => {
-        init();
+        const now = performance.now();
+
+        letterTabs = letterTabs.map((l, i) => ({
+            ...l,
+            startAt: now + i * delays,
+            revealAt: now + i * delays + 600
+        }));
+
         rafId = requestAnimationFrame(tick);
 
         return () => cancelAnimationFrame(rafId);

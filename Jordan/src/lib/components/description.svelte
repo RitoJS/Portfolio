@@ -1,18 +1,24 @@
 <script lang="ts">
-    import { getContext } from 'svelte';
-    import AnimationLetter from './animation-letter.svelte';
+    import { getContext, onMount } from 'svelte';
+	import AnimationLetter from './animation-letter.svelte';
 
-    const info = getContext<{text: string | null}>('info');
+    const info = getContext<{ text: string | null }>('info');
+
+    let hydrated: boolean = $state(false);
+
+    onMount(() => {
+        hydrated = true;
+    });
 </script>
 
-<div>
-    {#if info.text}
-        <p>
-            <AnimationLetter data={info.text} className="title-text"/>
-        </p>
-    {:else}
-        <p>
-            <AnimationLetter data="Une description sans hover !" className="title-text"/>
-        </p>
-    {/if}
-</div>
+{#if hydrated && info.text}
+    <AnimationLetter 
+        data={info.text} 
+        className="title-text"
+    />
+{:else}
+    <AnimationLetter 
+        data="Une description sans hover !" 
+        className="title-text"
+    />
+{/if}
