@@ -4,6 +4,7 @@
 	import { setContext } from 'svelte';
 	import Description from '$lib/components/description.svelte';
 	
+	import CanvasBackground from '$lib/components/canvas-background.svelte';
 
 	let { children } = $props();
 	const info = $state({
@@ -12,8 +13,8 @@
 
 	setContext('info', info);
 </script>
-
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
+<CanvasBackground></CanvasBackground>
 {@render children()}
 <footer>
 	<Description />
