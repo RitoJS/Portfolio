@@ -1,10 +1,21 @@
 <script lang="ts">
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.svg';
+	import { setContext } from 'svelte';
+	import Description from '$lib/components/description.svelte';
+	
 	import CanvasBackground from '$lib/components/canvas-background.svelte';
 
 	let { children } = $props();
+	const info = $state({
+		text: null as string | null
+	});
+
+	setContext('info', info);
 </script>
-<CanvasBackground></CanvasBackground>
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
+<CanvasBackground></CanvasBackground>
 {@render children()}
+<footer>
+	<Description />
+</footer>
