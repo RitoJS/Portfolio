@@ -148,3 +148,46 @@ html, body {
     }
 }
 
+
+
+/** Animation transition page **/
+.stagger-in,
+.stagger-in-about,
+.stagger-in-contact {
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-delay: var(--stagger-delay);
+    animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+    animation-duration: 300ms;
+}
+
+.stagger-in {
+    animation-name: stagger-in;
+}
+
+.stagger-in-about {
+    animation-name: stagger-in-slide;
+    animation-duration: 400ms;
+    animation-timing-function: ease-out;
+}
+
+.stagger-in-contact {
+    animation-name: stagger-in-fade;
+    animation-duration: 500ms;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes stagger-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes stagger-in-slide {
+    from { opacity: 0; transform: translateX(20px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes stagger-in-fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
