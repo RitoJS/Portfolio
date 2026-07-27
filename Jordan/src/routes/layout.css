@@ -118,6 +118,21 @@ html, body {
     transition: 500ms;
 }
 
+.block-decorator {
+    width: 5%;
+    
+    .thick-line {
+        width: 40%;
+        background-color: var(--focus-elements);
+        margin-right: 5px;
+    }
+
+    .thin-line {
+        width: 15%;
+        background-color: var(--focus-elements);
+    }
+}
+
 
 /** Small size **/
 @media (min-width: 640px) {

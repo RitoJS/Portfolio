@@ -4,25 +4,21 @@
 
     let { data, className, delays = 80 } = $props();
 
-    let letterTabs = $state<AnimatedLetter[]>([]);
+    let letterTabs = $state<AnimatedLetter[]>(
+         Array.from(data as string).map(char => ({
+            letter: char,
+            current: "",
+            show: false,
+            startAt: 0,
+            revealAt: 0
+        }))
+    );
     let rafId: number;
 
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
     function randomChar() {
         return chars[Math.floor(Math.random() * chars.length)];
-    }
-
-    function init() {
-        const now = performance.now();
-
-        letterTabs = Array.from(data as string).map((char, i) => ({
-            letter: char,
-            current: "",
-            show: false,
-            startAt: now + i * delays,        // stagger start
-            revealAt: now + i * delays + 600   // stagger lock
-        }));
     }
 
     function tick() {
@@ -50,7 +46,14 @@
     }
 
     onMount(() => {
-        init();
+        const now = performance.now();
+
+        letterTabs = letterTabs.map((l, i) => ({
+            ...l,
+            startAt: now + i * delays,
+            revealAt: now + i * delays + 600
+        }));
+
         rafId = requestAnimationFrame(tick);
 
         return () => cancelAnimationFrame(rafId);
