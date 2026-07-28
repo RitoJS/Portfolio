@@ -237,6 +237,6 @@
         };
     });
 </script>
-<main>
+<div>
     <canvas bind:this={canvas} id="main-background"></canvas>
-</main>
+</div>

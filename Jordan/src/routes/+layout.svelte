@@ -2,10 +2,24 @@
     import './layout.css';
     import { fly } from 'svelte/transition';
     import { cubicIn, cubicOut } from 'svelte/easing';
+	import { setContext } from 'svelte';
     import favicon from '$lib/assets/favicon.svg';
     import CanvasBackground from '$lib/components/canvas-background.svelte';
+	import Description from '$lib/components/description.svelte';
+	import AnimatedBlock from '$lib/components/animated-block.svelte';
+	import Menu from '$lib/components/menu.svelte';
 
     let { children, data } = $props();
+
+	const info = $state({
+		text: null as string | null
+	});
+
+	let optionsMenu = $state({
+        visible: true,
+    });
+
+	setContext('info', info);
 
     const transitionIn = { easing: cubicIn, x: 10, duration: 300, delay: 800 };
     const transitionOut = { easing: cubicOut, x: -10, duration: 300 };
@@ -52,8 +66,52 @@
 <CanvasBackground />
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
 
+<header class="fixed top-0 left-0 md:flex head-menu md:p-1">
+    <h1 class="hidden">JS</h1>
+    <!--Burger Menu-->
+    <div class=" md:hidden">
+        <AnimatedBlock
+          closedWidth = "65px" 
+            closedHeight = "45px"
+            openWidth = "50%"
+            openHeight = "70%"
+            moveDuration = {600}
+            resizeDuration = {400}
+            startTop = "1%"
+            startLeft = "2%"
+            endTop = "50%"
+            endLeft = "50%"
+            init = {false}
+        > 
+             {#snippet trigger(contentVisible)}
+                {contentVisible ? 'close' : 'Menu'}
+            {/snippet}
+            <nav class="flex flex-col justify-center items-center  w-full menu-nav">
+                <Menu options={optionsMenu} />
+            </nav>
+        </AnimatedBlock>
+    </div>
+
+    <!--Desktop Menu-->
+    <div class="hidden md:block w-full">
+         <nav class="flex justify-around items-center  w-full menu-nav">
+            <Menu options={optionsMenu} />
+        </nav>
+        
+    </div>
+    
+</header>
+
 {#key data.pathname}
-<main in:fly={transitionIn} out:fly={transitionOut} use:stagger={pageStagger}>
+<main class=" main-content pt-15 pr-5 pl-5 pb-15" in:fly={transitionIn} out:fly={transitionOut} use:stagger={pageStagger}>
     {@render children()}
+    <div class="tips">
+        <Description />
+    </div>
 </main>
 {/key}
+
+<footer class="none footer border flex md:block">
+    <div>RitoJS</div>
+    <div>Fait avec truc</div>
+</footer>
