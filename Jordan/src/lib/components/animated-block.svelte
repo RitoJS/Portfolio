@@ -16,6 +16,7 @@
 		endTop?: string;
 		endLeft?: string;
 		init?: boolean;
+		opacity?: number;
 	};
 
 	let {
@@ -33,6 +34,7 @@
 		endTop = "50%",
 		endLeft = "50%",
 		init = false,
+		opacity = 1,
 	}: Props = $props();
 
 	let moved = $state(false);
@@ -106,6 +108,7 @@
 		--start-left: {startLeft};
 		--end-top: {endTop};
 		--end-left: {endLeft};
+		--opacity: {opacity};
 	"
 >	
 	{#if !init}
@@ -123,7 +126,7 @@
 	.animated-block {
 		position: fixed;
 		z-index: 5;
-		opacity: 0;
+		opacity: var(--opacity);
 		top: var(--start-top);
 		left: var(--start-left);
 

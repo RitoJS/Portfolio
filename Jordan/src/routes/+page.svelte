@@ -21,6 +21,7 @@
             endTop = "50%"
             endLeft = "50%"
             init = {true}
+            opacity ={0}
         > 
              {#snippet trigger(contentVisible)}
                 {contentVisible ? 'Yeag' : 'Yarr'}
