@@ -8,6 +8,7 @@
 		closedHeight?: string;
 		openWidth?: string;
 		openHeight?: string;
+		backgroundColor?: string;
 		moveDuration?: number;
 		resizeDuration?: number;
 		startTop?: string | number;
@@ -24,13 +25,14 @@
 		closedHeight = "5%",
 		openWidth = "50%",
 		openHeight = "50%",
+		backgroundColor = "#afaa96",
 		moveDuration = 600,
 		resizeDuration = 400,
 		startTop = 0,
 		startLeft = 0,
 		endTop = "50%",
 		endLeft = "50%",
-		init = false
+		init = false,
 	}: Props = $props();
 
 	let moved = $state(false);
@@ -73,8 +75,15 @@
 		}
 	}
 
-	onMount(() => {
+	function nextFrame() {
+		return new Promise<void>((resolve) => 
+			requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
+		);
+	}
+
+	onMount(async () => {
         if (init) {
+			await nextFrame();
 			toggle();
 		}
     });
@@ -90,6 +99,7 @@
 		--closed-height: {closedHeight};
 		--open-width: {openWidth};
 		--open-height: {openHeight};
+		--bg-color: {backgroundColor};
 		--move-duration: {moveDuration}ms;
 		--resize-duration: {resizeDuration}ms;
 		--start-top: {startTop};
@@ -111,14 +121,15 @@
 
 <style>
 	.animated-block {
-		position: absolute;
+		position: fixed;
+		z-index: 5;
 		top: var(--start-top);
 		left: var(--start-left);
 
 		width: var(--closed-width);
 		height: var(--closed-height);
 
-		background: green;
+		background: var(--bg-color);
 		overflow: hidden;
 
 		transform: translate(0, 0);

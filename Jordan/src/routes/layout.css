@@ -17,6 +17,7 @@
 }
 
 
+
 html {
     overflow-y: hidden;
     overflow-x: hidden;
@@ -47,9 +48,12 @@ html, body {
 }
 
 .head-menu {
-    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: auto;
     width: 100%;
-    z-index: 2;
+    z-index: 50;
 }
 
 .main-content {

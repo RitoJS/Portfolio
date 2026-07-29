@@ -57,16 +57,17 @@
 		}
 
 		targets.forEach((child, i) => {
-			(child as HTMLElement).style.setProperty('--stagger-delay', `${delay + i * step}ms`);
-			child.classList.add(className);
-		});
+            if (child.classList.contains('animated-block')) return; // skip
+            (child as HTMLElement).style.setProperty('--stagger-delay', `${delay + i * step}ms`);
+            child.classList.add(className);
+        });
 	}
 </script>
 
 <CanvasBackground />
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
 
-<header class="fixed top-0 left-0 md:flex head-menu md:p-1">
+<header class=" z-2 md:flex head-menu md:p-1">
     <h1 class="hidden">JS</h1>
     <!--Burger Menu-->
     <div class=" md:hidden">
@@ -103,7 +104,7 @@
 </header>
 
 {#key data.pathname}
-<main class=" main-content pt-15 pr-5 pl-5 pb-15" in:fly={transitionIn} out:fly={transitionOut} use:stagger={pageStagger}>
+<main class=" main-content mt-15 mr-5 ml-5 mb-15 Z-3" in:fly={transitionIn} out:fly={transitionOut} use:stagger={pageStagger}>
     {@render children()}
     <div class="tips">
         <Description />
@@ -111,7 +112,7 @@
 </main>
 {/key}
 
-<footer class="none footer border flex md:block">
+<footer class=" z-3 none footer border flex md:block">
     <div>RitoJS</div>
     <div>Fait avec truc</div>
 </footer>

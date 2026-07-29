@@ -7,7 +7,7 @@ export const menuMock: Menu[] = [
     },
     {
         label: 'About',
-        link: '',
+        link: '/about',
         icon: '',
     },
     {
