@@ -123,6 +123,7 @@
 	.animated-block {
 		position: fixed;
 		z-index: 5;
+		opacity: 0;
 		top: var(--start-top);
 		left: var(--start-left);
 
@@ -143,6 +144,8 @@
 	}
 
 	.animated-block.moved {
+		transition: 1s;
+		opacity: 1;
 		top: var(--end-top);
 		left: var(--end-left);
 		transform: translate(-50%, -50%);
