@@ -83,6 +83,7 @@
             endTop = "50%"
             endLeft = "50%"
             init = {false}
+            transition = "0.5s"
         > 
              {#snippet trigger(contentVisible)}
                 {contentVisible ? 'close' : 'Menu'}

@@ -17,6 +17,7 @@
 		endLeft?: string;
 		init?: boolean;
 		opacity?: number;
+		transition?: string;
 	};
 
 	let {
@@ -35,6 +36,7 @@
 		endLeft = "50%",
 		init = false,
 		opacity = 1,
+		transition = "1s",
 	}: Props = $props();
 
 	let moved = $state(false);
@@ -109,6 +111,7 @@
 		--end-top: {endTop};
 		--end-left: {endLeft};
 		--opacity: {opacity};
+		--transition: {transition}
 	"
 >	
 	{#if !init}
@@ -147,7 +150,7 @@
 	}
 
 	.animated-block.moved {
-		transition: 1s;
+		transition: var(--transition);
 		opacity: 1;
 		top: var(--end-top);
 		left: var(--end-left);
