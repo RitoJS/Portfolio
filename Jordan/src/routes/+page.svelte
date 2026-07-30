@@ -66,10 +66,14 @@
                 </figure>
                 <div class="flex flex-col sm:flex-row">
                     <div>
-                        <h2>Développeur Full-Stack</h2>
+                        <hr class="w-full mb-0.5 " />
+                        <h2 class="text-center">Développeur Full-Stack</h2>
+                        <hr class="w-full mb-0.5 " />
                     </div>
                      <div>
-                        <h2>Intégrateur Web</h2>
+                        <hr class="w-full mb-0.5 " />
+                        <h2 class="text-center">Intégrateur Web</h2>
+                        <hr class="w-full mb-0.5 " />
                     </div>
                 </div>
                 <section class="pr-2 pl-2">
