@@ -18,6 +18,7 @@
 		init?: boolean;
 		opacity?: number;
 		transition?: string;
+		className?: string;
 	};
 
 	let {
@@ -37,6 +38,7 @@
 		init = false,
 		opacity = 1,
 		transition = "1s",
+		className = "",
 	}: Props = $props();
 
 	let moved = $state(false);
@@ -95,7 +97,7 @@
 
 <div
 	bind:this={block}
-	class="animated-block"
+	class={`animated-block ${className}`}
 	class:moved
 	class:resized
 	style="

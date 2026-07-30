@@ -60,7 +60,7 @@
     });
 </script>
 
-<div>
+<div class="w-full">
     {#each letterTabs as letter, index (index)}
         {#if letter.show}
             <span class={className}>

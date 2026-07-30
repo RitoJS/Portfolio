@@ -29,8 +29,8 @@
           closedWidth = "65px" 
             closedHeight = "45px"
             openWidth = "70%"
-            openHeight = "85%"
-            backgroundColor = "#3e3b34"
+            openHeight = "60%"
+            backgroundColor = "#afaa96"
             moveDuration = {600}
             resizeDuration = {400}
             startTop = "5%"
@@ -43,38 +43,62 @@
             {#snippet trigger(contentVisible)}
                 {contentVisible ? '' : ''}
             {/snippet}
-            <h1>
-                <AnimationLetter data="Jordan Sama" className="title-text"/>
+            <h1 class="mt-2 mb-2">
+                <hr class="w-full mb-0.5 " />
+                <div class="flex home-titles w-full items-center text-center">
+                    <AnimationLetter data="Jordan Sama" className="title-text"/>
+                </div>
+                <hr class="w-full mt-0.5 " />
             </h1>
-            <figure>
-                <img 
-                    src={avatarMobile}
-                    in:spinFade={{ duration: 1000 }}
-                    out:fade
-                    id="avatar"
-                    onintrostart={() => (spinning = true)}
-                    onintroend={() => (landed = true)}
-                    class:landed
-                    class:spinning
-                    alt="C'est mon visage !"
-                />
-            </figure>
-            <section>
-                <Date day="Bonjour !" night="Bonsoirs" />
-            </section>
+            <div>
+                <figure class="pl-2 pr-2">
+                    <img 
+                        src={avatarMobile}
+                        in:spinFade={{ duration: 1000 }}
+                        out:fade
+                        id="avatar"
+                        onintrostart={() => (spinning = true)}
+                        onintroend={() => (landed = true)}
+                        class:landed
+                        class:spinning
+                        alt="C'est mon visage !"
+                    />
+                </figure>
+                <div class="flex flex-col sm:flex-row">
+                    <div>
+                        <h2>Développeur Full-Stack</h2>
+                    </div>
+                     <div>
+                        <h2>Intégrateur Web</h2>
+                    </div>
+                </div>
+                <section class="pr-2 pl-2">
+                    <p>
+                        <Date day="Bonjour !" night="Bonsoirs" /> et bienvenue sur mon site internet.<br/>
+                        Vous pouvez naviguer en slidant vers la gauche ou la droite ou via le menu à gauche.
+                    </p>
+                </section>
+            </div>
     </AnimatedBlock>
 </article>
 
 <style>
+    .home-titles {
+        background-color: var(--bg-block-decorator);
+        color: var(--focus-text-color);
+    }
+
     @keyframes spin {
         from { transform: rotate(0deg); }
-        to   { transform: rotate(-1080deg); }
+        to   { transform: rotate(1080deg); }
     }
 
     #avatar {
         position: relative;
         bottom: 100%;
         opacity: 0;
+        width: 80%;
+        margin: auto;
 
         &.landed {
             bottom: 0;
@@ -82,7 +106,7 @@
         }
 
         &.spinning {
-            animation: spin 3s linear forwards; /* independent duration */
+            animation: spin 1s linear forwards; /* independent duration */
         }
     }
 </style>
