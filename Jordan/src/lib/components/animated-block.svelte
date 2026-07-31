@@ -19,6 +19,7 @@
 		opacity?: number;
 		transition?: string;
 		className?: string;
+		buttonMenu?: boolean;
 		animatedBorder?: boolean;
 	};
 
@@ -40,6 +41,7 @@
 		opacity = 1,
 		transition = "1s",
 		className = "",
+		buttonMenu = false,
 		animatedBorder = false,
 	}: Props = $props();
 
@@ -121,7 +123,11 @@
 >	
 	{#if !init}
 		<button onclick={toggle}>
-			{@render trigger?.(contentVisible)}
+			{#if !buttonMenu }
+				{@render trigger?.(contentVisible)}
+			{:else}
+				<!--Mon style button-->
+			{/if}
 		</button>
 	{/if}
 
