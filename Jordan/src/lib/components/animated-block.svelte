@@ -154,6 +154,7 @@
 			height var(--resize-duration);
 		
 		box-shadow: 3px 3px 0px var(--shadow-elements-color);
+		overflow-y: scroll;
 	}
 
 	.animated-block.moved {

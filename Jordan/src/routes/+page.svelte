@@ -66,13 +66,13 @@
                         alt="C'est mon visage !"
                     />
                 </figure>
-                <div class="flex flex-col mt-2 sm:flex-row">
-                    <div class="mt-2 mb-1 home-titles">
+                <div class="flex flex-col mt-2 sm:flex-row sm:items-center">
+                    <div class="mt-2 mb-1 home-titles sm:mr-1 sm:w-1/2">
                         <hr class="w-full mt-0.5 " />
                         <h2 class="text-center p-1">Développeur Full-Stack</h2>
                         <hr class="w-full mb-0.5 " />
                     </div>
-                     <div class=" mb-2 home-titles">
+                     <div class=" mb-2 home-titles sm:w-1/2 sm:mt-2 sm:mb-1">
                         <hr class="w-full mt-0.5 " />
                         <h2 class="text-center p-1">Intégrateur Web</h2>
                         <hr class="w-full mb-0.5 " />
@@ -123,6 +123,13 @@
 
         &.spinning {
             animation: spin 1s linear forwards; /* independent duration */
+        }
+    }
+
+    /** Small size **/
+    @media (min-width: 640px) {
+        #avatar {
+            width: 65%;
         }
     }
 
