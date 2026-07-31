@@ -74,7 +74,7 @@
         <AnimatedBlock
           closedWidth = "65px" 
             closedHeight = "45px"
-            openWidth = "50%"
+            openWidth = "90%"
             openHeight = "70%"
             moveDuration = {600}
             resizeDuration = {400}

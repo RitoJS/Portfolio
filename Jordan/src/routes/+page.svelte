@@ -44,6 +44,7 @@
             {#snippet trigger(contentVisible)}
                 {contentVisible ? '' : ''}
             {/snippet}
+            <hr class=" ml-auto mr-auto animated-block-separator mt-2.5 mb-0.5 " />
             <h1 class="mt-2 mb-2">
                 <hr class="w-full mb-0.5 " />
                 <div class="flex home-titles w-full items-center text-center">
@@ -89,10 +90,15 @@
                         
                 </section>
             </div>
+            <hr class=" ml-auto mr-auto animated-block-separator mt-2.5 mb-0.5 " />
     </AnimatedBlock>
 </article>
 
 <style>
+    .animated-block-separator {
+        width: 50%;
+        color: var(--shadow-elements-color);
+    }
     .home-titles {
         background-color: var(--bg-block-decorator);
         color: var(--focus-text-color);
