@@ -19,6 +19,7 @@
 		opacity?: number;
 		transition?: string;
 		className?: string;
+		animatedBorder?: boolean;
 	};
 
 	let {
@@ -28,7 +29,7 @@
 		closedHeight = "5%",
 		openWidth = "50%",
 		openHeight = "50%",
-		backgroundColor = "#afaa96",
+		backgroundColor = "#d7d1b9",
 		moveDuration = 600,
 		resizeDuration = 400,
 		startTop = 0,
@@ -39,6 +40,7 @@
 		opacity = 1,
 		transition = "1s",
 		className = "",
+		animatedBorder = false,
 	}: Props = $props();
 
 	let moved = $state(false);
@@ -100,6 +102,7 @@
 	class={`animated-block ${className}`}
 	class:moved
 	class:resized
+	class:animated-border={animatedBorder}
 	style="
 		--closed-width: {closedWidth};
 		--closed-height: {closedHeight};
@@ -149,6 +152,8 @@
 			transform var(--move-duration),
 			width var(--resize-duration),
 			height var(--resize-duration);
+		
+		box-shadow: 3px 3px 0px var(--shadow-elements-color);
 	}
 
 	.animated-block.moved {
@@ -162,5 +167,64 @@
 	.animated-block.resized {
 		width: var(--open-width);
 		height: var(--open-height);
+	}
+
+	/* --- animated border --- */
+	.animated-block.animated-border::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		padding: 2px;
+		border-radius: inherit;
+		background: conic-gradient(
+			from var(--border-angle),
+			transparent 0deg,
+			transparent 40deg,
+			var(--default-bg-elements, --focus-text-color) 45deg,
+			transparent 50deg,
+			transparent 130deg,
+			var(--default-bg-elements, --focus-text-color) 135deg,
+			transparent 140deg,
+			transparent 220deg,
+			var(--default-bg-elements, --focus-text-color) 225deg,
+			transparent 230deg,
+			transparent 310deg,
+			var(--default-bg-elements, --focus-text-color) 315deg,
+			transparent 320deg,
+			transparent 360deg
+		);
+		-webkit-mask:
+			linear-gradient(#fff 0 0) content-box,
+			linear-gradient(#fff 0 0);
+		-webkit-mask-composite: xor;
+		mask-composite: exclude;
+		pointer-events: none;
+		z-index: 1;
+
+		animation: border-rotate-fade 4s ease-in-out infinite;
+	}
+
+	@property --border-angle {
+		syntax: "<angle>";
+		initial-value: 0deg;
+		inherits: false;
+	}
+
+	@keyframes border-rotate-fade {
+		0% {
+			--border-angle: 0deg;
+			opacity: 0;
+		}
+		15% {
+			opacity: 1;
+		}
+		70% {
+			--border-angle: 90deg;
+			opacity: 1;
+		}
+		100% {
+			--border-angle: 180deg;
+			opacity: 0;
+		}
 	}
 </style>

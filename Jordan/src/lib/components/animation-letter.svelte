@@ -2,7 +2,7 @@
 	import type { AnimatedLetter } from "$lib/types/animated-letter";
     import { onMount } from "svelte";
 
-    let { data, className, delays = 80 } = $props();
+    let { data, className, classParent = '', delays = 80 } = $props();
 
     let letterTabs = $state<AnimatedLetter[]>(
          Array.from(data as string).map(char => ({
@@ -60,7 +60,7 @@
     });
 </script>
 
-<div class="w-full">
+<div class={classParent}>
     {#each letterTabs as letter, index (index)}
         {#if letter.show}
             <span class={className}>

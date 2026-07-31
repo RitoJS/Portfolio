@@ -30,7 +30,7 @@
             closedHeight = "45px"
             openWidth = "70%"
             openHeight = "60%"
-            backgroundColor = "#afaa96"
+            backgroundColor = "#d8d2ba"
             moveDuration = {600}
             resizeDuration = {400}
             startTop = "5%"
@@ -39,6 +39,7 @@
             endLeft = "50%"
             init = {true}
             opacity ={0}
+            animatedBorder={true}
         > 
             {#snippet trigger(contentVisible)}
                 {contentVisible ? '' : ''}
@@ -46,7 +47,7 @@
             <h1 class="mt-2 mb-2">
                 <hr class="w-full mb-0.5 " />
                 <div class="flex home-titles w-full items-center text-center">
-                    <AnimationLetter data="Jordan Sama" className="title-text"/>
+                    <AnimationLetter data="Jordan Sama" className="title-text" classParent="w-full"/>
                 </div>
                 <hr class="w-full mt-0.5 " />
             </h1>
@@ -64,23 +65,28 @@
                         alt="C'est mon visage !"
                     />
                 </figure>
-                <div class="flex flex-col sm:flex-row">
-                    <div>
-                        <hr class="w-full mb-0.5 " />
-                        <h2 class="text-center">Développeur Full-Stack</h2>
+                <div class="flex flex-col mt-2 sm:flex-row">
+                    <div class="mt-2 mb-1 home-titles">
+                        <hr class="w-full mt-0.5 " />
+                        <h2 class="text-center p-1">Développeur Full-Stack</h2>
                         <hr class="w-full mb-0.5 " />
                     </div>
-                     <div>
-                        <hr class="w-full mb-0.5 " />
-                        <h2 class="text-center">Intégrateur Web</h2>
+                     <div class=" mb-2 home-titles">
+                        <hr class="w-full mt-0.5 " />
+                        <h2 class="text-center p-1">Intégrateur Web</h2>
                         <hr class="w-full mb-0.5 " />
                     </div>
                 </div>
                 <section class="pr-2 pl-2">
                     <p>
-                        <Date day="Bonjour !" night="Bonsoirs" /> et bienvenue sur mon site internet.<br/>
-                        Vous pouvez naviguer en slidant vers la gauche ou la droite ou via le menu à gauche.
+                        <Date day="Bonjour " night="Bonsoirs" /> 
+                        <AnimationLetter data="et bienvenue sur mon site internet." className="" classParent="inline"  />
                     </p>
+
+                    <p>
+                        <AnimationLetter data="Vous pouvez naviguer en slidant vers la gauche ou la droite ou via le menu à gauche." delays={50} className="" />
+                    </p>
+                        
                 </section>
             </div>
     </AnimatedBlock>
@@ -113,4 +119,6 @@
             animation: spin 1s linear forwards; /* independent duration */
         }
     }
+
+    
 </style>

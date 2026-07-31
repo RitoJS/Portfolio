@@ -8,7 +8,7 @@ import AnimationLetter from "./animation-letter.svelte";
     }
 </script>
 
-<AnimationLetter data={getTimes()} className="title-text"/>
+<AnimationLetter data={getTimes()} className="" classParent="inline-block"/>
 
 
 
