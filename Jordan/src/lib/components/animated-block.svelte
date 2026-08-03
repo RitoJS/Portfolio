@@ -99,6 +99,18 @@
     });
 </script>
 
+
+{#if !init}
+		<button class="menu-block" class:moved  onclick={toggle}>
+			{#if buttonMenu }
+				<div class="burger-icon w-full h-full">
+					<hr class="line-burger" id="line1" class:moved/>
+					<hr class="line-burger" id="line2" class:moved/>
+					<hr class="line-burger" id="line3" class:moved/>
+				</div>
+			{/if}
+		</button>
+	{/if}
 <div
 	bind:this={block}
 	class={`animated-block ${className}`}
@@ -122,11 +134,9 @@
 	"
 >	
 	{#if !init}
-		<button onclick={toggle}>
+		<button class="" onclick={toggle}>
 			{#if !buttonMenu }
 				{@render trigger?.(contentVisible)}
-			{:else}
-				<!--Mon style button-->
 			{/if}
 		</button>
 	{/if}
@@ -137,6 +147,53 @@
 </div>
 
 <style>
+
+	#line1.moved{
+		position: relative;
+		transform: rotate(40deg);
+		top: 25%;
+		background-color: var(--focus-text-color);
+	}
+
+	#line2.moved {
+		border: 0px solid;
+		opacity: 0;
+	}
+
+	#line3.moved {
+		position: relative;
+		transform: rotate(-40deg);
+		bottom: 20%;
+		background-color: var(--focus-text-color);
+	}
+	.menu-block {
+		width: 65px;
+		height: 45px;
+		border: 1px solid;
+		position: fixed;
+		top: 1%;
+		left: 2%;
+		z-index: 6;
+		overflow: hidden;
+		transition: 1s;
+		background: var(--default-bg-elements2);
+	}
+
+	.menu-block.moved {
+		background-color: var(--focus-elements);
+		color: var(--focus-text-color);
+	}
+
+	.line-burger {
+		transition: 1s;
+		margin-top: 0.5em;
+		width: 80%;
+		margin-right: auto;
+		margin-left: auto;
+		border: 2px solid;
+
+	}
+
 	.animated-block {
 		position: fixed;
 		z-index: 5;
