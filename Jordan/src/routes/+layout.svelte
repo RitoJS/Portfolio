@@ -89,7 +89,7 @@
              {#snippet trigger(contentVisible)}
                 {contentVisible ? 'close' : 'Menu'}
             {/snippet}
-            <nav class="flex flex-col justify-center items-center  w-full menu-nav">
+            <nav class="grid grid-cols-2 p-2  w-full menu-nav min-w-0">
                 <Menu options={optionsMenu} />
             </nav>
         </AnimatedBlock>

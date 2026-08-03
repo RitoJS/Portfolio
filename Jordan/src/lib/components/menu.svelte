@@ -12,14 +12,24 @@
 </script>
 {#if options.visible}
     {#each menu as link, index (index) }
-        <div class="flex flex-col w-full h-full selected-hover pt-1 pb-1 justify-center items-center">
+        <!--Mobile-->
+        <div class={ `w-full  ${(menu.length-1 === index && !(menu.length-1 & 1) ? 'col-span-full' : '')} border  md:hidden`}>
+            <div class="icon-menu">
+                <p>Je suis {index} sur {menu.length-1}</p>
+            </div>
+            <div class="label-menu">
+                <a class="w-full" href={link.link}>{link.label}</a> 
+            </div>
+        </div>
+        
+        <!--Desk-->
+        <div class="hidden md:flex flex-col w-full h-full selected-hover pt-1 pb-1 justify-center items-center">
             <hr class="w-full mb-0.5 line-hover " />
             <div class="flex selected-block items-center" transition:fly|global={{x: -100, duration: 400, delay: index * 100}} >
                 <div class="decorator-cube"></div> <a class="w-full  " href={link.link}>{link.label}</a> 
             </div>
             <hr class="w-full mt-0.5 line-hover " />
         </div>
-        
     {/each}
 {/if}
 
