@@ -133,13 +133,14 @@
 		--transition: {transition}
 	"
 >	
-	{#if !init}
+	<!--Refaire cette partie pour les label de block générique-->
+	<!--{#if !init}
 		<button class="" onclick={toggle}>
 			{#if !buttonMenu }
 				{@render trigger?.(contentVisible)}
 			{/if}
 		</button>
-	{/if}
+	{/if}-->
 
 	{#if contentVisible}
 		{@render children?.()}
