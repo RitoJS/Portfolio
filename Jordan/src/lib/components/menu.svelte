@@ -16,10 +16,12 @@
         <!--Mobile-->
         <div class={ `w-full p-2  ${(menu.length-1 === index && !(menu.length-1 & 1) ? 'col-span-full' : '')} md:hidden`}>
             <div class="content-menu flex flex-col  w-full h-full">
-                <div class="icon-menu w-full grow-7 border flex justify-center ">
-                   <HomeIcon />
+                <div class="icon-menu w-full basis-0 grow-7 border flex justify-center min-h-0  ">
+                    <div class="min-h-0">
+                        <HomeIcon />
+                    </div>
                 </div>
-                <div class="label-menu w-full grow-2">
+                <div class="label-menu w-full basis-0 grow-2 min-h-0">
                     <a class="w-full" href={link.link}>{link.label}</a> 
                 </div>
             </div>
