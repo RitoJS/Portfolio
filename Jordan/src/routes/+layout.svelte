@@ -130,8 +130,8 @@
 
 <style>
      .modal-bg {
-        opacity: 0.2;
-        background-color: red;
+        opacity: 0.5;
+        background-color: rgb(0, 0, 0);
         transition: 0.2s;
     }
 </style>
