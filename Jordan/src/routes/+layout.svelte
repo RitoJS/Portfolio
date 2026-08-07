@@ -19,6 +19,8 @@
         visible: true,
     });
 
+    let modalBgShow = $state(false);
+
 	setContext('info', info);
 
     const transitionIn = { easing: cubicIn, x: 10, duration: 300, delay: 800 };
@@ -62,15 +64,21 @@
             child.classList.add(className);
         });
 	}
+
+    function modalBg() {
+        return modalBgShow = !modalBgShow;
+    }
 </script>
 
 <CanvasBackground />
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
-
+{#if modalBgShow}
+    <div class="fixed z-1 w-full h-full top-0 left-0 modal-bg md:hidden"></div>
+{/if}
 <header class=" z-2 md:flex head-menu md:p-1">
     <h1 class="hidden">JS</h1>
     <!--Burger Menu-->
-    <div class=" md:hidden">
+    <button class=" md:hidden" onclick={modalBg}>
         <AnimatedBlock
           closedWidth = "65px" 
             closedHeight = "45px"
@@ -94,7 +102,7 @@
                 <Menu options={optionsMenu} />
             </nav>
         </AnimatedBlock>
-    </div>
+    </button>
 
     <!--Desktop Menu-->
     <div class="hidden md:block w-full">
@@ -119,3 +127,11 @@
     <div>RitoJS</div>
     <div>Fait avec truc</div>
 </footer>
+
+<style>
+     .modal-bg {
+        opacity: 0.2;
+        background-color: red;
+        transition: 0.2s;
+    }
+</style>
