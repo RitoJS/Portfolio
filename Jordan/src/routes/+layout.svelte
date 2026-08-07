@@ -78,7 +78,7 @@
 <header class=" z-2 md:flex head-menu md:p-1">
     <h1 class="hidden">JS</h1>
     <!--Burger Menu-->
-    <button class=" md:hidden" onclick={modalBg}>
+    <button class=" md:hidden" onclick={modalBg} >
         <AnimatedBlock
           closedWidth = "65px" 
             closedHeight = "45px"
@@ -98,7 +98,7 @@
              {#snippet trigger(contentVisible)}
                 {contentVisible ? 'close' : 'Menu'}
             {/snippet}
-            <nav class="grid grid-cols-2 auto-rows-fr p-2 w-full h-full menu-nav min-w-0">
+            <nav class="grid grid-cols-2 auto-rows-fr p-2 w-full h-full menu-nav min-w-0" >
                 <Menu options={optionsMenu} />
             </nav>
         </AnimatedBlock>
