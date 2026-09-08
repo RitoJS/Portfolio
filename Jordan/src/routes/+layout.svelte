@@ -78,7 +78,17 @@
 <header class=" z-2 md:flex head-menu md:p-1">
     <h1 class="hidden">JS</h1>
     <!--Burger Menu-->
-    <button class=" md:hidden" onclick={modalBg} >
+    <div 
+    role="button" 
+    tabindex="0"
+    onkeydown={(e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      modalBg();
+    }
+  }} 
+    class=" md:hidden" onclick={modalBg} 
+    >
         <AnimatedBlock
           closedWidth = "65px" 
             closedHeight = "45px"
@@ -102,7 +112,7 @@
                 <Menu options={optionsMenu} />
             </nav>
         </AnimatedBlock>
-    </button>
+    </div>
 
     <!--Desktop Menu-->
     <div class="hidden md:block w-full">

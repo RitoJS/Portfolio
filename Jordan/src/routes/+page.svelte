@@ -2,7 +2,7 @@
     import { fade } from "svelte/transition";
 	import AnimationLetter from "$lib/components/animation-letter.svelte";
     import AnimatedBlock from "$lib/components/animated-block.svelte";
-    import { getContext } from "svelte";
+    import { getContext, onMount, tick } from "svelte";
 	import Date from "$lib/components/date.svelte";
     import avatarMobile from "$lib/assets/avatar.png";
 
@@ -20,78 +20,55 @@
             `
         };
     }
+
+    let showAvatar = $state(false);
+
+    onMount(async () => {
+        await tick();
+        showAvatar = true;
+    });
 </script>
 
 <!--Mobile-->
 
-<article class="md:hidden">
-    <AnimatedBlock
-          closedWidth = "65px" 
-            closedHeight = "45px"
-            openWidth = "70%"
-            openHeight = "60%"
-            backgroundColor = "#d8d2ba"
-            moveDuration = {600}
-            resizeDuration = {400}
-            startTop = "5%"
-            startLeft = "50%"
-            endTop = "50%"
-            endLeft = "50%"
-            init = {true}
-            opacity ={0}
-            animatedBorder={true}
-        > 
-            {#snippet trigger(contentVisible)}
-                {contentVisible ? '' : ''}
-            {/snippet}
-            <hr class=" ml-auto mr-auto animated-block-separator mt-2.5 mb-0.5 " />
-            <h1 class="mt-2 mb-2">
-                <hr class="w-full mb-0.5 " />
-                <div class="flex home-titles w-full items-center text-center">
-                    <AnimationLetter data="Jordan Sama" className="title-text" classParent="w-full"/>
-                </div>
-                <hr class="w-full mt-0.5 " />
-            </h1>
-            <div>
+<article class="md:hidden flex flex-col justify-center h-full">
+    {#if showAvatar}
+        <h1 class=" mb-2">
+            <hr class="w-full mb-0.5 " />
+            <div class="flex home-titles w-full items-center text-center">
+                <AnimationLetter data="Jordan Sama" className="title-text" classParent="w-full"/>
+            </div>
+            <hr class="w-full mt-0.5 " />
+        </h1>
+        <div>
+            
                 <figure class="pl-2 pr-2">
-                    <img 
-                        src={avatarMobile}
-                        in:spinFade={{ duration: 1000 }}
-                        out:fade
-                        id="avatar"
-                        onintrostart={() => (spinning = true)}
-                        onintroend={() => (landed = true)}
-                        class:landed
-                        class:spinning
-                        alt="C'est mon visage !"
+                    <img
+                    src={avatarMobile}
+                    in:spinFade={{ duration: 1000 }}
+                    out:fade
+                    id="avatar"
+                    onintroend={() => (landed = true)}
+                    class:landed
+                    class:spinning
+                    alt="C'est moi !"
                     />
                 </figure>
-                <div class="flex flex-col mt-2 sm:flex-row sm:items-center">
-                    <div class="mt-2 mb-1 home-titles sm:mr-1 sm:w-1/2">
-                        <hr class="w-full mt-0.5 " />
-                        <h2 class="text-center p-1">Développeur Full-Stack</h2>
-                        <hr class="w-full mb-0.5 " />
-                    </div>
-                     <div class=" mb-2 home-titles sm:w-1/2 sm:mt-2 sm:mb-1">
-                        <hr class="w-full mt-0.5 " />
-                        <h2 class="text-center p-1">Intégrateur Web</h2>
-                        <hr class="w-full mb-0.5 " />
-                    </div>
+            
+            <div class="flex flex-col mt-2 sm:flex-row sm:items-center">
+                <div class="mt-2 mb-1 home-titles sm:mr-1 sm:w-1/2">
+                    <hr class="w-full mt-0.5 " />
+                    <h2 class="text-center p-1">Développeur Full-Stack</h2>
+                    <hr class="w-full mb-0.5 " />
                 </div>
-                <section class="pr-2 pl-2">
-                    <p>
-                        <Date day="Bonjour " night="Bonsoirs" /> 
-                        <AnimationLetter data="et bienvenue sur mon site internet." className="" classParent="inline"  />
-                    </p>
-
-                    <p>
-                        <AnimationLetter data="Vous pouvez naviguer en slidant vers la gauche ou la droite ou via le menu à gauche." delays={50} className="" />
-                    </p>
-                        
-                </section>
+                    <div class=" mb-2 home-titles sm:w-1/2 sm:mt-2 sm:mb-1">
+                    <hr class="w-full mt-0.5 " />
+                    <h2 class="text-center p-1">Intégrateur Web</h2>
+                    <hr class="w-full mb-0.5 " />
+                </div>
             </div>
-            <hr class=" ml-auto mr-auto animated-block-separator mt-2.5 mb-0.5 " />
-    </AnimatedBlock>
+        </div>
+    {/if}
 </article>
 
 <style>

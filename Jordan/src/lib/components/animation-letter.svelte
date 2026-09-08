@@ -4,15 +4,15 @@
 
     let { data, className, classParent = '', delays = 80 } = $props();
 
-    let letterTabs = $state<AnimatedLetter[]>(
-         Array.from(data as string).map(char => ({
-            letter: char,
-            current: "",
-            show: false,
-            startAt: 0,
-            revealAt: 0
-        }))
-    );
+    let letterTabs = $derived(
+  Array.from(data as string).map(char => ({
+    letter: char,
+    current: "",
+    show: false,
+    startAt: 0,
+    revealAt: 0
+  }))
+);
     let rafId: number;
 
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
