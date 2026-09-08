@@ -71,6 +71,15 @@
     {/if}
 </article>
 
+<!--Desktop-->
+<article class="hidden md:block">
+    <div class="border">
+        <p>
+            Je suis desktop !
+        </p>
+    </div>
+</article>
+
 <style>
     .animated-block-separator {
         width: 50%;
