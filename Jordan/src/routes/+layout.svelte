@@ -75,7 +75,7 @@
 {#if modalBgShow}
     <div class="fixed z-1 w-full h-full top-0 left-0 modal-bg md:hidden"></div>
 {/if}
-<header class=" z-2 md:flex head-menu md:p-1">
+<header class="z-2 md:flex head-menu md:p-1 shrink-0">
     <h1 class="hidden">JS</h1>
     <!--Burger Menu-->
     <div 
@@ -125,7 +125,7 @@
 </header>
 
 {#key data.pathname}
-<main class=" main-content mt-15 mr-5 ml-5 mb-15 Z-3" in:fly={transitionIn} out:fly={transitionOut} use:stagger={pageStagger}>
+<main class="main-content mt-15 mr-5 ml-5 mb-15 Z-3 flex-1 min-h-0" in:fly={transitionIn} out:fly={transitionOut} use:stagger={pageStagger}>
     {@render children()}
     <div class="tips">
         <Description />
@@ -144,4 +144,16 @@
         background-color: rgb(0, 0, 0);
         transition: 0.2s;
     }
+
+    .tips {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+    }
+
+    .tips:hover {
+        opacity: 0.3;
+        transition: 0.2s;
+    }
+
 </style>

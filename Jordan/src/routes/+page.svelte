@@ -5,6 +5,7 @@
     import { getContext, onMount, tick } from "svelte";
 	import Date from "$lib/components/date.svelte";
     import avatarMobile from "$lib/assets/avatar.png";
+    import avatarDesktop from "$lib/assets/home9.jpg";
 
     const info = getContext<{ text: string | null }>('info');
 
@@ -72,15 +73,46 @@
 </article>
 
 <!--Desktop-->
-<article class="hidden md:block">
-    <div class="border">
-        <p>
-            Je suis desktop !
-        </p>
+<article class="hidden w-full h-full md:block">
+    <div class="border flex w-full h-full">
+        <div class="w-1/4 h-full home-menu border-blue">
+             <hr class="w-full mb-0.5 line-hover " />
+            <div class="flex selected-block items-center" transition:fly|global={{x: -100, duration: 400, delay: index * 100}} >
+                <div class="decorator-cube"></div> <a class="w-full  " href={link.link}>{link.label}</a> 
+            </div>
+            <hr class="w-full mt-0.5 line-hover " />
+        </div>
+
+        <div class="w-2/4 h-full home-portrait border-green">
+            <div class="h-full w-full" id="portrait">
+                <img src={avatarDesktop} alt="mon portrait !" id="avatar-desktop"  />
+            </div>
+        </div>
+
+        <div class="w-1/4 h-full home-menu border-blue">
+             <hr class="w-full mb-0.5 line-hover " />
+            <div class="flex selected-block items-center" transition:fly|global={{x: -100, duration: 400, delay: index * 100}} >
+                <div class="decorator-cube"></div> <a class="w-full  " href={link.link}>{link.label}</a> 
+            </div>
+            <hr class="w-full mt-0.5 line-hover " />
+        </div>
+      
     </div>
 </article>
 
 <style>
+    .border-red {
+        border: 1px solid red;
+        background-color: red;
+    }
+    .border-green {
+        border: 1px solid green;
+        background-color: green;
+    }
+    .border-blue {
+        border: 1px solid blue;
+        background-color: blue;
+    }
     .animated-block-separator {
         width: 50%;
         color: var(--shadow-elements-color);
@@ -110,6 +142,11 @@
         &.spinning {
             animation: spin 1s linear forwards; /* independent duration */
         }
+    }
+
+    #avatar-desktop {
+        width: 100%;
+        height: 100%;
     }
 
     /** Small size **/
