@@ -1,5 +1,6 @@
 <script lang="ts">
     import './layout.css';
+    import { page } from '$app/state';
     import { fly } from 'svelte/transition';
     import { cubicIn, cubicOut } from 'svelte/easing';
 	import { setContext } from 'svelte';
@@ -115,12 +116,13 @@
     </div>
 
     <!--Desktop Menu-->
-    <div class="hidden md:block w-full">
-         <nav class="flex justify-around items-center  w-full menu-nav">
-            <Menu options={optionsMenu} />
-        </nav>
-        
-    </div>
+    {#if page.url.pathname !== '/'}
+        <div class="hidden md:block w-full">
+            <nav class="flex justify-around items-center  w-full menu-nav">
+                <Menu options={optionsMenu} />
+            </nav>
+        </div>
+    {/if}
     
 </header>
 

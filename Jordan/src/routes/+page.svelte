@@ -1,13 +1,18 @@
 <script lang="ts">
-    import { fade } from "svelte/transition";
+    /* eslint-disable svelte/no-navigation-without-resolve */
+    import { menuMock } from "$lib/mock/menu-mock";
+	import type { Menu } from "$lib/types/menu";
+
+    import { fade, fly } from "svelte/transition";
 	import AnimationLetter from "$lib/components/animation-letter.svelte";
-    import AnimatedBlock from "$lib/components/animated-block.svelte";
     import { getContext, onMount, tick } from "svelte";
 	import Date from "$lib/components/date.svelte";
     import avatarMobile from "$lib/assets/avatar.png";
     import avatarDesktop from "$lib/assets/home9.jpg";
 
     const info = getContext<{ text: string | null }>('info');
+
+    let menu: Menu[] = menuMock;
 
     // Animation Avatar
     let landed = $state(false);
@@ -75,26 +80,39 @@
 <!--Desktop-->
 <article class="hidden w-full h-full md:block">
     <div class="border flex w-full h-full">
-        <div class="w-1/4 h-full home-menu border-blue">
-             <hr class="w-full mb-0.5 line-hover " />
-            <div class="flex selected-block items-center" transition:fly|global={{x: -100, duration: 400, delay: index * 100}} >
-                <div class="decorator-cube"></div> <a class="w-full  " href={link.link}>{link.label}</a> 
-            </div>
-            <hr class="w-full mt-0.5 line-hover " />
+        <div class="w-1/4 h-full home-menu flex flex-col justify-around border-blue">
+            {#each menu as link, i (i) }
+                {#if  i != 0 && i <= 2 }
+                    <div class="left-link">
+                        <hr class="w-full mb-0.5 line-hover " />
+                        <div class="flex desktop-link items-center" transition:fly|global={{x: -100, duration: 400, delay: i * 100}} >
+                            <div class="decorator-cube"></div> <a class="w-full text-center  " href={link.link}>{link.label}</a> 
+                        </div>
+                        <hr class="w-full mt-0.5 line-hover " />
+                    </div>
+                {/if}
+            {/each}
         </div>
 
         <div class="w-2/4 h-full home-portrait border-green">
             <div class="h-full w-full" id="portrait">
-                <img src={avatarDesktop} alt="mon portrait !" id="avatar-desktop"  />
+                <!--<img src={avatarDesktop} alt="mon portrait !" id="avatar-desktop"  />-->
             </div>
         </div>
 
-        <div class="w-1/4 h-full home-menu border-blue">
-             <hr class="w-full mb-0.5 line-hover " />
-            <div class="flex selected-block items-center" transition:fly|global={{x: -100, duration: 400, delay: index * 100}} >
-                <div class="decorator-cube"></div> <a class="w-full  " href={link.link}>{link.label}</a> 
-            </div>
-            <hr class="w-full mt-0.5 line-hover " />
+        <div class="w-1/4 h-full home-menu flex flex-col justify-around border-blue">
+            {#each menu as link, i (link) }
+                {#if  i != 0 && i >= 3 }
+                    <div class="right-link">
+                        <hr class="w-full mb-0.5 line-hover " />
+                        <div class="flex desktop-link items-center" transition:fly|global={{x: -100, duration: 400, delay: i * 100}} >
+                            <div class="decorator-cube mr-0"></div> <a class="w-full text-center " href={link.link}>{link.label}</a> 
+                        </div>
+                        <hr class="w-full mt-0.5 line-hover " />
+                    </div>
+                   
+                {/if}
+            {/each}
         </div>
       
     </div>
@@ -113,13 +131,36 @@
         border: 1px solid blue;
         background-color: blue;
     }
-    .animated-block-separator {
-        width: 50%;
-        color: var(--shadow-elements-color);
-    }
     .home-titles {
         background-color: var(--bg-block-decorator);
         color: var(--focus-text-color);
+    }
+
+    .home-menu {
+        .left-link, .right-link {
+            height: 8%;
+            position: relative;
+        }
+
+        .left-link {
+            left: 5%;
+        }
+
+        .right-link {
+            left: -5%;
+        }
+
+    }
+
+    .desktop-link {
+        width: 100%;
+        background-color: var(--default-bg-elements);
+        height: 100%;
+        font-weight: 500;
+        background: linear-gradient(to right, var(--focus-elements) 50%, var(--default-bg-elements) 50%);
+        background-size: 200% 100%;
+        background-position: right bottom;
+        transition: 500ms;
     }
 
     @keyframes spin {
