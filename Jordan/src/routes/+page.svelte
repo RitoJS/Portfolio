@@ -119,18 +119,6 @@
 </article>
 
 <style>
-    .border-red {
-        border: 1px solid red;
-        background-color: red;
-    }
-    .border-green {
-        border: 1px solid green;
-        background-color: green;
-    }
-    .border-blue {
-        border: 1px solid blue;
-        background-color: blue;
-    }
     .home-titles {
         background-color: var(--bg-block-decorator);
         color: var(--focus-text-color);
