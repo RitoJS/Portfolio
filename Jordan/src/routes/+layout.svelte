@@ -1,11 +1,28 @@
 <script lang="ts">
     import './layout.css';
+    import { page } from '$app/state';
     import { fly } from 'svelte/transition';
     import { cubicIn, cubicOut } from 'svelte/easing';
+	import { setContext } from 'svelte';
     import favicon from '$lib/assets/favicon.svg';
     import CanvasBackground from '$lib/components/canvas-background.svelte';
+	import Description from '$lib/components/description.svelte';
+	import AnimatedBlock from '$lib/components/animated-block.svelte';
+	import Menu from '$lib/components/menu.svelte';
 
     let { children, data } = $props();
+
+	const info = $state({
+		text: null as string | null
+	});
+
+	let optionsMenu = $state({
+        visible: true,
+    });
+
+    let modalBgShow = $state(false);
+
+	setContext('info', info);
 
     const transitionIn = { easing: cubicIn, x: 10, duration: 300, delay: 800 };
     const transitionOut = { easing: cubicOut, x: -10, duration: 300 };
@@ -43,17 +60,102 @@
 		}
 
 		targets.forEach((child, i) => {
-			(child as HTMLElement).style.setProperty('--stagger-delay', `${delay + i * step}ms`);
-			child.classList.add(className);
-		});
+            if (child.classList.contains('animated-block')) return; // skip
+            (child as HTMLElement).style.setProperty('--stagger-delay', `${delay + i * step}ms`);
+            child.classList.add(className);
+        });
 	}
+
+    function modalBg() {
+        return modalBgShow = !modalBgShow;
+    }
 </script>
 
 <CanvasBackground />
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
+{#if modalBgShow}
+    <div class="fixed z-1 w-full h-full top-0 left-0 modal-bg md:hidden"></div>
+{/if}
+<header class="z-2 md:flex head-menu md:p-1 shrink-0">
+    <h1 class="hidden">JS</h1>
+    <!--Burger Menu-->
+    <div 
+    role="button" 
+    tabindex="0"
+    onkeydown={(e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      modalBg();
+    }
+  }} 
+    class=" md:hidden" onclick={modalBg} 
+    >
+        <AnimatedBlock
+          closedWidth = "65px" 
+            closedHeight = "45px"
+            openWidth = "90%"
+            openHeight = "70%"
+            moveDuration = {600}
+            resizeDuration = {400}
+            startTop = "1%"
+            startLeft = "2%"
+            endTop = "50%"
+            endLeft = "50%"
+            init = {false}
+            transition = "0.5s"
+            buttonMenu = {true}
+            
+        > 
+             {#snippet trigger(contentVisible)}
+                {contentVisible ? 'close' : 'Menu'}
+            {/snippet}
+            <nav class="grid grid-cols-2 auto-rows-fr p-2 w-full h-full menu-nav min-w-0" >
+                <Menu options={optionsMenu} />
+            </nav>
+        </AnimatedBlock>
+    </div>
+
+    <!--Desktop Menu-->
+    {#if page.url.pathname !== '/'}
+        <div class="hidden md:block w-full">
+            <nav class="flex justify-around items-center  w-full menu-nav">
+                <Menu options={optionsMenu} />
+            </nav>
+        </div>
+    {/if}
+    
+</header>
 
 {#key data.pathname}
-<main in:fly={transitionIn} out:fly={transitionOut} use:stagger={pageStagger}>
+<main class="main-content mt-15 mr-5 ml-5 mb-15 Z-3 flex-1 min-h-0" in:fly={transitionIn} out:fly={transitionOut} use:stagger={pageStagger}>
     {@render children()}
+    <div class="tips">
+        <Description />
+    </div>
 </main>
 {/key}
+
+<footer class=" z-3 none footer border flex md:block">
+    <div>RitoJS</div>
+    <div>Fait avec truc</div>
+</footer>
+
+<style>
+     .modal-bg {
+        opacity: 0.5;
+        background-color: rgb(0, 0, 0);
+        transition: 0.2s;
+    }
+
+    .tips {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+    }
+
+    .tips:hover {
+        opacity: 0.3;
+        transition: 0.2s;
+    }
+
+</style>

@@ -2,17 +2,17 @@
 	import type { AnimatedLetter } from "$lib/types/animated-letter";
     import { onMount } from "svelte";
 
-    let { data, className, delays = 80 } = $props();
+    let { data, className, classParent = '', delays = 80 } = $props();
 
-    let letterTabs = $state<AnimatedLetter[]>(
-         Array.from(data as string).map(char => ({
-            letter: char,
-            current: "",
-            show: false,
-            startAt: 0,
-            revealAt: 0
-        }))
-    );
+    let letterTabs = $derived(
+  Array.from(data as string).map(char => ({
+    letter: char,
+    current: "",
+    show: false,
+    startAt: 0,
+    revealAt: 0
+  }))
+);
     let rafId: number;
 
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -60,7 +60,7 @@
     });
 </script>
 
-<div>
+<div class={classParent}>
     {#each letterTabs as letter, index (index)}
         {#if letter.show}
             <span class={className}>
