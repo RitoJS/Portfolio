@@ -15,7 +15,7 @@ export type About = {
     avatar: string;
     name: string;
     age: Date;
-    job: number;
+    job: string;
     stability: number;
     creativity: number;
     skills: Skills;
