@@ -1,5 +1,5 @@
 import type { About } from "$lib/types/about";
-export const aboutMock = {
+export const aboutMock: About = {
     avatar: '',
     name: 'Jordan Sama',
     age: new Date("1994-08-02"),
