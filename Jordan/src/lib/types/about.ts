@@ -1,7 +1,23 @@
-export type AnimatedLetter = {
-    letter: string;
-    current: string;
-    startAt: number;
-    revealAt: number;
-    show: boolean;
+
+
+type gauge = {
+    name: string;
+    bar: number;
+    icon: string;
+}
+type Skills = {
+    front: gauge[];
+    back: gauge[];
+    workflow: gauge[];
+    plugin: gauge[];
+}
+export type About = {
+    avatar: string;
+    name: string;
+    age: Date;
+    job: number;
+    stability: number;
+    creativity: number;
+    skills: Skills;
+    description: string;
 };
