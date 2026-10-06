@@ -60,7 +60,7 @@
     });
 </script>
 
-<div class={classParent}>
+<span class={classParent}>
     {#each letterTabs as letter, index (index)}
         {#if letter.show}
             <span class={className}>
@@ -72,4 +72,4 @@
             </span>
         {/if}
     {/each}
-</div>
+        </span>

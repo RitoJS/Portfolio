@@ -24,7 +24,7 @@
 
 	setContext('info', info);
 
-    const transitionIn = { easing: cubicIn, x: 10, duration: 300, delay: 800 };
+    const transitionIn = { easing: cubicIn, x: 10, duration: 800, delay: 800 };
     const transitionOut = { easing: cubicOut, x: -10, duration: 300 };
 
     const prefersReducedMotion =
@@ -33,7 +33,7 @@
 
     // one config table, keyed by route
     const staggerConfig: Record<string, { className: string; delay?: number; step?: number, depth?: number }> = {
-        '/about':   { className: 'stagger-in-about',   delay: 800, step: 60 },
+        '/about':   { className: 'stagger-in-about',   delay: 200, step: 80, depth: 3 },
         '/contact': { className: 'stagger-in-contact', delay: 800, step: 80 },
         default:    { className: 'stagger-in', delay: 900, step: 320, depth: 2 }
     };
@@ -53,7 +53,7 @@
 
 		// depth 1 = stagger main's direct children (default)
 		// depth 2 = stagger the children INSIDE each of main's direct children instead
-		let targets: Element[] = Array.from(node.children);
+		let targets: Element[] = Array.from(node.children).filter((el) => !el.classList.contains('tips'));
 
 		for (let level = 1; level < depth; level++) {
 			targets = targets.flatMap((el) => Array.from(el.children));
