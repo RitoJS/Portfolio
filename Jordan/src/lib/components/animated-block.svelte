@@ -100,7 +100,8 @@
 </script>
 
 
-{#if !init}
+<!--Only show this if buttonMenu is True-->
+{#if !init && buttonMenu}
 		<button class="menu-block" class:moved  onclick={toggle}>
 			{#if buttonMenu }
 				<div class="burger-icon w-full h-full">
@@ -110,7 +111,7 @@
 				</div>
 			{/if}
 		</button>
-	{/if}
+{/if}
 <div
 	bind:this={block}
 	class={`animated-block ${className}`}
@@ -134,13 +135,13 @@
 	"
 >	
 	<!--Refaire cette partie pour les label de block générique-->
-	<!--{#if !init}
+	{#if !init}
 		<button class="" onclick={toggle}>
 			{#if !buttonMenu }
 				{@render trigger?.(contentVisible)}
 			{/if}
 		</button>
-	{/if}-->
+	{/if}
 
 	{#if contentVisible}
 		{@render children?.()}
