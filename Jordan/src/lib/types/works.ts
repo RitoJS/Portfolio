@@ -6,10 +6,10 @@ export type Works = {
     screenshots: string[] | null;
     description: string;
     role: string;
-    problem: string;
-    solution: string;
-    langages: string[] | null;
+    problem: string | null;
+    solution: string | null;
+    languages: string[] | null;
     hasDetail: boolean;
     formation: boolean;
-    link: string;
+    link: string | null;
 }
