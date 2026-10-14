@@ -205,10 +205,11 @@
             <!--Mobile/Tablet-->
             <div class="lg:hidden ">
                 <AnimatedBlock
+                    anchored
                     closedWidth = "100%" 
-                    closedHeight = "50%"
+                    closedHeight = "50px"
                     openWidth = "90%"
-                    openHeight = "100%"
+                    openHeight = "90%"
                     moveDuration = {600}
                     resizeDuration = {400}
                     startTop = "0%"
