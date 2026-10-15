@@ -22,6 +22,8 @@
 		buttonMenu?: boolean;
 		animatedBorder?: boolean;
 		anchored?: boolean; // true: closed state follows an in-flow placeholder
+		intro?: (node: Element, params?: void) => void; // params for intro animation
+		introParams?: Record<string, void>;
 	};
 
 	let {
@@ -45,12 +47,15 @@
 		buttonMenu = false,
 		animatedBorder = false,
 		anchored = false,
+		intro = () => ({}),
+		introParams = {},
 	}: Props = $props();
 
 	let moved = $state(false);
 	let resized = $state(false);
 	let contentVisible = $state(false);
 	let block: HTMLDivElement;
+	let mounted = $state(false);
 
 	// --- anchored mode ---
 	let anchor: HTMLDivElement | undefined = $state();
@@ -125,6 +130,7 @@
 	}
 
 	onMount(() => {
+		mounted = true;
 		let cleanup: (() => void) | undefined;
 
 		if (anchored && anchor) {
@@ -174,44 +180,47 @@
 	></div>
 {/if}
 
-<div
-	use:portal={anchored}
-	bind:this={block}
-	class={`animated-block ${className}`}
-	class:moved
-	class:resized
-	class:instant
-	class:offscreen={anchored && !anchorVisible && !moved}
-	class:animated-border={animatedBorder}
-	style="
-		--closed-width: {cWidth};
-		--closed-height: {cHeight};
-		--open-width: {openWidth};
-		--open-height: {openHeight};
-		--bg-color: {backgroundColor};
-		--move-duration: {moveDuration}ms;
-		--resize-duration: {resizeDuration}ms;
-		--start-top: {cTop};
-		--start-left: {cLeft};
-		--end-top: {endTop};
-		--end-left: {endLeft};
-		--opacity: {opacity};
-		--transition: {transition}
-	"
->
-	<!--Refaire cette partie pour les label de block générique-->
-	{#if !init}
-		<button class="" onclick={toggle}>
-			{#if !buttonMenu}
-				{@render trigger?.(contentVisible)}
-			{/if}
-		</button>
-	{/if}
+{#if mounted}
+	<div
+		use:portal={anchored}
+		in:intro|global={introParams}
+		bind:this={block}
+		class={`animated-block ${className}`}
+		class:moved
+		class:resized
+		class:instant
+		class:offscreen={anchored && !anchorVisible && !moved}
+		class:animated-border={animatedBorder}
+		style="
+			--closed-width: {cWidth};
+			--closed-height: {cHeight};
+			--open-width: {openWidth};
+			--open-height: {openHeight};
+			--bg-color: {backgroundColor};
+			--move-duration: {moveDuration}ms;
+			--resize-duration: {resizeDuration}ms;
+			--start-top: {cTop};
+			--start-left: {cLeft};
+			--end-top: {endTop};
+			--end-left: {endLeft};
+			--opacity: {opacity};
+			--transition: {transition}
+		"
+	>
+		<!--Refaire cette partie pour les label de block générique-->
+		{#if !init}
+			<button class="" onclick={toggle}>
+				{#if !buttonMenu}
+					{@render trigger?.(contentVisible)}
+				{/if}
+			</button>
+		{/if}
 
-	{#if contentVisible}
-		{@render children?.()}
-	{/if}
-</div>
+		{#if contentVisible}
+			{@render children?.()}
+		{/if}
+	</div>
+{/if}
 
 <style>
 	.anchor-placeholder {

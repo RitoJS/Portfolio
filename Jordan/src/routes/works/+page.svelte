@@ -2,6 +2,8 @@
 	import AnimatedBlock from "$lib/components/animated-block.svelte";
     import { worksMock } from "$lib/mock/works-mock";
     import type { Works } from "$lib/types/works";
+    import { fly } from "svelte/transition";
+    import { cubicOut } from "svelte/easing";
     import { getContext } from "svelte";
 
     const dataWorks: Works[] = worksMock;
@@ -17,11 +19,13 @@
         >
             {#each dataWorks as work, index (index) }
                 <!--Item-->
-                <div class="relative flex justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                <div class="relative flex justify-between md:justify-normal md:odd:flex-row-reverse group is-active" >
                     <!--Icon-->
-                    <div class={ `${(dataWorks.length-1 !== index ? 'mb-5' : '')} `}>
+                    <div  class={ `${(dataWorks.length-1 !== index ? 'mb-5' : '')} `}>
                         <AnimatedBlock
                             anchored
+                            intro={fly}
+                            introParams={{ y: 10, duration: 500, delay: index * 150, easing: cubicOut }}
                             closedWidth="56px"
                             closedHeight="56px"
                             openWidth="90%"
@@ -48,5 +52,5 @@
 
 
 <style>
-    .signals-block
+    
 </style>
