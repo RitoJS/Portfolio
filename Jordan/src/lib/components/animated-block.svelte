@@ -21,12 +21,15 @@
 		className?: string;
 		buttonMenu?: boolean;
 		animatedBorder?: boolean;
+		anchored?: boolean; // true: closed state follows an in-flow placeholder
+		intro?: (node: Element, params?: any) => any; // params for intro animation
+		introParams?: Record<string, any>;
 	};
 
 	let {
 		trigger,
 		children,
-		closedWidth = "15%", 
+		closedWidth = "15%",
 		closedHeight = "5%",
 		openWidth = "50%",
 		openHeight = "50%",
@@ -43,12 +46,46 @@
 		className = "",
 		buttonMenu = false,
 		animatedBorder = false,
+		anchored = false,
+		intro = () => ({}),
+		introParams = {},
 	}: Props = $props();
 
 	let moved = $state(false);
 	let resized = $state(false);
 	let contentVisible = $state(false);
 	let block: HTMLDivElement;
+	let mounted = $state(false);
+
+	// --- anchored mode ---
+	let anchor: HTMLDivElement | undefined = $state();
+	let rect = $state({ top: 0, left: 0, width: 0, height: 0 });
+	let anchorVisible = $state(false);
+	let instant = $state(false); // disables transitions while following scroll/resize
+
+	// Closed-state values: measured px when anchored, props otherwise
+	const cTop = $derived(anchored ? `${rect.top}px` : String(startTop));
+	const cLeft = $derived(anchored ? `${rect.left}px` : String(startLeft));
+	const cWidth = $derived(anchored ? `${rect.width}px` : closedWidth);
+	const cHeight = $derived(anchored ? `${rect.height}px` : closedHeight);
+
+	function measure(snap = true) {
+		if (!anchored || !anchor || moved) return;
+		const r = anchor.getBoundingClientRect();
+		anchorVisible = r.width > 0 && r.height > 0; // 0 when the anchor is display:none
+		if (snap) {
+			instant = true;
+			requestAnimationFrame(() => (instant = false));
+		}
+		rect = { top: r.top, left: r.left, width: r.width, height: r.height };
+	}
+
+	// Moves the node to <body> so no transformed ancestor can affect position: fixed
+	function portal(node: HTMLElement, enabled: boolean) {
+		if (!enabled) return;
+		document.body.appendChild(node);
+		return { destroy() { node.remove(); } };
+	}
 
 	function waitTransitionEnd(node: HTMLElement, propertyName?: string) {
 		return new Promise<void>((resolve) => {
@@ -66,6 +103,7 @@
 
 	async function toggle() {
 		if (!moved) {
+			measure(false); // fresh position, without disabling the upcoming transition
 			moved = true;
 			await waitTransitionEnd(block, "transform");
 
@@ -86,71 +124,111 @@
 	}
 
 	function nextFrame() {
-		return new Promise<void>((resolve) => 
+		return new Promise<void>((resolve) =>
 			requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
 		);
 	}
 
-	onMount(async () => {
-        if (init) {
-			await nextFrame();
-			toggle();
-		}
-    });
-</script>
+	onMount(() => {
+		mounted = true;
+		let cleanup: (() => void) | undefined;
 
+		if (anchored && anchor) {
+			measure();
+			const ro = new ResizeObserver(() => measure());
+			ro.observe(anchor);
+			const onChange = () => measure();
+			window.addEventListener('resize', onChange);
+			window.addEventListener('scroll', onChange, true); // true: inner scroll containers too
+			cleanup = () => {
+				ro.disconnect();
+				window.removeEventListener('resize', onChange);
+				window.removeEventListener('scroll', onChange, true);
+			};
+		}
+
+		(async () => {
+			if (init) {
+				await nextFrame();
+				toggle();
+			}
+		})();
+
+		return cleanup;
+	});
+</script>
 
 <!--Only show this if buttonMenu is True-->
 {#if !init && buttonMenu}
-		<button class="menu-block" class:moved  onclick={toggle}>
-			{#if buttonMenu }
-				<div class="burger-icon w-full h-full">
-					<hr class="line-burger" id="line1" class:moved/>
-					<hr class="line-burger" id="line2" class:moved/>
-					<hr class="line-burger" id="line3" class:moved/>
-				</div>
-			{/if}
-		</button>
+	<button class="menu-block" class:moved onclick={toggle}>
+		{#if buttonMenu}
+			<div class="burger-icon w-full h-full">
+				<hr class="line-burger" id="line1" class:moved />
+				<hr class="line-burger" id="line2" class:moved />
+				<hr class="line-burger" id="line3" class:moved />
+			</div>
+		{/if}
+	</button>
 {/if}
-<div
-	bind:this={block}
-	class={`animated-block ${className}`}
-	class:moved
-	class:resized
-	class:animated-border={animatedBorder}
-	style="
-		--closed-width: {closedWidth};
-		--closed-height: {closedHeight};
-		--open-width: {openWidth};
-		--open-height: {openHeight};
-		--bg-color: {backgroundColor};
-		--move-duration: {moveDuration}ms;
-		--resize-duration: {resizeDuration}ms;
-		--start-top: {startTop};
-		--start-left: {startLeft};
-		--end-top: {endTop};
-		--end-left: {endLeft};
-		--opacity: {opacity};
-		--transition: {transition}
-	"
->	
-	<!--Refaire cette partie pour les label de block générique-->
-	{#if !init}
-		<button class="" onclick={toggle}>
-			{#if !buttonMenu }
-				{@render trigger?.(contentVisible)}
-			{/if}
-		</button>
-	{/if}
 
-	{#if contentVisible}
-		{@render children?.()}
-	{/if}
-</div>
+<!--In-flow placeholder: it takes the space and gives the fixed block its start position-->
+{#if anchored}
+	<div
+		bind:this={anchor}
+		class="anchor-placeholder"
+		style="width: {closedWidth}; height: {closedHeight};"
+	></div>
+{/if}
+
+{#if mounted}
+	<div
+		use:portal={anchored}
+		in:intro|global={introParams}
+		bind:this={block}
+		class={`animated-block ${className}`}
+		class:moved
+		class:resized
+		class:instant
+		class:offscreen={anchored && !anchorVisible && !moved}
+		class:animated-border={animatedBorder}
+		style="
+			--closed-width: {cWidth};
+			--closed-height: {cHeight};
+			--open-width: {openWidth};
+			--open-height: {openHeight};
+			--bg-color: {backgroundColor};
+			--move-duration: {moveDuration}ms;
+			--resize-duration: {resizeDuration}ms;
+			--start-top: {cTop};
+			--start-left: {cLeft};
+			--end-top: {endTop};
+			--end-left: {endLeft};
+			--opacity: {opacity};
+			--transition: {transition}
+		"
+	>
+		<!--Refaire cette partie pour les label de block générique-->
+		{#if !init}
+			<button class="" onclick={toggle}>
+				{#if !buttonMenu}
+					{@render trigger?.(contentVisible)}
+				{/if}
+			</button>
+		{/if}
+
+		{#if contentVisible}
+			{@render children?.()}
+		{/if}
+	</div>
+{/if}
 
 <style>
+	.anchor-placeholder {
+		pointer-events: none;
+		flex-shrink: 0;
+	}
 
-	#line1.moved{
+	#line1.moved {
 		position: relative;
 		transform: rotate(40deg);
 		top: 25%;
@@ -168,6 +246,7 @@
 		bottom: 20%;
 		background-color: var(--focus-text-color);
 	}
+
 	.menu-block {
 		width: 65px;
 		height: 45px;
@@ -193,7 +272,6 @@
 		margin-right: auto;
 		margin-left: auto;
 		border: 2px solid;
-
 	}
 
 	.animated-block {
@@ -217,7 +295,7 @@
 			transform var(--move-duration),
 			width var(--resize-duration),
 			height var(--resize-duration);
-		
+
 		box-shadow: 3px 3px 0px var(--shadow-elements-color);
 	}
 
@@ -232,6 +310,16 @@
 	.animated-block.resized {
 		width: var(--open-width);
 		height: var(--open-height);
+	}
+
+	/* following scroll/resize: no animation */
+	.animated-block.instant:not(.moved) {
+		transition: none;
+	}
+
+	/* anchor hidden (e.g. lg:hidden parent): hide the block too */
+	.animated-block.offscreen {
+		display: none;
 	}
 
 	/* --- animated border --- */
