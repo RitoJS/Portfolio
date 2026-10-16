@@ -22,8 +22,8 @@
 		buttonMenu?: boolean;
 		animatedBorder?: boolean;
 		anchored?: boolean; // true: closed state follows an in-flow placeholder
-		intro?: (node: Element, params?: void) => void; // params for intro animation
-		introParams?: Record<string, void>;
+		intro?: (node: Element, params?: any) => any; // params for intro animation
+		introParams?: Record<string, any>;
 	};
 
 	let {
