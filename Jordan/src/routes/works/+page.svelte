@@ -4,6 +4,7 @@
     import type { Works } from "$lib/types/works";
     import { fly } from "svelte/transition";
     import { cubicOut } from "svelte/easing";
+	import Detail from "$lib/components/detail.svelte";
 
     const dataWorks: Works[] = worksMock;
 </script>
@@ -78,7 +79,7 @@
                                     {#snippet trigger(contentVisible)}
                                         {contentVisible ? 'close' : 'About Me'}
                                     {/snippet}
-                                    <p>Lorem ipsum ...</p>
+                                    <Detail work={work} />
                                 </AnimatedBlock>
                     </div>
 

@@ -3,7 +3,7 @@ export type Works = {
     endDate: Date | null;
     jobName: string;
     company: string;
-    screenshots: string[] | null;
+    screenshots: string[];
     description: string;
     role: string;
     problem: string | null;

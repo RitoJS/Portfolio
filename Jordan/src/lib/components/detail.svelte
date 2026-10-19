@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Works } from "$lib/types/works";
     import AnimationLetter from "./animation-letter.svelte";
+	import Gallery from "./gallery.svelte";
     type Props = {
         work:  Works;
     };
@@ -9,7 +10,7 @@
    
 </script>
 
-<article class="work-parent p-5 w-full">
+<article class="work-parent p-5 w-full h-full overflow-y-auto">
     <div class="detail flex flex-col w-full">
         <div class="compagny-section text-center w-full">
             <h3 class="compagny-title">{ work.company }</h3>
@@ -63,6 +64,15 @@
                     <p class="language-block">
                         { language }
                     </p>
+                {/each}
+            </div>
+        </div>
+
+        <div class="section-img">
+            <h3>Images :</h3>
+            <div class="gallery-block grid grid-rows-2 md:grid-rows-3">
+                {#each work.screenshots as screenshot, index (index) }
+                    <Gallery images={work.screenshots} miniature={screenshot} />
                 {/each}
             </div>
         </div>
