@@ -46,6 +46,13 @@ html, body {
     flex-direction: column;
 }
 
+.grid-bg {
+    background-image: url(../lib/assets/bg-grid.png);
+    z-index: 99;
+    pointer-events: none;
+    opacity: 0.2;
+}
+
 .hover-background {
     transition: 1s;
     background-color: rgba(0, 0, 0, 0.5);
