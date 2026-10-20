@@ -72,7 +72,7 @@
             <h3>Images :</h3>
             <div class="gallery-block grid grid-rows-2 md:grid-rows-3">
                 {#each work.screenshots as screenshot, index (index) }
-                    <Gallery images={work.screenshots} miniature={screenshot} />
+                    <Gallery images={work.screenshots} miniature={screenshot} startIndex={index} />
                 {/each}
             </div>
         </div>

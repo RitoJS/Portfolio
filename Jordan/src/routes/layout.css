@@ -50,7 +50,7 @@ html, body {
     background-image: url(../lib/assets/bg-grid.png);
     z-index: 99;
     pointer-events: none;
-    opacity: 0.2;
+    opacity: 0.05;
 }
 
 .hover-background {
