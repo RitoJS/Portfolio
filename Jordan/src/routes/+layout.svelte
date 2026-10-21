@@ -107,7 +107,7 @@
             
         > 
              {#snippet trigger(contentVisible)}
-                {contentVisible ? 'close' : 'Menu'}
+                {contentVisible ? '' : ''}
             {/snippet}
             <nav class="grid grid-cols-2 auto-rows-fr p-2 w-full h-full menu-nav min-w-0" >
                 <Menu options={optionsMenu} />
