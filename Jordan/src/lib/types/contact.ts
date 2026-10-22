@@ -12,6 +12,7 @@ export type ContactPage = {
 export type ContactForm = {
     from: string;
     to: string;
+    name: string;
     subject: string;
     html: HTMLElement
 }
