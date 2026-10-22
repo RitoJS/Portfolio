@@ -6,6 +6,7 @@ type ExternLink = {
 export type ContactPage = {
     mail: string;
     gitHub: string;
+    cv: string;
     externLink: ExternLink[];
 }
 

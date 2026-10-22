@@ -12,17 +12,17 @@ export const menuMock: Menu[] = [
     },
     {
         label: 'Works',
-        link: '',
+        link: '/works',
         icon: '',
     },
     {
         label: 'Hobbies',
-        link: '',
+        link: '/hobbies',
         icon: '',
     },
     {
         label: 'Contact',
-        link: '',
+        link: '/contact',
         icon: '',
     }
 
