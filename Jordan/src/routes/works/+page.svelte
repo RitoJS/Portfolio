@@ -33,8 +33,13 @@
                             transition="0.5s"
                             buttonMenu={false}
                         >
-                            {#snippet trigger(contentVisible)}
-                                {contentVisible ? 'close' : 'About Me'}
+                             {#snippet trigger(contentVisible)}
+                                {#if contentVisible}
+                                    <h2 class="text-xs font-bold">X</h2>
+                                    
+                                {:else}
+                                    Icone
+                                {/if}
                             {/snippet}
                             <p>Lorem ipsum ...</p>
                         </AnimatedBlock>
@@ -56,7 +61,7 @@
     <div class="hidden lg:flex w-full h-full block-timeline-desktop overflow-x-auto items-center">
         <div class="relative flex w-full min-w-max justify-between gap-x-24 px-6
                     before:absolute before:top-1/2 before:h-0.5 before:-translate-y-px before:bg-white
-                    before:left-[3.25rem] before:right-[3.25rem]">
+                    before:left-13 before:right-13">
             {#each dataWorks as work, index (index)}
                 <!--Item -->
                 <div class="shrink-0 w-14 grid grid-rows-[2.5rem_56px_2.5rem] gap-y-4 justify-items-center">
@@ -76,8 +81,13 @@
                                     transition="0.5s"
                                     buttonMenu={false}
                                 >
-                                    {#snippet trigger(contentVisible)}
-                                        {contentVisible ? 'close' : 'About Me'}
+                                   {#snippet trigger(contentVisible)}
+                                        {#if contentVisible}
+                                            <h2 class="text-xs font-bold">X</h2>
+                                            
+                                        {:else}
+                                            Icone
+                                        {/if}
                                     {/snippet}
                                     <Detail work={work} />
                                 </AnimatedBlock>

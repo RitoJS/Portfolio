@@ -1,3 +1,10 @@
+<script module lang="ts">
+	const max_blocks = 7;
+
+	let openBlock = $state.raw<symbol[]>([]);
+
+</script>
+
 <script lang="ts">
 	import { tick, onMount } from "svelte";
 
@@ -56,6 +63,7 @@
 	let contentVisible = $state(false);
 	let block: HTMLDivElement;
 	let mounted = $state(false);
+	let elevated = $state(false); // For block on focus to stay on front of everything if we clicked on it
 
 	// --- anchored mode ---
 	let anchor: HTMLDivElement | undefined = $state();
@@ -68,6 +76,39 @@
 	const cLeft = $derived(anchored ? `${rect.left}px` : String(startLeft));
 	const cWidth = $derived(anchored ? `${rect.width}px` : closedWidth);
 	const cHeight = $derived(anchored ? `${rect.height}px` : closedHeight);
+
+	// index blocks var
+	const id = Symbol();
+	const zOpen = $derived(max_blocks + Math.max(openBlock.indexOf(id), 0));
+
+	// Drag blocks var
+	let mouseX: number = $state(0);
+	let mouseY: number = $state(0);
+
+	let dragging = $state(false);
+	let offset = $state({ x: 0, y: 0 });          // how far the block was dragged from its centered position
+	let start = { px: 0, py: 0, ox: 0, oy: 0 };   // pointer and offset at the start of the drag
+
+
+
+	// index blocks functions
+	function raise() {
+		if (openBlock[openBlock.length - 1] === id) return; // already on top
+		openBlock = [...openBlock.filter((s) => s !== id), id];
+	}
+
+	function release() {
+		openBlock = openBlock.filter((s) => s !== id);
+	}
+
+	// if the component is destroyed while open
+	$effect(() => release);
+
+	function bringToFront() {
+		if (moved) raise();
+	}
+
+	
 
 	function measure(snap = true) {
 		if (!anchored || !anchor || moved) return;
@@ -103,6 +144,8 @@
 
 	async function toggle() {
 		if (!moved) {
+			raise();
+			elevated = true;
 			measure(false); // fresh position, without disabling the upcoming transition
 			moved = true;
 			await waitTransitionEnd(block, "transform");
@@ -113,6 +156,7 @@
 			contentVisible = true;
 			await tick();
 		} else {
+			offset = { x: 0, y: 0 };
 			contentVisible = false;
 
 			resized = false;
@@ -120,6 +164,8 @@
 
 			moved = false;
 			await waitTransitionEnd(block, "transform");
+			elevated = false;
+			release();
 		}
 	}
 
@@ -156,6 +202,29 @@
 
 		return cleanup;
 	});
+
+	// Drag blocks functions
+	function onDragStart(e: PointerEvent) {
+		if (!resized) return; // only drag when fully open
+		dragging = true;
+		start = { px: e.clientX, py: e.clientY, ox: offset.x, oy: offset.y };
+		(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+	}
+
+	function onDragMove(e: PointerEvent) {
+		mouseX = e.clientX; // live position (only needed if you display it)
+		mouseY = e.clientY;
+		if (!dragging) return;
+		offset = {
+			x: start.ox + (e.clientX - start.px),
+			y: start.oy + (e.clientY - start.py)
+		};
+	}
+
+	function onDragEnd(e: PointerEvent) {
+		dragging = false;
+		(e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
+	}
 </script>
 
 <!--Only show this if buttonMenu is True-->
@@ -181,14 +250,18 @@
 {/if}
 
 {#if mounted}
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<div
 		use:portal={anchored}
 		in:intro|global={introParams}
+		onpointerdown={bringToFront}
 		bind:this={block}
 		class={`animated-block ${className}`}
 		class:moved
 		class:resized
+		class:elevated
 		class:instant
+		class:dragging
 		class:offscreen={anchored && !anchorVisible && !moved}
 		class:animated-border={animatedBorder}
 		style="
@@ -204,16 +277,31 @@
 			--end-top: {endTop};
 			--end-left: {endLeft};
 			--opacity: {opacity};
-			--transition: {transition}
+			--transition: {transition};
+			--z-open: {zOpen};
+			translate: {offset.x}px {offset.y}px;
 		"
 	>
-		<!--Refaire cette partie pour les label de block générique-->
+		<div
+			class={`${contentVisible ? 'h-5' : ''} drag-handle`}
+			onpointerdown={onDragStart}
+			onpointermove={onDragMove}
+			onpointerup={onDragEnd}
+			onpointercancel={onDragEnd}
+		>
+			
+		</div>
 		{#if !init}
-			<button class="" onclick={toggle}>
-				{#if !buttonMenu}
-					{@render trigger?.(contentVisible)}
-				{/if}
-			</button>
+			<div 
+				role="button"
+				tabindex="0"
+				class="trigger"
+				class:open={contentVisible}
+				onclick={toggle}
+				onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), toggle())}
+			>
+				{@render trigger?.(contentVisible)}
+			</div>
 		{/if}
 
 		{#if contentVisible}
@@ -294,7 +382,8 @@
 			left var(--move-duration),
 			transform var(--move-duration),
 			width var(--resize-duration),
-			height var(--resize-duration);
+			height var(--resize-duration),
+			translate var(--move-duration);
 
 		box-shadow: 3px 3px 0px var(--shadow-elements-color);
 	}
@@ -322,6 +411,25 @@
 		display: none;
 	}
 
+	/*On active*/
+	.animated-block.elevated {
+		z-index: var(--z-open);
+	}
+
+	/* Drag blocks */
+	.drag-handle {
+		cursor: grab;
+		touch-action: none;
+		user-select: none;
+		background-color: var(--bg-block-decorator);
+	}
+
+	.animated-block.dragging {
+		transition: none;
+	}
+	.animated-block.dragging .drag-handle {
+		cursor: grabbing;
+	}
 	/* --- animated border --- */
 	.animated-block.animated-border::after {
 		content: "";
@@ -355,6 +463,19 @@
 		z-index: 1;
 
 		animation: border-rotate-fade 4s ease-in-out infinite;
+	}
+
+	.trigger {
+		width: 100%;
+	}
+
+	.trigger.open {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: auto;
+		padding: 0.5rem 15px 0.5rem 0.5rem;
+		z-index: 2;
 	}
 
 	@property --border-angle {
