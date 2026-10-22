@@ -15,6 +15,4 @@ export const contactPageMock: ContactPage = {
         link: 'https://www.linkedin.com/in/jordan-sama'
     }
    ]
-
-   
 }
