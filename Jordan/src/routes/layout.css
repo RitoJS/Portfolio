@@ -163,17 +163,30 @@ html, body {
 
 .block-decorator {
     width: 5%;
-    
+
     .thick-line {
         width: 40%;
-        background-color: var(--focus-elements);
+      
         margin-right: 5px;
     }
 
     .thin-line {
         width: 15%;
-        background-color: var(--focus-elements);
     }
+}
+
+.thick-line {
+    background-color: var(--focus-elements);
+    margin-right: 5px;
+}
+
+.thin-line {
+    background-color: var(--focus-elements);
+}
+
+.page-title {
+    font-size: 2em;
+    text-shadow: 6px 4px 2px rgba(0,0,0,0.2);
 }
 
 
