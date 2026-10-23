@@ -14,43 +14,66 @@
             <!--Form-->
             <div class="form-block">
                 <form>
-                    <div class="form-input flex  mt-3 md:mt-10 text-center">
-                        <div class=" w-3 md:block thick-line mr-2"></div>
-                        <div class="w-1 thin-line mr-2"></div>
-                        <input type="text" placeholder="Nom" class="w-full"  required />
+                    <div class="form-input  mt-3 md:mt-10 ">
+                        <label class="ml-6.5 label-form" for="nom">Nom: </label>
+                        <div class="flex w-full">
+                            <div class=" w-3 md:block thick-line-pages mr-2"></div>
+                            <div class="w-1 thin-line-pages mr-2"></div>
+                            <input type="text" class="w-full" name="nom"  required />
+                        </div>
+                        
                     </div>
 
-                    <div class="form-input flex  mt-3 md:mt-10 text-center">
-                        <div class=" w-3 md:block thick-line mr-2"></div>
-                        <div class="w-1 thin-line mr-2"></div>
-                        <input
-                            type="mail"
-                            placeholder="Adresse Email"
-                            pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
-                            class="w-full"
-                            required
-                        />
+                    
+                    <div class="form-input  mt-3 md:mt-10 ">
+                        <label class="ml-6.5 label-form"  for="email">Adresse Email: </label>
+                        <div class="flex w-full ">
+                            <div class=" w-3 md:block thick-line-pages mr-2"></div>
+                            <div class="w-1 thin-line-pages mr-2"></div>
+                            <input
+                                type="mail"
+                                pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+                                class="w-full"
+                                name="email"
+                                required
+                            />
+                        </div>
+                       
                     </div>
 
-                    <div class="form-input flex  mt-3 md:mt-10 text-center">
-                        <div class=" w-3 md:block thick-line mr-2"></div>
-                        <div class="w-1 thin-line mr-2"></div>
-                        <input type="text" placeholder="sujet" class="w-full"  required />
+                    <div class="form-input  mt-3 md:mt-10 ">
+                        <label class="ml-6.5 label-form" for="nom">Sujet: </label>
+                        <div class="w-full flex">
+                            <div class=" w-3 md:block thick-line-pages mr-2"></div>
+                            <div class="w-1 thin-line-pages mr-2"></div>
+                            <input type="text" placeholder="sujet" class="w-full"  name="Sujet: " required />
+                        </div>
+                        
                     </div>
 
-                    <div class="form-textarea flex   mt-3 md:mt-10 text-center">
-                        <div class=" w-3 md:block thick-line mr-2"></div>
-                        <div class="w-1 thin-line mr-2"></div>
-                        <textarea
-                            class="w-full"
-                            placeholder="Tapez votre message ici"
-                            rows="5"
-                            required
-                        ></textarea>
+                    <div class="form-textarea   mt-3 md:mt-10 ">
+                        <label class="ml-6.5 label-form" for="description">Description: </label>
+                        <div class="flex w-full">
+                            <div class=" w-3 md:block thick-line-pages mr-2"></div>
+                            <div class="w-1 thin-line-pages mr-2"></div>
+                            <textarea
+                                class="w-full"
+                                placeholder="Tapez votre message ici"
+                                rows="5"
+                                name="description"
+                                required
+                            ></textarea>
+                        </div>
+                       
                     </div>
 
-                    <div class="form-button mb-3 mt-3 text-center">
-                        <button  type="submit">Envoyer</button>
+                    <div class="form-button flex justify-center mb-3 mt-3 text-center">
+                        <button class="flex w-1/2 h-15 items-center "  type="submit">
+                            
+                            <div class="text-center w-full ">
+                                Envoyer
+                            </div>
+                        </button>
                     </div>
                 </form>
 
@@ -83,8 +106,47 @@
 
 
 <style>
-    .form-input {
+    .form-input, .form-textarea {
         background: none;
-        height: 75px;
+        border: 0;
+        input, textarea {
+            background: #b8b19b;
+            box-shadow: 5px 3px 5px rgba(39, 38, 36, 0.2);
+            border-bottom: 2px solid var(--shadow-elements-color);
+            border-top: 0;
+            border-left: 0;
+            border-right: 0;
+        }
+        input {
+            height: 75px;
+        }
+        input:focus-visible {
+            outline: none;
+        }
+
+    }
+
+    .label-form {
+        font-size: 1.3em;
+        font-weight: 400;
+    }
+
+    .form-button {
+        button {
+            font-weight: 500;
+            background: linear-gradient(to right, var(--focus-elements) 50%, var(--default-bg-elements) 50%);
+            background-size: 200% 100%;
+            background-position: right bottom;
+            border-bottom: 3px solid;
+            border-radius: 2px;
+            transition: 0.1s;
+
+        }
+
+        button:active {
+            border-bottom: 0;
+            border-top: 2px solid;
+            border-left: 1px solid;
+        }
     }
 </style>

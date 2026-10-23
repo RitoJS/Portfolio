@@ -14,6 +14,7 @@
     --default-bg-elements2: #d7d1b9;
     --default-text-color: #4c4940;
     --focus-text-color: #beb9a4;
+    --line-pages-bg: #b8b19b;
 }
 
 
@@ -182,6 +183,15 @@ html, body {
 
 .thin-line {
     background-color: var(--focus-elements);
+}
+
+.thick-line-pages {
+    background-color: var(--line-pages-bg);
+    margin-right: 5px;
+}
+
+.thin-line-pages {
+    background-color: var(--line-pages-bg);
 }
 
 .page-title {

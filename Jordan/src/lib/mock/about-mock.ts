@@ -163,5 +163,5 @@ export const aboutMock: About = {
             },
         ],
     },
-    description: 'Une description temporaire de moi' 
+    description: " Je m'appelle Jordan Sama, Developpeur Front End / Intégrateur Web avec 4 ans d'expérience professionnels actuel. Passionné par la culture web et vidéoludique, j'aime a la fois développé et faire un peu de graphisme pendant mon temps libre. Spécialisé sur les langages front depuis mes débuts professionnels, je me spécialise sur les frameworks react et suis capable d'intervenir sur les projets back-end si néccessaire  (python, php)"
 }
