@@ -6,12 +6,12 @@ export const contactPageMock: ContactPage = {
    externLink: [
     {
         name: 'wordpress',
-        icon: '',
+        icon: 'assets/icons/wordpress.svg',
         link: 'https://picrito.wordpress.com/'
     },
     {
         name: 'linkedin',
-        icon:'',
+        icon:'assets/icons/linkedin.svg',
         link: 'https://www.linkedin.com/in/jordan-sama'
     }
    ]

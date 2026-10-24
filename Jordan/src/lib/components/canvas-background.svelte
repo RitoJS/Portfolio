@@ -186,7 +186,7 @@
         );
 
         ctx.strokeStyle = style.getPropertyValue('--line-canvas-color');
-        ctx.lineWidth = 4;
+        ctx.lineWidth = 2;
         ctx.lineCap = "round";
 
         ctx.stroke();
