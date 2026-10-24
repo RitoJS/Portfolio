@@ -126,15 +126,25 @@
     
 </header>
 
-{#key data.pathname}
-<div class="grid-bg absolute w-full h-full"></div>
-<main class="main-content mt-15 mr-5 ml-5 mb-15 Z-3 flex-1 min-h-0" in:fly={transitionIn} out:fly={transitionOut} use:stagger={pageStagger}>
-    {@render children()}
+
+<div class="relative grid grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)] flex-1 min-h-0">
+    {#key data.pathname}
+        <div class="grid-bg absolute w-full h-full"></div>
+        <main
+            style="grid-area: 1 / 1"
+            class="main-content mt-15 mr-5 ml-5 mb-24 min-h-0"
+            in:fly={transitionIn}
+            out:fly={transitionOut}
+            use:stagger={pageStagger}
+        >
+            {@render children()}
+        </main>
+    {/key}
+
     <div class="tips">
         <Description />
     </div>
-</main>
-{/key}
+</div>
 
 <footer class=" z-3 none footer border flex md:block">
     <div>RitoJS</div>
@@ -142,16 +152,20 @@
 </footer>
 
 <style>
-     .modal-bg {
+    .main-content {
+        grid-area: 1 / 1;
+    }
+    .modal-bg {
         opacity: 0.5;
         background-color: rgb(0, 0, 0);
         transition: 0.2s;
     }
 
     .tips {
-        position: absolute;
-        width: 100%;
-        bottom: 0;
+        grid-area: 1 / 1;
+        align-self: end;
+        margin-bottom: 4rem;
+        z-index: 4;
     }
 
     .tips:hover {

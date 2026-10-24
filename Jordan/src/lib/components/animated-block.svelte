@@ -64,6 +64,7 @@
 	let block: HTMLDivElement;
 	let mounted = $state(false);
 	let elevated = $state(false); // For block on focus to stay on front of everything if we clicked on it
+	let raf = 0;
 
 	// --- anchored mode ---
 	let anchor: HTMLDivElement | undefined = $state();
@@ -110,10 +111,21 @@
 
 	
 
+	function track(duration = 2000) {
+		cancelAnimationFrame(raf);
+		const end = performance.now() + duration;
+		const tick = () => {
+			measure(false); // no `instant` flicker, the block is not visible-animating yet
+			if (performance.now() < end) raf = requestAnimationFrame(tick);
+		};
+		tick();
+	}
+
 	function measure(snap = true) {
 		if (!anchored || !anchor || moved) return;
 		const r = anchor.getBoundingClientRect();
-		anchorVisible = r.width > 0 && r.height > 0; // 0 when the anchor is display:none
+		anchorVisible = r.width > 0 && r.height > 0;
+		if (r.top === rect.top && r.left === rect.left && r.width === rect.width && r.height === rect.height) return;
 		if (snap) {
 			instant = true;
 			requestAnimationFrame(() => (instant = false));
@@ -180,13 +192,14 @@
 		let cleanup: (() => void) | undefined;
 
 		if (anchored && anchor) {
-			measure();
+			track();
 			const ro = new ResizeObserver(() => measure());
 			ro.observe(anchor);
 			const onChange = () => measure();
 			window.addEventListener('resize', onChange);
 			window.addEventListener('scroll', onChange, true); // true: inner scroll containers too
 			cleanup = () => {
+				cancelAnimationFrame(raf);
 				ro.disconnect();
 				window.removeEventListener('resize', onChange);
 				window.removeEventListener('scroll', onChange, true);
