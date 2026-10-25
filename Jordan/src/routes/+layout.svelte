@@ -126,37 +126,86 @@
     
 </header>
 
-{#key data.pathname}
-<div class="grid-bg absolute w-full h-full"></div>
-<main class="main-content mt-15 mr-5 ml-5 mb-15 Z-3 flex-1 min-h-0" in:fly={transitionIn} out:fly={transitionOut} use:stagger={pageStagger}>
-    {@render children()}
+
+<div class="relative grid grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)] flex-1 min-h-0">
+    {#key data.pathname}
+        <div class="grid-bg absolute w-full h-full"></div>
+        <main
+            style="grid-area: 1 / 1"
+            class="main-content mt-15 mr-5 ml-5 mb-15 min-h-0 overflow-y-auto"
+            in:fly={transitionIn}
+            out:fly={transitionOut}
+            use:stagger={pageStagger}
+        >
+            {@render children()}
+        </main>
+    {/key}
+
     <div class="tips">
         <Description />
     </div>
-</main>
-{/key}
+</div>
 
-<footer class=" z-3 none footer border flex md:block">
-    <div>RitoJS</div>
-    <div>Fait avec truc</div>
+
+<footer class="site-footer">
+    <span class="footer-mark" aria-hidden="true"></span>
+    <span class="footer-name">RitoJS</span>
+    <span class="footer-note">Fait avec truc</span>
 </footer>
 
 <style>
-     .modal-bg {
+    .main-content {
+        grid-area: 1 / 1;
+    }
+    .modal-bg {
         opacity: 0.5;
         background-color: rgb(0, 0, 0);
         transition: 0.2s;
     }
 
     .tips {
-        position: absolute;
-        width: 100%;
-        bottom: 0;
+        grid-area: 1 / 1;
+        align-self: end;
+        z-index: 4;
     }
 
     .tips:hover {
         opacity: 0.3;
         transition: 0.2s;
+    }
+
+    .site-footer {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-shrink: 0;
+        height: var(--footer-h, 2.5rem);
+        padding: 0 0.75rem 0 0;
+        border-top: 1px solid var(--focus-elements);
+        background: var(--default-bg-elements2);
+        box-shadow: 0 -3px 0 var(--shadow-elements-color);
+        z-index: 3;
+    }
+
+    /* same dark square as the menu buttons */
+    .footer-mark {
+        align-self: stretch;
+        width: 2rem;
+        background: var(--focus-elements);
+    }
+
+    .footer-name {
+        font-weight: 700;
+    }
+
+    /* pushes the note to the right on larger screens */
+    .footer-note {
+        margin-left: auto;
+        opacity: 0.8;
+    }
+
+    @media (max-width: 767px) {
+        .footer-note { display: none; } /* keep the mobile footer short */
     }
 
 </style>
