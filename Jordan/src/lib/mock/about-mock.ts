@@ -11,47 +11,47 @@ export const aboutMock: About = {
             {
                 name: 'HTML',
                 bar: 100,
-                icon: ''
+                icon: 'assets/icons/html.svg',
             },
                         {
                 name: 'CSS',
                 bar: 100,
-                icon: ''
+                icon: 'assets/icons/css.svg',
             },
                         {
                 name: 'Bootsraps',
                 bar: 80,
-                icon: ''
+                icon: 'assets/icons/bootstrap.svg',
             },
                         {
                 name: 'JavaScript',
                 bar: 80,
-                icon: ''
+                icon: 'assets/icons/js.svg',
             },
                         {
                 name: 'Tailwindcss',
                 bar: 80,
-                icon: ''
+                icon: 'assets/icons/tailwind.svg',
             },
                         {
                 name: 'TypeScript',
                 bar: 80,
-                icon: ''
+                icon: 'assets/icons/typescript.svg',
             },
                         {
                 name: 'Angular',
                 bar: 70,
-                icon: ''
+                icon: 'assets/icons/angular.svg',
             },
                         {
                 name: 'React.js',
                 bar: 40,
-                icon: ''
+                icon: 'assets/icons/react.svg',
             },
                         {
                 name: 'Next.js',
                 bar: 65,
-                icon: ''
+                icon: 'assets/icons/nextjs.svg',
             },
                         {
                 name: 'Vue.js',
@@ -61,17 +61,17 @@ export const aboutMock: About = {
                         {
                 name: 'jQuery',
                 bar: 75,
-                icon: ''
+                icon: 'assets/icons/jquery.svg',
             },
                         {
                 name: 'Wordpress',
                 bar: 70,
-                icon: ''
+                icon: 'assets/icons/wordpress.svg',
             },
                         {
                 name: 'Svelte',
                 bar: 79,
-                icon: ''
+                icon: 'assets/icons/svelte.svg',
             },
 
         ],
@@ -79,87 +79,83 @@ export const aboutMock: About = {
             {
                 name: 'php',
                 bar: 65,
-                icon: ''
+                icon: 'assets/icons/php.svg',
             },
                         {
-                name: 'Symfony 2',
+                name: 'Symfony',
                 bar: 40,
-                icon: ''
+                icon: 'assets/icons/symfony.svg',
             },
                                     {
                 name: 'SQL/Postgresql',
                 bar: 45,
-                icon: ''
+                icon: 'assets/icons/sql.svg',
             },
                                     {
                 name: 'Node.js',
                 bar: 40,
-                icon: ''
+                icon: 'assets/icons/nodejs.svg',
             },
                                     {
                 name: 'MongoDB',
                 bar: 40,
-                icon: ''
+                icon: 'assets/icons/mongodb.svg',
             },
 
                                     {
                 name: 'Python',
                 bar: 60,
-                icon: ''
+                icon: 'assets/icons/python.svg',
             },
                                     {
                 name: 'Django',
                 bar: 60,
-                icon: ''
+                icon: 'assets/icons/django.svg',
             },
         ],
         workflow: [
             {
                 name: 'trello',
                 bar: 80,
-                icon:''
+                icon:'assets/icons/trello.svg',
             },
                         {
                 name: 'Git',
                 bar: 80,
-                icon:''
+                icon:'assets/icons/git.svg',
             },
                         {
                 name: 'AzureDevOps',
                 bar: 60,
-                icon:''
+                icon:'assets/icons/azure-devops.svg',
             },
                         {
                 name: 'AWS',
                 bar: 30,
-                icon:''
+                icon:'assets/icons/aws.svg',
             },
         ],
         plugin: [
             {
                 name: 'Photoshop',
                 bar: 70,
-                icon:''
+                icon:'assets/icons/photoshop.svg',
             },
-                        {
-                name: 'Illustrator',
-                bar: 40,
-                icon:''
-            },
+            
                         {
                 name: 'Paint.NET',
                 bar: 60,
-                icon:''
+                icon:'assets/icons/paint.svg',
             },
                         {
                 name: 'Postman',
                 bar: 65,
-                icon:''
+                icon:'assets/icons/postman.svg',
             },
                         {
                 name: 'Figma',
                 bar: 60,
-                icon:''
+                icon:'assets/icons/figma.svg',
             },
         ],
     },

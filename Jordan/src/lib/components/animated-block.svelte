@@ -31,6 +31,7 @@
 		anchored?: boolean; // true: closed state follows an in-flow placeholder
 		intro?: (node: Element, params?: any) => any; // params for intro animation
 		introParams?: Record<string, any>;
+		disabled?: boolean
 	};
 
 	let {
@@ -56,6 +57,7 @@
 		anchored = false,
 		intro = () => ({}),
 		introParams = {},
+		disabled = false,
 	}: Props = $props();
 
 	let moved = $state(false);
@@ -89,6 +91,7 @@
 	let dragging = $state(false);
 	let offset = $state({ x: 0, y: 0 });          // how far the block was dragged from its centered position
 	let start = { px: 0, py: 0, ox: 0, oy: 0 };   // pointer and offset at the start of the drag
+	let busy: boolean = $state(false) // Prevent weird behavior when clicking on a block while being transitionned
 
 
 
@@ -140,44 +143,56 @@
 		return { destroy() { node.remove(); } };
 	}
 
-	function waitTransitionEnd(node: HTMLElement, propertyName?: string) {
+	function waitTransitionEnd(node: HTMLElement, propertyName?: string, fallback = 1500) {
 		return new Promise<void>((resolve) => {
-			function handler(event: TransitionEvent) {
-				if (event.target !== node) return;
-				if (propertyName && event.propertyName !== propertyName) return;
-
+			const timer = setTimeout(done, fallback);
+			function done() {
+				clearTimeout(timer);
 				node.removeEventListener("transitionend", handler);
 				resolve();
 			}
-
+			function handler(event: TransitionEvent) {
+				if (event.target !== node) return;
+				if (propertyName && event.propertyName !== propertyName) return;
+				done();
+			}
 			node.addEventListener("transitionend", handler);
 		});
 	}
 
 	async function toggle() {
-		if (!moved) {
-			raise();
-			elevated = true;
-			measure(false); // fresh position, without disabling the upcoming transition
-			moved = true;
-			await waitTransitionEnd(block, "transform");
+		if (busy || (disabled && !moved)) return;
 
-			resized = true;
-			await waitTransitionEnd(block, "width");
+		busy = true;
+		try {
+			if (!moved) {
+				// open 
+				raise();
+				elevated = true;
+				measure(false); // fresh position, without disabling the upcoming transition
+				moved = true;
+				await waitTransitionEnd(block, "transform");
 
-			contentVisible = true;
-			await tick();
-		} else {
-			offset = { x: 0, y: 0 };
-			contentVisible = false;
+				resized = true;
+				await waitTransitionEnd(block, "width");
 
-			resized = false;
-			await waitTransitionEnd(block, "width");
+				contentVisible = true;
+				await tick();
+			} else {
+				// close
+				offset = { x: 0, y: 0 };
+				contentVisible = false;
 
-			moved = false;
-			await waitTransitionEnd(block, "transform");
-			elevated = false;
-			release();
+				resized = false;
+				await waitTransitionEnd(block, "width");
+
+				moved = false;
+				await waitTransitionEnd(block, "transform");
+				elevated = false;
+				release();
+			}
+		} finally {
+			busy = false; // always reset, even if something throws
 		}
 	}
 
@@ -435,6 +450,8 @@
 		touch-action: none;
 		user-select: none;
 		background-color: var(--bg-block-decorator);
+		position: inherit;
+		width: 100%;
 	}
 
 	.animated-block.dragging {
@@ -488,7 +505,7 @@
 		right: 0;
 		width: auto;
 		padding: 0.5rem 15px 0.5rem 0.5rem;
-		z-index: 2;
+		z-index: 9;
 	}
 
 	@property --border-angle {

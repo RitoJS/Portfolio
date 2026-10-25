@@ -1,35 +1,27 @@
 <script lang="ts">
     import { getContext, onMount } from 'svelte';
-	import AnimationLetter from './animation-letter.svelte';
+    import AnimationLetter from './animation-letter.svelte';
 
     const info = getContext<{ text: string | null }>('info');
 
-    let hydrated: boolean = $state(false);
+    let hydrated = $state(false);
+    onMount(() => (hydrated = true));
 
-    onMount(() => {
-        hydrated = true;
-    });
+    const shown = $derived(
+        hydrated && info.text ? info.text : 'Une description sans hover !'
+    );
 </script>
 
-<div class="desc-block hidden md:flex ">
+<div class="desc-block hidden md:flex">
     <div class="block-decorator flex">
         <div class="thick-line"></div>
         <div class="thin-line"></div>
     </div>
     <div>
-         {#if hydrated && info.text}
-            <AnimationLetter 
-                data={info.text} 
-                className="title-text"
-            />
-        {:else}
-            <AnimationLetter 
-                data="Une description sans hover !" 
-                className="title-text"
-            />
-        {/if}
+        {#key shown}
+            <AnimationLetter data={shown} className="title-text" />
+        {/key}
     </div>
-   
 </div>
 
 <style>
