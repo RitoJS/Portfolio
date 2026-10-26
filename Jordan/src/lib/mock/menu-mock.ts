@@ -2,7 +2,7 @@ import type { Menu } from "$lib/types/menu";
 export const menuMock: Menu[] = [
     {
         label: 'Home',
-        link: '',
+        link: '/',
         icon: '',
     },
     {

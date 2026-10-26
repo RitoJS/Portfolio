@@ -34,7 +34,7 @@
 <div
     role="button"
     tabindex="0"
-    class="miniature w-44 h-20 cursor-pointer"
+    class="miniature relative w-44 h-20 cursor-pointer"
     onclick={() => open(startIndex)}
     onkeydown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -43,7 +43,8 @@
         }
     }}
 >
-    <img src="/{miniature}" alt="" class="h-full w-full object-cover" />
+    <img src="/{miniature}" alt="" class="h-full w-full object-cover  " />
+    <div class="absolute inset-0 miniature-bg pointer-events-none"></div>
 </div>
 
 <dialog
@@ -53,7 +54,7 @@
         if (e.key === 'ArrowLeft') prev();
         if (e.key === 'ArrowRight') next();
     }}
-    class=" flex w-full h-full dialog-gallery"
+    class=" w-full h-full dialog-gallery open:grid"
 >
     <!--For detecting and trigger the in/out animation-->
     <div class="grid w-full h-full overflow-hidden place-items-center">
@@ -70,9 +71,13 @@
    
 
     {#if images.length > 1}
-        <button id="previous-button" type="button" onclick={prev} aria-label="Previous image">‹</button>
-        <button id="next-button" type="button" onclick={next} aria-label="Next image">›</button>
-        <span>{index + 1} / {images.length}</span>
+        <button type="button" class="nav-btn nav-prev" onclick={prev} aria-label="Previous image">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 L7 12 L15 20" /></svg>
+        </button>
+        <button type="button" class="nav-btn nav-next" onclick={next} aria-label="Next image">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 L17 12 L9 20" /></svg>
+        </button>
+        <span class="count-imgs">{index + 1} / {images.length}</span>
     {/if}
 
     <button id="close-button" type="button" onclick={close} aria-label="Close">×</button>
@@ -118,17 +123,83 @@
         position: absolute;
 	}
 
-    #previous-button {
+/* arrows */
+    .nav-btn {
+        position: absolute;
         top: 50%;
-        left: 1%;
+        translate: 0 -50%;          
+        z-index: 2;
+        display: grid;
+        place-items: center;
+        width: 3rem;
+        height: 5rem;
+        border: none;
+        cursor: pointer;
+        background: var(--default-bg-elements2);
+        color: var(--default-text-color);
+        box-shadow: 3px 3px 0 var(--shadow-elements-color);
+        transition: background 0.15s, color 0.15s;
     }
 
-    #next-button {
-        top: 50%;
-        right: 1%;
+    .nav-prev { left: 0; }          /* stuck to the far left */
+    .nav-next { right: 0; }         /* stuck to the far right */
+
+    .nav-btn svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 3;
+        stroke-linecap: square;     
+        stroke-linejoin: miter;
+        transition: translate 0.15s;
     }
+
+    .nav-btn:hover,
+    .nav-btn:focus-visible {
+        background: var(--focus-elements);
+        color: var(--focus-text-color);
+        outline: none;
+    }
+
+    /* small nudge toward the direction of the arrow */
+    .nav-prev:hover svg { translate: -3px 0; }
+    .nav-next:hover svg { translate: 3px 0; }
+
+    .nav-btn:active {
+         box-shadow: 1px 1px 0 var(--shadow-elements-color);
+        background: var(--focus-text-color);
+        color: var(--default-bg-elements2);
+    }
+
+    @media (max-width: 767px) {
+        .nav-btn { width: 2.25rem; height: 4rem; }
+    }
+
     #close-button {
-        top: 5%;
+        position: absolute;
+        top: 0;
         right: 1%;
+        font-size: 3.5rem;
+        color: var(--focus-text-color);
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .miniature {
+        img {
+            border: 2px solid;
+        }
+    }
+    .miniature-bg {
+        background-color: #b3ac93;
+        opacity: 0.35;
+    }
+    .count-imgs {
+        text-align: center;
+        font-size: 1.5rem;
+        color: var(--focus-text-color);
+        font-weight: 700;
     }
 </style>

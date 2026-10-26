@@ -8,8 +8,13 @@ export type Works = {
     role: string;
     problem: string | null;
     solution: string | null;
-    languages: string[] | null;
+    languages: languages[] | null;
     hasDetail: boolean;
     formation: boolean;
     link: string | null;
+}
+
+type languages = {
+    name: string;
+    icon: string;
 }
