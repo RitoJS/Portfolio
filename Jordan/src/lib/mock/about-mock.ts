@@ -56,7 +56,7 @@ export const aboutMock: About = {
                         {
                 name: 'Vue.js',
                 bar: 80,
-                icon: ''
+                icon: 'assets/icons/vue.svg',
             },
                         {
                 name: 'jQuery',

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { Works } from "$lib/types/works";
-    import AnimationLetter from "./animation-letter.svelte";
 	import Gallery from "./gallery.svelte";
     type Props = {
         work:  Works;
@@ -78,7 +77,7 @@
                 <div class="languages-used grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  justify-items-center">
                     {#each work.languages as language, index (index) }
                         <p class="language-block p-2 m-1 text-center w-full sm:w-40 flex justify-center items-center font-bold">
-                            <img class="icons-works mr-2" src="/{language.icon}" alt="icone {language.name}" />{ language.name }
+                            <img class="icons-general mr-2" src="/{language.icon}" alt="icone {language.name}" />{ language.name }
                         </p>
                     {/each}
                 </div>
@@ -164,16 +163,9 @@
             padding: 5px;
         }
 
-        .icons-works {
-            height: 40px;
-            width: 40px;
-        }
+        
 
-        .language-block {
-            background-color: var(--focus-text-color);
-            border-bottom: 2px solid var(--default-bg-elements);
-            border-radius: 3px;
-        }
+        
     }
 
      .section-imgs {

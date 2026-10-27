@@ -50,6 +50,10 @@ html, body {
     flex-direction: column;
 }
 
+.sections-text {
+    color: var(--bg-block-decorator);
+}
+
 .grid-bg {
     background-image: url(../lib/assets/bg-grid.png);
     z-index: 99;
@@ -205,6 +209,17 @@ html, body {
 .close-button-blocks {
     font-size: 1.5rem;
     color: var(--focus-text-color);
+}
+
+.language-block {
+    background-color: var(--focus-text-color);
+    border-bottom: 2px solid var(--default-bg-elements);
+    border-radius: 3px;
+}
+
+.icons-general {
+    height: 40px;
+    width: 40px;
 }
 
 
