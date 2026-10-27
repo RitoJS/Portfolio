@@ -2,7 +2,9 @@
     import { fly } from "svelte/transition";
     import { cubicOut } from "svelte/easing";
 
-    let { miniature, images, startIndex }: { miniature: string; images: string[]; startIndex: number } = $props();
+    
+
+    let {  miniature, images, startIndex, detail = true, className }: { miniature: string; images: string[]; startIndex: number, detail?: boolean, className?: string } = $props();
 
     let dialog: HTMLDialogElement;
     let index = $state(0);
@@ -34,7 +36,10 @@
 <div
     role="button"
     tabindex="0"
-    class="miniature relative w-44 h-20 cursor-pointer"
+    class:w-44={detail}
+    class:h-20={detail}
+    class:h-full={!detail}
+    class="miniature relative cursor-pointer"
     onclick={() => open(startIndex)}
     onkeydown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -43,8 +48,10 @@
         }
     }}
 >
-    <img src="/{miniature}" alt="" class="h-full w-full object-cover  " />
-    <div class="absolute inset-0 miniature-bg pointer-events-none"></div>
+    <img src="/{miniature}" alt=""  class={className} />
+    {#if detail}
+        <div class="absolute inset-0 miniature-bg pointer-events-none"></div>
+    {/if}
 </div>
 
 <dialog

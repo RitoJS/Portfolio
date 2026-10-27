@@ -95,7 +95,7 @@
                 <div class="gallery-block grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  justify-items-center">
                     {#each work.screenshots as screenshot, index (index) }
                         <div class="p-2">
-                            <Gallery images={work.screenshots} miniature={screenshot} startIndex={index} />
+                            <Gallery images={work.screenshots} miniature={screenshot} startIndex={index} className="h-full w-full object-cover " />
                         </div>
                         
                     {/each}

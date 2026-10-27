@@ -88,7 +88,7 @@
       modalBg();
     }
   }} 
-    class=" md:hidden" onclick={modalBg} 
+    class=" lg:hidden" onclick={modalBg} 
     >
         <AnimatedBlock
           closedWidth = "65px" 

@@ -5,9 +5,8 @@
     import type { About } from "$lib/types/about";
     import { getContext } from "svelte";
 
-    import avatarMobile  from "$lib/assets/home2.png";
-    import avatarDesktop from "$lib/assets/home6.png";
 	import OpenedBlock from "$lib/components/opened-block.svelte";
+	import Gallery from "$lib/components/gallery.svelte";
 
     const info = getContext<{ text: string | null }>('info');
 
@@ -35,7 +34,7 @@
         <div class=" lg:hidden main-stats flex h-3/10 w-full">
                 <div class="avatar-block h-full p-1 w-1/3">
                     <OpenedBlock title="Mon Profil">
-                        <img class="lg:hidden w-full h-full object-cover" src={avatarMobile} alt="mon portrait !"  />
+                        <Gallery startIndex={0} images={[about.avatarMobile]} miniature={about.avatarMobile} className="w-full h-full object-cover" detail={false} />
                     </OpenedBlock> 
                 </div>
             
@@ -57,7 +56,7 @@
         <div class="hidden lg:flex lg:flex-col gap-2  w-1/3 xl:w-3/6 h-full min-h-0 ">
              <div class="avatar-block  w-full xl:h-full lg:h-2/5 shrink-0 ">  
                 <OpenedBlock title="Mon Profil">
-                    <img class="block w-full h-full object-cover" src={avatarDesktop} alt="mon portrait sur grand écran !"  />
+                    <Gallery startIndex={0} images={[about.avatarDesktop]} miniature={about.avatarDesktop} className="block w-full h-full object-cover" detail={false} />
                 </OpenedBlock>
             </div>
             <div class="hidden lg:block lg:h-3/5 xl:hidden flex-1 min-h-0 ">
@@ -135,7 +134,7 @@
         </div>
         <div class="about-me-block w-full  h-1/10 xl:h-full  lg:hidden xl:block xl:w-1/6 xl:ml-2">
             <!--Mobile/Tablet-->
-            <div class="lg:hidden ">
+            <div class="lg:hidden pt-2 ">
                 <AnimatedBlock
                     anchored
                     closedWidth = "100%" 
