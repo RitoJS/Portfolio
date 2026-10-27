@@ -222,6 +222,13 @@ html, body {
     width: 40px;
 }
 
+.decorator-cube-detail {
+    background-color: var(--focus-text-color);
+    width: 35px;
+    height: 35px;
+    margin: 5px;
+}
+
 
 /** Small size **/
 @media (min-width: 640px) {

@@ -132,7 +132,7 @@
         <div class="grid-bg absolute w-full h-full"></div>
         <main
             style="grid-area: 1 / 1"
-            class="main-content mt-15 mr-5 ml-5 mb-15 min-h-0 overflow-y-auto"
+            class="main-content mt-15 mr-5 ml-5 mb-15 min-h-0 "
             in:fly={transitionIn}
             out:fly={transitionOut}
             use:stagger={pageStagger}

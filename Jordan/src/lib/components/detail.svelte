@@ -119,12 +119,7 @@
     .compagny-title {
         font-size: 1.5rem;
     }
-    .decorator-cube-detail {
-        background-color: var(--focus-text-color);
-        width: 35px;
-        height: 35px;
-        margin: 5px;
-    }
+    
 
     .block-separator {
         border: 1px solid;

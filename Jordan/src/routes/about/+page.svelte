@@ -5,8 +5,9 @@
     import type { About } from "$lib/types/about";
     import { getContext } from "svelte";
 
-    import avatarMobile  from "$lib/assets/home9.jpg";
-    import avatarDesktop from "$lib/assets/home3.png";
+    import avatarMobile  from "$lib/assets/home2.png";
+    import avatarDesktop from "$lib/assets/home6.png";
+	import OpenedBlock from "$lib/components/opened-block.svelte";
 
     const info = getContext<{ text: string | null }>('info');
 
@@ -25,20 +26,27 @@
 </script>
 
 <!--Mobile-->
-<article class="w-full h-full">
+<article class="w-full h-full ">
+     <div>
+        <AnimationLetter data="A propos de moi" className="page-title w-full text-left" />
+    </div>
     <div class="about-profile w-full h-full lg:flex">
         <!--Mobile/Tablet-->
-        <div class=" lg:hidden main-stats flex h-2/6 w-full">
-            <div class="avatar-block border-blue w-1/3">
-                <img class="lg:hidden" src={avatarMobile} alt="mon portrait !"  />
-                <img class="hidden lg:block" src={avatarDesktop} alt="mon portrait sur grand écran !"  />
-            </div>
+        <div class=" lg:hidden main-stats flex h-3/10 w-full">
+                <div class="avatar-block h-full p-1 w-1/3">
+                    <OpenedBlock title="Mon Profil">
+                        <img class="lg:hidden w-full h-full object-cover" src={avatarMobile} alt="mon portrait !"  />
+                    </OpenedBlock> 
+                </div>
+            
 
             <div class="main-stats-info flex flex-col  w-2/3">
-                <div class="names-and-jobs border-green w-full h-full p-2">
-                    <p>Name: <AnimationLetter data={about.name} className='' /></p>
-                    <p>Age: <AnimationLetter data={getAge(about.age)} className='' /> ans</p>
-                    <p>Job: <AnimationLetter data={about.job} className='' /></p>
+                <div class="names-and-jobs w-full h-full p-1">
+                    <OpenedBlock title="Informations">
+                        <p>Name: <AnimationLetter data={about.name} className='' /></p>
+                        <p>Age: <AnimationLetter data={getAge(about.age)} className='' /> ans</p>
+                        <p>Job: <AnimationLetter data={about.job} className='' /></p>
+                    </OpenedBlock>
                 </div>
 
                 
@@ -46,71 +54,86 @@
         </div>
 
         <!--Desktop-->
-        <div class="hidden lg:block w-1/3 xl:w-2/4 border">
-             <div class="avatar-block  w-full">
-                <img class="hidden lg:block" src={avatarDesktop} alt="mon portrait sur grand écran !"  />
+        <div class="hidden lg:flex lg:flex-col gap-2  w-1/3 xl:w-3/6 h-full min-h-0 ">
+             <div class="avatar-block  w-full xl:h-full lg:h-2/5 shrink-0 ">  
+                <OpenedBlock title="Mon Profil">
+                    <img class="block w-full h-full object-cover" src={avatarDesktop} alt="mon portrait sur grand écran !"  />
+                </OpenedBlock>
+            </div>
+            <div class="hidden lg:block lg:h-3/5 xl:hidden flex-1 min-h-0 ">
+                <OpenedBlock title="A propos">
+                    <p>
+                        {about.description}
+                    </p>
+                </OpenedBlock>
             </div>
         </div>
 
-        <div class=" flex flex-col sub-stats w-full lg:w-2/3 xl:w-1/4 h-3/6 lg:h-full p-2">
+        <div class=" flex flex-col sub-stats w-full lg:w-2/3 xl:w-2/6 h-6/10 lg:h-full mt-2 lg:mt-0 lg:ml-2">
             <!--Desktop-->
             <div class="hidden lg:block">
-                <div class="main-stats-info flex flex-col border-red w-full">
-                    <div class="names-and-jobs border-green w-full h-1/3 p-2">
-                        <p>Name: <AnimationLetter data={about.name} className='' /></p>
-                        <p>Age: <AnimationLetter data={getAge(about.age)} className='' /> ans</p>
-                        <p>Job: <AnimationLetter data={about.job} className='' /></p>
+                <div class="main-stats-info flex flex-col  w-full ">
+                    <div class="names-and-jobs w-full h-1/3 mb-2 ">
+                        <OpenedBlock title="Informations">
+                            <p>Name: <AnimationLetter data={about.name} className='' /></p>
+                            <p>Age: <AnimationLetter data={getAge(about.age)} className='' /> ans</p>
+                            <p>Job: <AnimationLetter data={about.job} className='' /></p>
+                        </OpenedBlock>
+                       
                     </div>
                 </div>
             </div>
-            <h2 class="h-10">Skills :</h2>
-            <div class="overflow-auto flex-1 min-h-0 skills-block">
-                <!--Front-->
-                <h3 class="font-semibold sections-text">Front-End: </h3>
-                <ul class=" grid grid-cols-3 gap-1 w-full  border p-2 mb-5">
-                    <!--loop-->
-                    {#each about.skills.front as front, index (index) }
-                        <li class="language-block flex justify-center items-center font-bold h-20">
-                            <img class="icons-general mr-2" src="/{front.icon}" alt="icone {front.name}" /> <div>{ front.name }</div>
-                        </li>    
-                    {/each}
-                </ul>
+            
+            <div class=" flex-1 min-h-0 skills-block  ">
+                <OpenedBlock title="Compétences">
+                     <!--Front-->
+                    <h3 class="font-semibold sections-text">Front-End: </h3>
+                    <ul class=" grid grid-cols-2 md:grid-cols-3 gap-1 w-full   p-2 mb-5">
+                        <!--loop-->
+                        {#each about.skills.front as front, index (index) }
+                            <li class="language-block flex justify-center items-center font-bold h-20">
+                                <img class="icons-general mr-2" src="/{front.icon}" alt="icone {front.name}" /> <div>{ front.name }</div>
+                            </li>    
+                        {/each}
+                    </ul>
 
-                <!--Back-->
-                <h3 class="font-semibold sections-text">Back-End: </h3>
-                <ul class="grid grid-cols-3 gap-1 w-full  border p-2 mb-3">
-                    <!--loop-->
-                    {#each about.skills.back as back, index (index) }
-                        <li class="language-block flex justify-center items-center font-bold h-20">
-                            <img class="icons-general mr-2" src="/{back.icon}" alt="icone {back.name}" /> <div>{ back.name }</div>
-                        </li>    
-                    {/each} 
-                </ul>
+                    <!--Back-->
+                    <h3 class="font-semibold sections-text">Back-End: </h3>
+                    <ul class="grid grid-cols-2 md:grid-cols-3 gap-1 w-full   p-2 mb-3">
+                        <!--loop-->
+                        {#each about.skills.back as back, index (index) }
+                            <li class="language-block flex justify-center items-center font-bold h-20">
+                                <img class="icons-general mr-2" src="/{back.icon}" alt="icone {back.name}" /> <div>{ back.name }</div>
+                            </li>    
+                        {/each} 
+                    </ul>
 
-                <!--Workflows-->
-                <h3 class="font-semibold sections-text">Workflows: </h3>
-                <ul class=" grid grid-cols-3 gap-1 w-full  border p-2 mb-3">
-                    <!--loop-->
-                    {#each about.skills.workflow as workflow, index (index) }
-                        <li class="language-block flex justify-center items-center font-bold h-20">
-                            <img class="icons-general mr-2" src="/{workflow.icon}" alt="icone {workflow.name}" /> <div>{ workflow.name }</div>
-                        </li>    
-                    {/each}
-                </ul>
+                    <!--Workflows-->
+                    <h3 class="font-semibold sections-text">Workflows: </h3>
+                    <ul class=" grid grid-cols-2 md:grid-cols-3 gap-1 w-full  p-2 mb-3">
+                        <!--loop-->
+                        {#each about.skills.workflow as workflow, index (index) }
+                            <li class="language-block flex justify-center items-center font-bold h-20">
+                                <img class="icons-general mr-2" src="/{workflow.icon}" alt="icone {workflow.name}" /> <div>{ workflow.name }</div>
+                            </li>    
+                        {/each}
+                    </ul>
 
-                <!--Logiciel et plugin-->
-                <h3 class="font-semibold sections-text">Logiciel et plugin: </h3>
-                <ul class="front-block grid grid-cols-3 gap-1 w-full  border p-2">
-                    <!--loop-->
-                    {#each about.skills.plugin as plugin, index (index) }
-                        <li class="language-block flex justify-center items-center font-bold h-20">
-                           <img class="icons-general mr-2" src="/{plugin.icon}" alt="icone {plugin.name}" /> <div>{ plugin.name }</div>
-                        </li>    
-                    {/each}
-                </ul>
+                    <!--Logiciel et plugin-->
+                    <h3 class="font-semibold sections-text">Logiciel et plugin: </h3>
+                    <ul class="front-block grid grid-cols-2 md:grid-cols-3 gap-1 w-full   p-2">
+                        <!--loop-->
+                        {#each about.skills.plugin as plugin, index (index) }
+                            <li class="language-block flex justify-center items-center font-bold h-20">
+                            <img class="icons-general mr-2" src="/{plugin.icon}" alt="icone {plugin.name}" /> <div>{ plugin.name }</div>
+                            </li>    
+                        {/each}
+                    </ul>
+                </OpenedBlock>
+               
             </div>
         </div>
-        <div class="about-me-block w-full  h-1/6 xl:h-full border lg:hidden xl:block xl:w-1/4">
+        <div class="about-me-block w-full  h-1/10 xl:h-full  lg:hidden xl:block xl:w-1/6 xl:ml-2">
             <!--Mobile/Tablet-->
             <div class="lg:hidden ">
                 <AnimatedBlock
@@ -132,11 +155,26 @@
                         {contentVisible ? 'close' : 'About Me'}
                     {/snippet}
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi aliquam vitae placeat praesentium odio! Aperiam, nihil maxime! Eveniet explicabo eaque laboriosam rem et, excepturi ducimus fuga repellat pariatur obcaecati! Sit.
+                        {about.description}
                     </p>
                 </AnimatedBlock>
+            </div>
+
+            <!--Desktop XL-->
+            <div class="hidden xl:block w-full h-1/2 ">
+                <OpenedBlock title="A propos">
+                    <p>
+                        {about.description}
+                    </p>
+                </OpenedBlock>
             </div>
                 
         </div>
     </div>
 </article>
+
+<style>
+    .sections-text {
+        text-align: center;
+    }
+</style>

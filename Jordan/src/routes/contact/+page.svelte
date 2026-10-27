@@ -9,7 +9,7 @@
     let contactPageInfo: ContactPage = contactPageMock;
 </script>
 
-<article class="w-full h-full">
+<article class="w-full h-full overflow-y-auto">
     <div>
         <AnimationLetter data="Contactez - moi" className="page-title w-full text-left" />
     </div>
