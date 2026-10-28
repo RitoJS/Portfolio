@@ -13,7 +13,7 @@
     onMount(() => {
         description.text = noInfo;
          return () => {
-            if (description.text === noInfo) description.text = null;
+            if (description.text === noInfo) description.text = noInfo;
         };
     })
 </script>
@@ -112,7 +112,7 @@
                         class="external-link-block p-2 m-2 transition-transform duration-300 hover:scale-125"
                         role="presentation"
                         onmouseenter={() => (description.text = `Mon adresse mail: jsscottsama@gmail.com`)}
-                        onmouseleave={() => (description.text = null)}
+                        onmouseleave={() => (description.text = noInfo)}
                     >
                         <img class="cursor-pointer m-auto imgs-icons" src="/assets/icons/mail.svg" alt="icone de l'addresse mail" />
                     </div>
@@ -122,7 +122,7 @@
                         class="external-link-block p-2 m-2 transition-transform duration-300 hover:scale-125"
                         role="presentation"
                         onmouseenter={() => (description.text = `Voir mon CV traditionnel`)}
-                        onmouseleave={() => (description.text = null)}
+                        onmouseleave={() => (description.text = noInfo)}
                     >
                         <a href="/assets/files/Jordan-Sama_cv-1.pdf" target="_blank" rel="noopener noreferrer">
                             <img class="cursor-pointer m-auto imgs-icons" src="/assets/icons/resume.svg" alt="icone de mon cv" />
@@ -134,7 +134,7 @@
                         class="external-link-block p-2 m-2 transition-transform duration-300 hover:scale-125"
                         role="presentation"
                         onmouseenter={() => (description.text = `Aller sur ma page github`)}
-                        onmouseleave={() => (description.text = null)}
+                        onmouseleave={() => (description.text = noInfo)}
                     >
                         <a href="https://github.com/RitoJS" target="_blank" rel="noopener noreferrer">
                             <img class="cursor-pointer m-auto imgs-icons" src="/assets/icons/git.svg" alt="icone de ma page github" />
@@ -147,7 +147,7 @@
                             class="external-link-block p-2 m-2 transition-transform duration-300 hover:scale-125"
                             role="presentation"
                             onmouseenter={() => (description.text = `Aller sur ${info.name}`)}
-                            onmouseleave={() => (description.text = null)}
+                            onmouseleave={() => (description.text = noInfo)}
                          >
                             <a href={info.link} target="_blank" rel="noopener noreferrer">
                                 <img class="cursor-pointer m-auto imgs-icons" src="/{info.icon}" alt="icone de {info.name}" />
@@ -170,7 +170,7 @@
         background: none;
         border: 0;
         input, textarea {
-            background: #b8b19b;
+            background: var(--default-bg-elements2);
             box-shadow: 5px 3px 5px rgba(39, 38, 36, 0.2);
             border-bottom: 2px solid var(--shadow-elements-color);
             border-top: 0;
@@ -191,7 +191,7 @@
     .form-button {
         button {
             font-weight: 500;
-            background: linear-gradient(to right, var(--focus-elements) 50%, var(--default-bg-elements) 50%);
+            background: linear-gradient(to right, var(--focus-elements) 50%, var(--default-bg-elements2) 50%);
             background-size: 200% 100%;
             background-position: right bottom;
             border-bottom: 3px solid;

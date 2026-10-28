@@ -4,6 +4,7 @@
     import { fly } from 'svelte/transition';
     import { cubicIn, cubicOut } from 'svelte/easing';
 	import { setContext } from 'svelte';
+    import { beforeNavigate } from '$app/navigation';
     import favicon from '$lib/assets/favicon.svg';
     import CanvasBackground from '$lib/components/canvas-background.svelte';
 	import Description from '$lib/components/description.svelte';
@@ -23,6 +24,10 @@
     let modalBgShow = $state(false);
 
 	setContext('info', info);
+
+     beforeNavigate(() => {
+        info.text = null;
+    });
 
     const transitionIn = { easing: cubicIn, x: 10, duration: 800, delay: 800 };
     const transitionOut = { easing: cubicOut, x: -10, duration: 300 };
@@ -74,10 +79,9 @@
 <CanvasBackground />
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
 {#if modalBgShow}
-    <div class="fixed z-1 w-full h-full top-0 left-0 modal-bg md:hidden"></div>
+    <div class="fixed z-1 w-full h-full top-0 left-0 modal-bg lg:hidden"></div>
 {/if}
-<header class="z-2 md:flex head-menu md:p-1 shrink-0">
-    <h1 class="hidden">JS</h1>
+<header class="z-2 lg:flex head-menu md:p-1 shrink-0">
     <!--Burger Menu-->
     <div 
     role="button" 
@@ -117,7 +121,7 @@
 
     <!--Desktop Menu-->
     {#if page.url.pathname !== '/'}
-        <div class="hidden md:block w-full">
+        <div class="hidden lg:block w-full">
             <nav class="flex justify-around items-center  w-full menu-nav">
                 <Menu options={optionsMenu} />
             </nav>
@@ -166,6 +170,8 @@
     .tips {
         grid-area: 1 / 1;
         align-self: end;
+        margin-left: 5%;
+        margin-right: 5%;
         z-index: 4;
     }
 

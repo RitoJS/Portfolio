@@ -1,189 +1,258 @@
 <script lang="ts">
     /* eslint-disable svelte/no-navigation-without-resolve */
-    import { menuMock } from "$lib/mock/menu-mock";
-	import type { Menu } from "$lib/types/menu";
-
-    import { fade, fly } from "svelte/transition";
-	import AnimationLetter from "$lib/components/animation-letter.svelte";
-    import { getContext, onMount, tick } from "svelte";
-	import Date from "$lib/components/date.svelte";
-    import avatarMobile from "$lib/assets/avatar.png";
-    import avatarDesktop from "$lib/assets/home9.jpg";
+    import { getContext, onMount } from 'svelte';
+    import { beforeNavigate } from '$app/navigation';
+    import Gallery from '$lib/components/gallery.svelte';
+    import AnimationLetter from '$lib/components/animation-letter.svelte';
+    import Date from '$lib/components/date.svelte';
 
     const info = getContext<{ text: string | null }>('info');
 
-    let menu: Menu[] = menuMock;
+    const avatarMobile: string = 'assets/imgs/home2.png';
+    const avatarDesktop: string = 'assets/imgs/home6.png';
 
-    // Animation Avatar
-    let landed = $state(false);
-    let spinning = $state(false);
-    function spinFade(node, { duration }) {
-        return {
-            duration,
-            css: (t: number) => `
-                opacity: ${t};
-                bottom: ${100 - t * 100}%;
-            `
-        };
-    }
+    const links = [
+        { href: '/works',   label: 'Works',   sub: 'Parcours et projets',   desc: 'Mon parcours, mes formations et mes projets.' },
+        { href: '/about',   label: 'About',   sub: 'Profil et compétences', desc: 'Qui je suis et ce que je sais faire.' },
+        { href: '/hobbies', label: 'Hobbies', sub: 'Hors du code',          desc: 'Ce que je fais quand je ne code pas.' },
+        { href: '/contact', label: 'Contact', sub: 'Formulaire et liens',   desc: 'Un message, un projet ? Écris-moi.' }
+    ];
 
-    let showAvatar = $state(false);
+    const tags: string[] = ['react', 'svelte', 'vue', 'nextjs'];
 
-    onMount(async () => {
-        await tick();
-        showAvatar = true;
+    const availability = {
+        open: true,
+        status: 'Disponible',
+        rows: [
+            { label: 'Contrat', value: 'CDI, CDD' },
+            { label: 'Début',   value: 'Immédiat' },
+            { label: 'Lieu',    value: 'Remote / Hybride' }
+        ]
+    };
+
+    const defaultText: string = 'Choisissez une section pour commencer.';
+    let active = $state(0);
+    let leaving = false;
+
+    beforeNavigate(() => {
+        leaving = true;
     });
+
+    onMount(() => {
+        info.text = defaultText;
+    });
+
+    function hover(i: number) {
+        if (leaving) return;
+        active = i;
+        info.text = links[i].desc;
+    }
+    function leave() {
+        if (leaving) return;
+        info.text = defaultText;
+    }
 </script>
 
-<!--Mobile-->
+<article class="w-full h-full flex flex-col lg:flex-row gap-4 lg:gap-14 lg:px-8 overflow-y-auto lg:overflow-visible">
 
-<article class="md:hidden flex flex-col justify-center h-full">
-    {#if showAvatar}
-        <h1 class=" mb-2">
-            <hr class="w-full mb-0.5 " />
-            <div class="flex home-titles w-full items-center text-center">
-                <AnimationLetter data="Jordan Sama" className="title-text" classParent="w-full"/>
-            </div>
-            <hr class="w-full mt-0.5 " />
-        </h1>
+    
+    <div class="flex flex-col gap-4 lg:w-5/12 lg:shrink-0 lg:h-full">
+        <p class="text-xs lg:text-sm tracking-[0.3em] font-medium"><Date day="Bonjour" night="Bonsoir" /></p>
+
         <div>
-            
-                <figure class="pl-2 pr-2">
-                    <img
-                    src={avatarMobile}
-                    in:spinFade={{ duration: 1000 }}
-                    out:fade
-                    id="avatar"
-                    onintroend={() => (landed = true)}
-                    class:landed
-                    class:spinning
-                    alt="C'est moi !"
+            <h1 class="title text-5xl lg:text-7xl font-light leading-none mb-3">
+                <AnimationLetter data="Jordan Sama" className="" />
+            </h1>
+            <div class="job px-3 py-2 lg:px-4 text-base lg:text-lg font-medium">
+                Développeur Web Front-End / Intégrateur Web
+            </div>
+        </div>
+
+        <!-- Mobile -->
+        <div class="flex gap-2.5 h-1/3 shrink-0 lg:hidden">
+            <div class="panel w-1/3 shrink-0 flex flex-col">
+                <div class="panel-bar text-xs"><span class="square h-1/2 aspect-square"></span>Profil</div>
+                <div class="flex-1 min-h-0">
+                    <Gallery
+                        startIndex={0}
+                        images={[avatarMobile]}
+                        miniature={avatarMobile}
+                        className="w-full h-full object-cover"
+                        detail={false}
                     />
-                </figure>
-            
-            <div class="flex flex-col mt-2 sm:flex-row sm:items-center">
-                <div class="mt-2 mb-1 home-titles sm:mr-1 sm:w-1/2">
-                    <hr class="w-full mt-0.5 " />
-                    <h2 class="text-center p-1">Développeur Full-Stack</h2>
-                    <hr class="w-full mb-0.5 " />
                 </div>
-                    <div class=" mb-2 home-titles sm:w-1/2 sm:mt-2 sm:mb-1">
-                    <hr class="w-full mt-0.5 " />
-                    <h2 class="text-center p-1">Intégrateur Web</h2>
-                    <hr class="w-full mb-0.5 " />
+            </div>
+            <div class="panel flex-1 min-w-0 flex flex-col">
+                <div class="panel-bar text-xs"><span class="square h-1/2 aspect-square"></span>Disponibilités</div>
+                <div class="panel-body flex-1 min-h-0 p-3 flex flex-col justify-between gap-2">
+                    <p class="status text-sm font-semibold">
+                        <span class="dot {availability.open ? 'is-open' : ''}"></span>{availability.status}
+                    </p>
+                    <dl class="text-xs leading-5">
+                        {#each availability.rows as row (row.label)}
+                            <div class="flex gap-1">
+                                <dt class="font-medium">{row.label} :</dt>
+                                <dd>{row.value}</dd>
+                            </div>
+                        {/each}
+                    </dl>
+                    <ul class="flex flex-wrap gap-1.5">
+                        {#each tags as tag (tag)}
+                            <li class="tag text-xs">{tag}</li>
+                        {/each}
+                    </ul>
                 </div>
             </div>
         </div>
-    {/if}
-</article>
 
-<!--Desktop-->
-<article class="hidden w-full h-full md:block">
-    <div class="border flex w-full h-full">
-        <div class="w-1/4 h-full home-menu flex flex-col justify-around border-blue">
-            {#each menu as link, i (i) }
-                {#if  i != 0 && i <= 2 }
-                    <div class="left-link">
-                        <hr class="w-full mb-0.5 line-hover " />
-                        <div class="flex desktop-link items-center" transition:fly|global={{x: -100, duration: 400, delay: i * 100}} >
-                            <div class="decorator-cube"></div> <a class="w-full text-center  " href={link.link}>{link.label}</a> 
-                        </div>
-                        <hr class="w-full mt-0.5 line-hover " />
-                    </div>
-                {/if}
+        <!-- Menu -->
+        <nav class="flex flex-col gap-2.5 lg:gap-0 lg:flex-1 lg:min-h-0 lg:mt-6" onmouseleave={leave} aria-label="Sections">
+            {#each links as link, i (link.href)}
+                <a
+                    href={link.href}
+                    class="menu-item py-4 lg:py-0 lg:flex-1 {active === i ? 'is-active' : ''}"
+                    onmouseenter={() => hover(i)}
+                    onfocus={() => hover(i)}
+                    onblur={leave}
+                >
+                    <span class="square-sm"></span>
+                    <span class="flex-1 text-xl lg:text-2xl font-medium">{link.label}</span>
+                    <span class="text-xs lg:text-base font-normal">{link.sub}</span>
+                </a>
             {/each}
-        </div>
+        </nav>
+    </div>
 
-        <div class="w-2/4 h-full home-portrait border-green">
-            <div class="h-full w-full" id="portrait">
-                <!--<img src={avatarDesktop} alt="mon portrait !" id="avatar-desktop"  />-->
+    <!-- Desktop -->
+    <div class="panel hidden lg:flex flex-1 min-w-0 h-full flex-col">
+        <div class="panel-bar text-lg"><span class="square h-1/2 aspect-square"></span>Mon Profil</div>
+        <div class="panel-body flex-1 min-h-0 p-5 flex flex-col gap-5">
+            <div class="h-1/2 min-h-0 border-2">
+                <Gallery
+                    startIndex={0}
+                    images={[avatarDesktop]}
+                    miniature={avatarDesktop}
+                    className="w-full h-full object-cover object-top"
+                    detail={false}
+                />
+            </div>
+
+            <ul class="flex flex-wrap gap-2">
+                {#each tags as tag (tag)}
+                    <li class="tag text-sm">{tag}</li>
+                {/each}
+            </ul>
+
+            <div class="flex flex-col gap-2 min-h-0">
+                <p class="status text-lg font-semibold">
+                    <span class="dot {availability.open ? 'is-open' : ''}"></span>{availability.status}
+                </p>
+                <dl class="text-base leading-6">
+                    {#each availability.rows as row (row.label)}
+                        <div class="flex gap-2 border-b border-(--shadow-elements-color) py-1">
+                            <dt class="font-medium w-1/4">{row.label}</dt>
+                            <dd>{row.value}</dd>
+                        </div>
+                    {/each}
+                </dl>
             </div>
         </div>
-
-        <div class="w-1/4 h-full home-menu flex flex-col justify-around border-blue">
-            {#each menu as link, i (link) }
-                {#if  i != 0 && i >= 3 }
-                    <div class="right-link">
-                        <hr class="w-full mb-0.5 line-hover " />
-                        <div class="flex desktop-link items-center" transition:fly|global={{x: -100, duration: 400, delay: i * 100}} >
-                            <div class="decorator-cube mr-0"></div> <a class="w-full text-center " href={link.link}>{link.label}</a> 
-                        </div>
-                        <hr class="w-full mt-0.5 line-hover " />
-                    </div>
-                   
-                {/if}
-            {/each}
-        </div>
-      
     </div>
 </article>
 
 <style>
-    .home-titles {
+    .title {
+        text-shadow: 3px 3px 0 var(--shadow-elements-color);
+    }
+
+    .job {
+        padding-block: 0.5rem;
         background-color: var(--bg-block-decorator);
         color: var(--focus-text-color);
     }
 
-    .home-menu {
-        .left-link, .right-link {
-            height: 8%;
-            position: relative;
-        }
-
-        .left-link {
-            left: 5%;
-        }
-
-        .right-link {
-            left: -5%;
-        }
-
+    .panel {
+        box-shadow: 3px 3px 0 var(--shadow-elements-color);
     }
 
-    .desktop-link {
-        width: 100%;
-        background-color: var(--default-bg-elements);
-        height: 100%;
-        font-weight: 500;
-        background: linear-gradient(to right, var(--focus-elements) 50%, var(--default-bg-elements) 50%);
-        background-size: 200% 100%;
-        background-position: right bottom;
-        transition: 500ms;
+    .panel-bar {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        height: 2.5rem;
+        padding: 0 0.75rem;
+        font-weight: 600;
+        background-color: var(--bg-block-decorator);
+        color: var(--focus-text-color);
+    }
+    .square {
+        background-color: var(--default-bg-elements2);
     }
 
-    @keyframes spin {
-        from { transform: rotate(0deg); }
-        to   { transform: rotate(1080deg); }
+    .panel-body {
+        background-color: var(--default-bg-elements2);
     }
 
-    #avatar {
-        position: relative;
-        bottom: 100%;
-        opacity: 0;
-        width: 80%;
-        margin: auto;
+    .tag {
+        padding: 0.25rem 0.625rem;
+        font-weight: 600;
+        background-color: var(--bg-block-decorator);
+        color: var(--focus-text-color);
+    }
 
-        &.landed {
-            bottom: 0;
-            opacity: 1;
+    .status {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .dot {
+        width: 0.75rem;
+        aspect-ratio: 1;
+        border: 2px solid var(--bg-block-decorator);
+        background-color: transparent;
+    }
+    .dot.is-open {
+        background-color: var(--bg-block-decorator);
+    }
+
+    .menu-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding-inline: 0.875rem;
+        background-color: var(--default-bg-elements2);
+        box-shadow: 3px 3px 0 var(--shadow-elements-color);
+        text-decoration: none;
+        transition: background-color 0.2s, color 0.2s;
+    }
+    .square-sm {
+        width: 0.75rem;
+        aspect-ratio: 1;
+        background-color: var(--bg-block-decorator);
+    }
+    .menu-item:hover,
+    .menu-item:focus-visible,
+    .menu-item.is-active {
+        background-color: var(--bg-block-decorator);
+        color: var(--focus-text-color);
+    }
+    .menu-item:hover .square-sm,
+    .menu-item:focus-visible .square-sm,
+    .menu-item.is-active .square-sm {
+        background-color: var(--focus-text-color);
+    }
+
+    /* Desktop  */
+    @media (min-width: 1024px) {
+        .menu-item {
+            background-color: transparent;
+            box-shadow: none;
+            border-bottom: 1px solid var(--shadow-elements-color);
         }
-
-        &.spinning {
-            animation: spin 1s linear forwards; /* independent duration */
+        .menu-item:hover,
+        .menu-item:focus-visible,
+        .menu-item.is-active {
+            box-shadow: 3px 3px 0 var(--shadow-elements-color);
         }
     }
-
-    #avatar-desktop {
-        width: 100%;
-        height: 100%;
-    }
-
-    /** Small size **/
-    @media (min-width: 640px) {
-        #avatar {
-            width: 65%;
-        }
-    }
-
-    
 </style>

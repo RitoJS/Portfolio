@@ -18,12 +18,12 @@
     onMount(() => {
         info.text = noInfo;
          return () => {
-            if (info.text === noInfo) info.text = null;
+            if (info.text === noInfo) info.text = noInfo;
         };
     })
 </script>
 
-<article class="w-full h-full overflow-y-auto">
+<article class="w-full h-full overflow-y-auto lg:overflow-y-hidden">
     <div class="h-1/10">
         <AnimationLetter data="Expériences" className="page-title w-full text-left" />
     </div>
