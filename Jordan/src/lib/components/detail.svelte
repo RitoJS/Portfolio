@@ -10,7 +10,7 @@
 </script>
 
 <article class=" w-full h-full overflow-y-auto">
-    <div class="compagny-section flex items-center w-full">
+    <div class="name-section flex items-center w-full">
          <div class="decorator-cube-detail"></div> <h3 class="compagny-title font-bold">{ work.company }</h3>
     </div>
     <div class="detail p-5 flex flex-col w-full">
@@ -108,22 +108,11 @@
 </article>
 
 <style>
-    .compagny-section {
-        background-color: var(--bg-block-decorator);
-        color: var(--focus-text-color);
-        pointer-events: none;
-        position: absolute;
-        z-index: 8;
-    }
 
     .compagny-title {
         font-size: 1.5rem;
     }
-    
-
-    .block-separator {
-        border: 1px solid;
-    }
+      
 
     .sections {
         padding: 5px;

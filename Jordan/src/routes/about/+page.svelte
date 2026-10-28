@@ -86,6 +86,9 @@
             <div class=" flex-1 min-h-0 skills-block  ">
                 <OpenedBlock title="Compétences">
                      <!--Front-->
+                    <div class="flex items-center mb-1 p-5">
+                        <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
+                    </div>
                     <h3 class="font-semibold sections-text">Front-End: </h3>
                     <ul class=" grid grid-cols-2 md:grid-cols-3 gap-1 w-full   p-2 mb-5">
                         <!--loop-->
@@ -97,6 +100,9 @@
                     </ul>
 
                     <!--Back-->
+                    <div class="flex items-center mb-1 p-5">
+                        <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
+                    </div>
                     <h3 class="font-semibold sections-text">Back-End: </h3>
                     <ul class="grid grid-cols-2 md:grid-cols-3 gap-1 w-full   p-2 mb-3">
                         <!--loop-->
@@ -108,6 +114,9 @@
                     </ul>
 
                     <!--Workflows-->
+                    <div class="flex items-center mb-1 p-5">
+                        <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
+                    </div>
                     <h3 class="font-semibold sections-text">Workflows: </h3>
                     <ul class=" grid grid-cols-2 md:grid-cols-3 gap-1 w-full  p-2 mb-3">
                         <!--loop-->
@@ -119,6 +128,9 @@
                     </ul>
 
                     <!--Logiciel et plugin-->
+                    <div class="flex items-center mb-1 p-5">
+                        <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
+                    </div>
                     <h3 class="font-semibold sections-text">Logiciel et plugin: </h3>
                     <ul class="front-block grid grid-cols-2 md:grid-cols-3 gap-1 w-full   p-2">
                         <!--loop-->
@@ -128,6 +140,9 @@
                             </li>    
                         {/each}
                     </ul>
+                    <div class="flex items-center mb-1 p-5">
+                        <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
+                    </div>
                 </OpenedBlock>
                
             </div>
@@ -151,21 +166,44 @@
                     transition = "0.5s"
                     buttonMenu = {false}> 
                     {#snippet trigger(contentVisible)}
-                        {contentVisible ? 'close' : 'About Me'}
+                        {#if contentVisible}
+                            <h2 class="close-button-blocks font-bold cursor-pointer">X</h2>
+                        {:else}
+                           <h3 class="w-full h-full text-center about-me-animated">A propos</h3>
+                        {/if}
                     {/snippet}
-                    <p>
+                    <div class="name-section flex items-center w-full">
+                        <div class="decorator-cube-detail"></div> <h3 class="title-about-me font-bold">A propos</h3>
+                    </div>
+                    <div class="detail p-5 flex flex-col w-full">
+                        <div class="flex items-center mb-1 mt-8">
+                            <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
+                        </div>
+                    </div>
+                    <p class="p-5">
                         {about.description}
                     </p>
+
+                    <div class="flex items-center mb-1 mt-8 p-5">
+                        <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
+                    </div>
                 </AnimatedBlock>
             </div>
 
             <!--Desktop XL-->
             <div class="hidden xl:block w-full h-1/2 ">
                 <OpenedBlock title="A propos">
+                    <div class="flex items-center mb-1">
+                        <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
+                    </div>
                     <p>
                         {about.description}
                     </p>
+                    <div class="flex items-center mb-1">
+                        <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
+                    </div>
                 </OpenedBlock>
+                
             </div>
                 
         </div>
@@ -175,5 +213,15 @@
 <style>
     .sections-text {
         text-align: center;
+    }
+
+    .title-about-me {
+        font-size: 1.5rem;
+    }
+
+    .about-me-animated {
+        font-size: 1.8rem;
+        font-weight: 700;
+        cursor: pointer;
     }
 </style>

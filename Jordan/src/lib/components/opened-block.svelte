@@ -49,7 +49,7 @@
 </script>
 
 <div class="flex flex-col h-full">
-    <div class="name-blocks flex w-full shrink-0">
+    <div class="name-blocks flex w-full items-center shrink-0">
         <div class="decorator-cube-detail"></div> <h3 class="font-bold">{ title }</h3>
     </div>
     <div class="flex-1 min-h-0  ">
@@ -70,6 +70,9 @@
     .name-blocks {
         background-color: var(--bg-block-decorator);
         color: var(--focus-text-color);
+        h3 {
+            font-size: 1.5rem;
+        }
     }
 
     .content-child {
