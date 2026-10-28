@@ -1,5 +1,6 @@
 <script lang="ts">
     /* eslint-disable svelte/no-navigation-without-resolve */
+    import { onMount } from "svelte";
     import AnimationLetter from "$lib/components/animation-letter.svelte";
     import { contactPageMock } from "$lib/mock/contact-page-mock";
     import type { ContactPage } from "$lib/types/contact";
@@ -7,6 +8,14 @@
     const description = getContext<{ text: string | null }>('info');
 
     let contactPageInfo: ContactPage = contactPageMock;
+    const noInfo: string = "Envie d'échanger ? Remplissez le formulaire, je réponds dès que possible.";
+
+    onMount(() => {
+        description.text = noInfo;
+         return () => {
+            if (description.text === noInfo) description.text = null;
+        };
+    })
 </script>
 
 <article class="w-full h-full overflow-y-auto">

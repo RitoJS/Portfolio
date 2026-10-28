@@ -3,7 +3,7 @@
     import AnimationLetter from "$lib/components/animation-letter.svelte";
     import { aboutMock } from "$lib/mock/about-mock";
     import type { About } from "$lib/types/about";
-    import { getContext } from "svelte";
+    import { getContext, onMount } from "svelte";
 
 	import OpenedBlock from "$lib/components/opened-block.svelte";
 	import Gallery from "$lib/components/gallery.svelte";
@@ -21,6 +21,15 @@
         if (!anniversaryHappened) age--;
         return age;
     }
+
+    const noInfo: string = "Une présentation de moi ainsi que de mes compétences"
+
+    onMount(() => {
+        info.text = noInfo;
+         return () => {
+            if (info.text === noInfo) info.text = null;
+        };
+    })
 
 </script>
 
@@ -54,7 +63,12 @@
 
         <!--Desktop-->
         <div class="hidden lg:flex lg:flex-col gap-2  w-1/3 xl:w-3/6 h-full min-h-0 ">
-             <div class="avatar-block  w-full xl:h-full lg:h-2/5 shrink-0 ">  
+            <div 
+                class="avatar-block  w-full xl:h-full lg:h-2/5 shrink-0 "
+                role="presentation"
+                onmouseenter={() => (info.text = `C'est moi !`)}
+                onmouseleave={() => (info.text = noInfo)}
+            >  
                 <OpenedBlock title="Mon Profil">
                     <Gallery startIndex={0} images={[about.avatarDesktop]} miniature={about.avatarDesktop} className="block w-full h-full object-cover" detail={false} />
                 </OpenedBlock>
