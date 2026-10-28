@@ -1,8 +1,7 @@
 <script lang="ts">
-	import type { AnimatedLetter } from "$lib/types/animated-letter";
     import { onMount } from "svelte";
 
-    let { data, className, classParent = '', delays = 80 } = $props();
+    let { data, className, classParent = '', delays = 15 } = $props();
 
     let letterTabs = $derived(
   Array.from(data as string).map(char => ({
@@ -72,4 +71,4 @@
             </span>
         {/if}
     {/each}
-        </span>
+</span>

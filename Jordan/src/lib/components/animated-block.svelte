@@ -7,6 +7,7 @@
 
 <script lang="ts">
 	import { tick, onMount } from "svelte";
+	import type { TransitionConfig } from "svelte/transition";
 
 	type Props = {
 		trigger: import('svelte').Snippet<[boolean]>;
@@ -29,8 +30,8 @@
 		buttonMenu?: boolean;
 		animatedBorder?: boolean;
 		anchored?: boolean; // true: closed state follows an in-flow placeholder
-		intro?: (node: Element, params?: any) => any; // params for intro animation
-		introParams?: Record<string, any>;
+		intro?: (node: Element, params?: Record<string, unknown>) => TransitionConfig; // params for intro animation
+		introParams?:  Record<string, unknown>;
 		disabled?: boolean
 	};
 
@@ -63,7 +64,7 @@
 	let moved = $state(false);
 	let resized = $state(false);
 	let contentVisible = $state(false);
-	let block: HTMLDivElement;
+	let block: HTMLDivElement | undefined = $state();
 	let mounted = $state(false);
 	let elevated = $state(false); // For block on focus to stay on front of everything if we clicked on it
 	let raf = 0;
@@ -161,6 +162,7 @@
 	}
 
 	async function toggle() {
+		if (!block) return
 		if (busy || (disabled && !moved)) return;
 
 		busy = true;

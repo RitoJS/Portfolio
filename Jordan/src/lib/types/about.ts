@@ -12,7 +12,8 @@ type Skills = {
     plugin: gauge[];
 }
 export type About = {
-    avatar: string;
+    avatarDesktop: string;
+    avatarMobile: string;
     name: string;
     age: Date;
     job: string;

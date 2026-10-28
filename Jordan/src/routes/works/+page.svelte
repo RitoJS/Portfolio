@@ -23,7 +23,7 @@
     })
 </script>
 
-<article class="w-full h-full">
+<article class="w-full h-full overflow-y-auto">
     <div class="h-1/10">
         <AnimationLetter data="Expériences" className="page-title w-full text-left" />
     </div>

@@ -12,7 +12,7 @@
     );
 </script>
 
-<div class="desc-block hidden md:flex">
+<div class="desc-block hidden lg:flex">
     <div class="block-decorator flex">
         <div class="thick-line"></div>
         <div class="thin-line"></div>
