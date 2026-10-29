@@ -1,4 +1,5 @@
 <script lang="ts">
+/* eslint-disable svelte/no-navigation-without-resolve */
     import './layout.css';
     import { page } from '$app/state';
     import { fly } from 'svelte/transition';
@@ -10,6 +11,20 @@
 	import Description from '$lib/components/description.svelte';
 	import AnimatedBlock from '$lib/components/animated-block.svelte';
 	import Menu from '$lib/components/menu.svelte';
+
+    type Icons = {
+        name: string;
+        icon: string;
+        link: string;
+        showMobile: boolean;
+    }
+
+    let links: Icons[] = [
+        {name: 'Svelte', icon:'assets/icons/svelte.svg', link: 'https://svelte.dev/', showMobile: false},
+        {name: 'Github', icon:'assets/icons/git.svg', link: 'https://github.com/RitoJS', showMobile: true},
+        {name: 'Linkedin', icon:'assets/icons/linkedin.svg', link: 'https://www.linkedin.com/in/jordan-sama', showMobile: true},
+        {name: 'Wordpress', icon:'assets/icons/wordpress.svg', link: 'https://picrito.wordpress.com/', showMobile: true},
+    ]
 
     let { children, data } = $props();
 
@@ -151,10 +166,39 @@
 </div>
 
 
-<footer class="site-footer">
-    <span class="footer-mark" aria-hidden="true"></span>
-    <span class="footer-name">RitoJS</span>
-    <span class="footer-note">Fait avec truc</span>
+<footer class="site-footer flex  justify-between">
+    <div class="flex h-full items-center md:w-1/2">
+        <div class="footer-mark " aria-hidden="true"></div>
+        <div class="footer-name ">
+            <a href="https://github.com/RitoJS">
+                Jordan Sama <span class="hidden md:inline">(RitoJS)</span>
+            </a>
+        </div>
+    </div>
+
+    <!--Mobile-->
+    <div class="flex  md:hidden">
+        {#each links as link, index (index)}
+            {#if link.showMobile}
+                <div class="ml-2">
+                    <a href={link.link}>
+                        <img class=" w-9 h-9 m-auto" src="/{link.icon}" alt="icone {link.name}" />
+                    </a>
+                </div>
+            {/if}
+        {/each}
+    </div>
+    <!--Desktop-->
+    <div class="hidden md:flex w-1/2 h-full items-center justify-end pr-3">
+        <div class="footer-note flex items-center gap-2">
+            <span>Fait avec</span>
+            <a class="flex items-center gap-1 font-semibold" href={links[0].link}>
+                {links[0].name}
+                <img class="size-6" src="/{links[0].icon}" alt="Icone de {links[0].name}" />
+            </a>
+        </div>
+    </div>
+    
 </footer>
 
 <style>
@@ -208,10 +252,6 @@
     .footer-note {
         margin-left: auto;
         opacity: 0.8;
-    }
-
-    @media (max-width: 767px) {
-        .footer-note { display: none; } /* keep the mobile footer short */
     }
 
 </style>

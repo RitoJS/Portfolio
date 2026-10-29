@@ -26,7 +26,7 @@
         rows: [
             { label: 'Contrat', value: 'CDI, CDD' },
             { label: 'Début',   value: 'Immédiat' },
-            { label: 'Lieu',    value: 'Remote / Hybride' }
+            { label: 'Lieu',    value: 'Paris  / Télétravail' }
         ]
     };
 
