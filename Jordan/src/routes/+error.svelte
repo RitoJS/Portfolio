@@ -1,6 +1,7 @@
 <script lang="ts">
     /* eslint-disable svelte/no-navigation-without-resolve */
     import { page } from '$app/state';
+	import { getContext, onMount } from 'svelte';
 
     const is404 = $derived(page.status === 404);
 
@@ -10,6 +11,15 @@
             ? "Cette page n'existe pas ou a été déplacée."
             : (page.error?.message ?? 'Une erreur inattendue est survenue.')
     );
+    const info = getContext<{ text: string | null }>('info');
+    const noInfo: string = "Ooops !"
+
+    onMount(() => {
+        info.text = noInfo;
+        return () => {
+            if (info.text === noInfo) info.text = noInfo;
+        };
+    })
 </script>
 
 <article class="w-full h-full flex items-center justify-center p-2">

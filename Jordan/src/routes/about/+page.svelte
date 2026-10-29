@@ -51,9 +51,9 @@
             <div class="main-stats-info flex flex-col  w-2/3">
                 <div class="names-and-jobs w-full h-full p-1">
                     <OpenedBlock title="Informations">
-                        <p>Name: <AnimationLetter data={about.name} className='' /></p>
-                        <p>Age: <AnimationLetter data={getAge(about.age)} className='' /> ans</p>
-                        <p>Job: <AnimationLetter data={about.job} className='' /></p>
+                        <p>Name: {about.name} </p>
+                        <p>Age: {getAge(about.age)} ans</p>
+                        <p>Job: {about.job}</p>
                     </OpenedBlock>
                 </div>
 
@@ -88,9 +88,9 @@
                 <div class="main-stats-info flex flex-col  w-full ">
                     <div class="names-and-jobs w-full h-1/3 mb-2 ">
                         <OpenedBlock title="Informations">
-                            <p>Name: <AnimationLetter data={about.name} className='' /></p>
-                            <p>Age: <AnimationLetter data={getAge(about.age)} className='' /> ans</p>
-                            <p>Job: <AnimationLetter data={about.job} className='' /></p>
+                            <p>Name: {about.name}</p>
+                            <p>Age: {getAge(about.age)} ans</p>
+                            <p>Job: {about.job}</p>
                         </OpenedBlock>
                        
                     </div>
