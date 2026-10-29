@@ -276,6 +276,12 @@ html, body {
 
 
 /** Animation transition page **/
+
+/* caché dans le HTML rendu par le serveur, jusqu'à ce que l'action stagger ait posé ses classes */
+.main-content:not(.stagger-ready) > article {
+    opacity: 0;
+}
+
 .stagger-in,
 .stagger-in-about,
 .stagger-in-contact {

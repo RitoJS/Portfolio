@@ -61,30 +61,27 @@
     const pageStagger = $derived(staggerConfig[data.pathname] ?? staggerConfig.default);
 
     function stagger(
-		node: HTMLElement,
-		{
-			delay = 800,
-			step = 60,
-			className = 'stagger-in',
-			depth = 1
-		}: { delay?: number; step?: number; className?: string; depth?: number } = {}
-	) {
-		if (prefersReducedMotion) return;
+        node: HTMLElement,
+        { delay = 800, step = 60, className = 'stagger-in', depth = 1 }: { delay?: number; step?: number; className?: string; depth?: number } = {}
+    ) {
+        if (prefersReducedMotion) {
+            node.classList.add('stagger-ready');
+            return;
+        }
 
-		// depth 1 = stagger main's direct children (default)
-		// depth 2 = stagger the children INSIDE each of main's direct children instead
-		let targets: Element[] = Array.from(node.children).filter((el) => !el.classList.contains('tips'));
+        let level: Element[] = Array.from(node.children).filter((el) => !el.classList.contains('tips'));
 
-		for (let level = 1; level < depth; level++) {
-			targets = targets.flatMap((el) => Array.from(el.children));
-		}
+        for (let l = 0; l < depth; l++) {
+            level.forEach((child, i) => {
+                if (child.classList.contains('animated-block')) return;
+                (child as HTMLElement).style.setProperty('--stagger-delay', `${delay + l * step + i * (step / 3)}ms`);
+                child.classList.add(className);
+            });
+            level = level.flatMap((el) => Array.from(el.children));
+        }
 
-		targets.forEach((child, i) => {
-            if (child.classList.contains('animated-block')) return; // skip
-            (child as HTMLElement).style.setProperty('--stagger-delay', `${delay + i * step}ms`);
-            child.classList.add(className);
-        });
-	}
+        node.classList.add('stagger-ready');
+    }
 
     function modalBg() {
         return modalBgShow = !modalBgShow;
