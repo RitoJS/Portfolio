@@ -55,10 +55,12 @@ html, body {
 }
 
 .grid-bg {
-    background-image: url(../lib/assets/bg-grid.png);
+    background-image: url(../lib/assets/nier-grid.png);
     z-index: 99;
     pointer-events: none;
-    opacity: 0.05;
+    opacity: 0.30;
+    background-size: 120px 120px;
+    background-repeat: repeat;
 }
 
 .hover-background {

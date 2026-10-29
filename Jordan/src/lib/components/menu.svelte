@@ -14,7 +14,7 @@
 {#if options.visible}
     {#each menu as link, index (index) }
         <!--Mobile-->
-        <div role="button" tabindex="0" class={ `w-full p-2 parent-link  ${(menu.length-1 === index && !(menu.length-1 & 1) ? 'col-span-full' : '')} md:hidden`}>
+        <div role="button" tabindex="0" class={ `w-full p-2 parent-link  ${(menu.length-1 === index && !(menu.length-1 & 1) ? 'col-span-full' : '')} lg:hidden`}>
             <div class="content-menu flex flex-col  w-full h-full">
                 <div class="icon-menu w-full basis-0 grow-7  flex justify-center min-h-0  overflow-hidden">
                     <div class="min-h-0 m-auto" transition:fly|global={{x: -100, duration: 400, delay: index * 100}} >
