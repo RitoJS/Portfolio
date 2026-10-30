@@ -1,4 +1,4 @@
-<!-- $lib/components/profile-design-simple.svelte -->
+
 <script lang="ts">
     // x, y, w, h : position et taille de la pièce dans la page (en %)
     // ox, oy, rot : décalage (en % de la zone) et rotation quand la pièce flotte
@@ -49,7 +49,7 @@
         --ink: var(--bg-block-decorator, #3e3b34);
     }
 
-    /* la page est centrée, 80 % de la hauteur, proportions fixes */
+    
     .page {
         position: absolute;
         top: 10%;

@@ -49,7 +49,6 @@
                             endTop="50%"
                             endLeft="50%"
                             transition="0.5s"
-                            buttonMenu={false}
                         >
                             {#snippet trigger(contentVisible)}
                                 {#if contentVisible}
@@ -111,7 +110,6 @@
                             endTop="50%"
                             endLeft="50%"
                             transition="0.5s"
-                            buttonMenu={false}
                         >
                             {#snippet trigger(contentVisible)}
                                 {#if contentVisible}
