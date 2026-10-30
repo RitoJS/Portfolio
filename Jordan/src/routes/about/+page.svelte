@@ -164,7 +164,7 @@
                     endLeft = "50%"
                     init = {false}
                     transition = "0.5s"
-                    buttonMenu = {false}> 
+                > 
                     {#snippet trigger(contentVisible)}
                         {#if contentVisible}
                             <h2 class="close-button-blocks font-bold cursor-pointer">X</h2>

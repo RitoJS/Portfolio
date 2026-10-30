@@ -35,7 +35,7 @@ export async function sendContactEmail({ name, email, subject, message }: Contac
         const { error } = await resend.emails.send({
             from: CONTACT_FROM_EMAIL,
             to: [CONTACT_TO_EMAIL],
-            replyTo: email, // tu réponds directement à la personne
+            replyTo: email,
             subject: `[Portfolio] ${safeSubject}`,
             text: `De : ${safeName} <${email}>\nSujet : ${safeSubject}\n\n${message}`,
             html: `<p><strong>De :</strong> ${escapeHtml(safeName)} &lt;${escapeHtml(email)}&gt;</p>
