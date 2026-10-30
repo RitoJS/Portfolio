@@ -17,19 +17,6 @@
         <div class="flex items-center mb-1 mt-8">
             <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
         </div>
-        <div class="sections">
-            <h3>Durée:</h3>
-            <p>
-                De <span class="font-semibold"> { work.startDate?.getFullYear() } </span> à <span class="font-semibold"> { work.endDate?.getFullYear() } </span>
-            </p>
-        </div>
-
-        <div class="sections">
-            <h3>A propos:</h3>
-            <p>
-                { work.description } 
-            </p>
-        </div>
 
         <div class="sections">
             <h3>Poste:</h3>
@@ -37,6 +24,14 @@
                 { work.jobName } 
             </p>
         </div>
+
+        <div class="sections">
+            <h3>Durée:</h3>
+            <p>
+                De <span class="font-semibold"> { work.startDate?.getFullYear() } </span> à <span class="font-semibold"> { work.endDate?.getFullYear() } </span>
+            </p>
+        </div>
+
 
          <div class="flex items-center mb-1 mt-5">
             <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
@@ -51,6 +46,18 @@
             </div>
         {/if}
         
+         {#if work.languages?.length}
+            <div class="sections-languages">
+                <h3>Langages utilisé:</h3>
+                <div class="languages-used grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  justify-items-center">
+                    {#each work.languages as language, index (index) }
+                        <p class="language-block p-2 m-1 text-center w-full sm:w-40 flex justify-center items-center font-bold">
+                            <img class="icons-general mr-2" src="/{language.icon}" alt="icone {language.name}" />{ language.name }
+                        </p>
+                    {/each}
+                </div>
+            </div>
+        {/if}
 
         {#if work.problem}
             <div class="sections">
@@ -71,18 +78,6 @@
             </div>
         {/if}
         
-        {#if work.languages?.length}
-            <div class="sections-languages">
-                <h3>Langages utilisé:</h3>
-                <div class="languages-used grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  justify-items-center">
-                    {#each work.languages as language, index (index) }
-                        <p class="language-block p-2 m-1 text-center w-full sm:w-40 flex justify-center items-center font-bold">
-                            <img class="icons-general mr-2" src="/{language.icon}" alt="icone {language.name}" />{ language.name }
-                        </p>
-                    {/each}
-                </div>
-            </div>
-        {/if}
         
 
          <div class="flex items-center mb-1 mt-8">

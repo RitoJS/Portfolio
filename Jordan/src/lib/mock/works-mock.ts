@@ -131,8 +131,7 @@ export const worksMock: Works[] = [
         company: "L'îlot - Etap'Web",
         screenshots: [
             'assets/screenshots/pdc1.png', 'assets/screenshots/pdc2.png', 'assets/screenshots/pdc3.png',
-            'assets/screenshots/pdc4.png', 'assets/screenshots/pdc5.png', 'assets/screenshots/demaille1.png',
-            'assets/screenshots/demaille2.png', 'assets/screenshots/demaille3.png',
+            'assets/screenshots/pdc4.png', 'assets/screenshots/pdc5.png',
         ],
         description: "Agence de réinsertion à l'emploi ",
         role: "Prestataire en création/modification de site web, j'ai travaillé sur divers site internet allant de developpement wordpress a appli interne Django",

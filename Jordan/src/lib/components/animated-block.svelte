@@ -27,7 +27,6 @@
 		opacity?: number;
 		transition?: string;
 		className?: string;
-		buttonMenu?: boolean;
 		animatedBorder?: boolean;
 		anchored?: boolean; // true: closed state follows an in-flow placeholder
 		intro?: (node: Element, params?: Record<string, unknown>) => TransitionConfig; // params for intro animation
@@ -53,7 +52,6 @@
 		opacity = 1,
 		transition = "1s",
 		className = "",
-		buttonMenu = false,
 		animatedBorder = false,
 		anchored = false,
 		intro = () => ({}),
@@ -257,18 +255,7 @@
 	}
 </script>
 
-<!--Only show this if buttonMenu is True-->
-{#if !init && buttonMenu}
-	<button class="menu-block" class:moved onclick={toggle}>
-		{#if buttonMenu}
-			<div class="burger-icon w-full h-full">
-				<hr class="line-burger" id="line1" class:moved />
-				<hr class="line-burger" id="line2" class:moved />
-				<hr class="line-burger" id="line3" class:moved />
-			</div>
-		{/if}
-	</button>
-{/if}
+
 
 <!--In-flow placeholder: it takes the space and gives the fixed block its start position-->
 {#if anchored}
@@ -346,24 +333,6 @@
 		flex-shrink: 0;
 	}
 
-	#line1.moved {
-		position: relative;
-		transform: rotate(40deg);
-		top: 25%;
-		background-color: var(--focus-text-color);
-	}
-
-	#line2.moved {
-		border: 0px solid;
-		opacity: 0;
-	}
-
-	#line3.moved {
-		position: relative;
-		transform: rotate(-40deg);
-		bottom: 20%;
-		background-color: var(--focus-text-color);
-	}
 
 	.menu-block {
 		width: 65px;

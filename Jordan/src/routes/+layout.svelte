@@ -9,8 +9,9 @@
     import favicon from '$lib/assets/favicon.svg';
     import CanvasBackground from '$lib/components/canvas-background.svelte';
 	import Description from '$lib/components/description.svelte';
-	import AnimatedBlock from '$lib/components/animated-block.svelte';
+
 	import Menu from '$lib/components/menu.svelte';
+	import BurgerMenu from '$lib/components/burger-menu.svelte';
 
     type Icons = {
         name: string;
@@ -83,9 +84,6 @@
         node.classList.add('stagger-ready');
     }
 
-    function modalBg() {
-        return modalBgShow = !modalBgShow;
-    }
 </script>
 
 <CanvasBackground />
@@ -95,41 +93,10 @@
 {/if}
 <header class="z-2 lg:flex head-menu md:p-1 shrink-0">
     <!--Burger Menu-->
-    <div 
-    role="button" 
-    tabindex="0"
-    onkeydown={(e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      modalBg();
-    }
-  }} 
-    class=" lg:hidden" onclick={modalBg} 
-    >
-        <AnimatedBlock
-          closedWidth = "65px" 
-            closedHeight = "45px"
-            openWidth = "90%"
-            openHeight = "70%"
-            moveDuration = {600}
-            resizeDuration = {400}
-            startTop = "1%"
-            startLeft = "2%"
-            endTop = "50%"
-            endLeft = "50%"
-            init = {false}
-            transition = "0.5s"
-            buttonMenu = {true}
-            
-        > 
-             {#snippet trigger(contentVisible)}
-                {contentVisible ? '' : ''}
-            {/snippet}
-            <nav class="grid grid-cols-2 auto-rows-fr p-2 w-full h-full menu-nav min-w-0" >
-                <Menu options={optionsMenu} />
-            </nav>
-        </AnimatedBlock>
+    <div class="lg:hidden">
+        <BurgerMenu />
     </div>
+   
 
     <!--Desktop Menu-->
     {#if page.url.pathname !== '/'}
@@ -143,12 +110,12 @@
 </header>
 
 
-<div class="relative grid grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)] flex-1 min-h-0">
+<div class="relative grid grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)] flex-1 min-h-0 ">
     {#key data.pathname}
         <div class="grid-bg absolute w-full h-full"></div>
         <main
             style="grid-area: 1 / 1"
-            class="main-content mt-15 mr-5 ml-5 mb-15 min-h-0 "
+            class="main-content mt-15 mr-5 ml-5 mb-15 min-h-0  "
             in:fly={transitionIn}
             out:fly={transitionOut}
             use:stagger={pageStagger}
@@ -167,7 +134,7 @@
     <div class="flex h-full items-center md:w-1/2">
         <div class="footer-mark " aria-hidden="true"></div>
         <div class="footer-name ">
-            <a href="https://github.com/RitoJS">
+            <a class="link" href="https://github.com/RitoJS">
                 Jordan Sama <span class="hidden md:inline">(RitoJS)</span>
             </a>
         </div>
@@ -178,7 +145,7 @@
         {#each links as link, index (index)}
             {#if link.showMobile}
                 <div class="ml-2">
-                    <a href={link.link}>
+                    <a class="link" href={link.link}>
                         <img class=" w-9 h-9 m-auto" src="/{link.icon}" alt="icone {link.name}" />
                     </a>
                 </div>
@@ -189,7 +156,7 @@
     <div class="hidden md:flex w-1/2 h-full items-center justify-end pr-3">
         <div class="footer-note flex items-center gap-2">
             <span>Fait avec</span>
-            <a class="flex items-center gap-1 font-semibold" href={links[0].link}>
+            <a  class="link flex items-center gap-1 font-semibold" href={links[0].link}>
                 {links[0].name}
                 <img class="size-6" src="/{links[0].icon}" alt="Icone de {links[0].name}" />
             </a>

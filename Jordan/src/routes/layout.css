@@ -2,6 +2,7 @@
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
 
+
 /*Chart colors and variable*/
 :root {
     --main-background: #C6C1AB;
@@ -35,10 +36,21 @@
     background-color: blue;
 }
 
+/** Fonts **/
+.font-title {
+    font-family: "Major Mono Display", monospace;
+    font-weight: 400;
+    font-style: normal;
+}
+
 
 html {
     overflow-y: hidden;
     overflow-x: hidden;
+    font-family: "Chakra Petch", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+   
 }
 
 html, body {
@@ -271,6 +283,31 @@ html, body {
         margin-bottom: 0em;
         height: 80%;
     }
+}
+
+/*Link*/
+a.link {
+    font-weight: 600;
+    color: var(--bg-block-decorator);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+    padding: 0 0.15em;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+a.link:hover,
+a.link:focus-visible {
+    background-color: var(--bg-block-decorator);
+    color: var(--focus-text-color);
+    text-decoration-color: transparent;
+    outline: none;
+}
+
+
+a.link[target='_blank']::after {
+    content: ' ↗';
+    font-size: 0.85em;
 }
 
 

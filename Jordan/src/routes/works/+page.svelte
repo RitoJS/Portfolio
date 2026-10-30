@@ -32,7 +32,7 @@
         <div
             class="space-y-8 relative w-fit h-fit before:absolute before:inset-0 before:m-auto before:-translate-x-px before:h-full before:w-0.5 bg-timeline"
         >
-            {#each dataWorks as work, index (index)}
+            {#each dataWorks.toReversed() as work, index (index)}
                 <div class="relative grid grid-cols-[5rem_auto_5rem] gap-x-6 items-center">
                     <div class="col-start-2 row-start-1">
                         <AnimatedBlock
@@ -57,7 +57,7 @@
                                     
                                 {:else}
                                     <div 
-                                        class="no-detail" 
+                                        class="no-detail w-full h-full flex items-center justify-center" 
                                         role="presentation"
                                         onmouseenter={() => (info.text = `${work.jobName} - ${work.company}`)}
                                         onmouseleave={() => (info.text = noInfo)}
@@ -93,7 +93,7 @@
         <div class="relative flex w-full min-w-max justify-between gap-x-24 px-6
                     before:absolute before:top-1/2 before:h-0.5 before:-translate-y-px bg-timeline
                     before:left-13 before:right-13">
-            {#each dataWorks as work, index (index)}
+            {#each dataWorks.toReversed() as work, index (index)}
                 <!--Item -->
                 <div class="shrink-0 w-14 grid grid-rows-[2.5rem_56px_2.5rem] gap-y-4 justify-items-center">
                     <div class="row-start-2 w-14 flex justify-center relative">
@@ -119,7 +119,7 @@
                                     
                                 {:else}
                                     <div 
-                                        class="no-detail" 
+                                        class="no-detail w-full h-full flex items-center justify-center" 
                                         role="presentation"
                                         onmouseenter={() => (info.text = `${work.jobName} - ${work.company}`)}
                                         onmouseleave={() => (info.text = noInfo)}

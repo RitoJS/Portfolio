@@ -5,16 +5,24 @@
     import { contactPageMock } from "$lib/mock/contact-page-mock";
     import type { ContactPage } from "$lib/types/contact";
     import { getContext } from "svelte";
+    import { enhance } from '$app/forms';
     const description = getContext<{ text: string | null }>('info');
 
     let contactPageInfo: ContactPage = contactPageMock;
     const noInfo: string = "Envie d'échanger ? Remplissez le formulaire, je réponds dès que possible.";
 
+    //Envoi de mail
+    let { form } = $props();
+    let sending = $state(false);
+
+    // Le résultat de l'envoi s'affiche aussi dans ta barre de description
+    $effect(() => {
+        if (form?.success) description.text = 'Message envoyé, merci ! Je vous réponds dès que possible.';
+        else if (form?.error) description.text = form.error;
+    });
+
     onMount(() => {
         description.text = noInfo;
-         return () => {
-            if (description.text === noInfo) description.text = noInfo;
-        };
     })
 </script>
 
@@ -26,7 +34,16 @@
         <div class="lg:w-5/10">
             <!--Form-->
             <div class="form-block">
-                <form>
+                <form
+                    method="POST"
+                    use:enhance={() => {
+                        sending = true;
+                        return async ({ update }) => {
+                            await update();
+                            sending = false;
+                        };
+                    }}
+                >
                     <div class="form-input  mt-3 md:mt-5 lg:mt-0 ">
                         <label class="ml-6.5 label-form" for="nom">
                             <AnimationLetter data="Nom: " className='' delays={20} />
@@ -34,8 +51,18 @@
                         <div class="flex w-full">
                             <div class=" w-3 md:block thick-line-pages mr-2"></div>
                             <div class="w-1 thin-line-pages mr-2"></div>
-                            <input id="nom" type="text" class="w-full h-20 md:h-15" name="nom" autocomplete="name"  required />
+                            <input 
+                                id="nom"
+                                type="text"
+                                class="w-full h-20 md:h-15"
+                                name="nom"
+                                autocomplete="name"
+                                maxlength="100"
+                                value={form?.values?.nom ?? ''}
+                                required 
+                            />
                         </div>
+                        {#if form?.errors?.nom}<p class="field-error ml-6.5" role="alert">{form.errors.nom}</p>{/if}
                         
                     </div>
 
@@ -54,9 +81,12 @@
                                 class="w-full h-20 md:h-15"
                                 name="email"
                                 autocomplete="email"
+                                maxlength="254"
+                                value={form?.values?.email ?? ''}
                                 required
                             />
                         </div>
+                        {#if form?.errors?.email}<p class="field-error ml-6.5" role="alert">{form.errors.email}</p>{/if}
                        
                     </div>
 
@@ -67,8 +97,18 @@
                         <div class="w-full flex">
                             <div class=" w-3 md:block thick-line-pages mr-2"></div>
                             <div class="w-1 thin-line-pages mr-2"></div>
-                            <input id="sujet" type="text"  class="w-full h-20 md:h-15"  name="sujet" autocomplete="off" required />
+                            <input 
+                                id="sujet"
+                                type="text"  
+                                class="w-full h-20 md:h-15"  
+                                name="sujet" 
+                                autocomplete="off"
+                                maxlength="150"
+                                value={form?.values?.sujet ?? ''}
+                                required 
+                            />
                         </div>
+                        {#if form?.errors?.sujet}<p class="field-error ml-6.5" role="alert">{form.errors.sujet}</p>{/if}
                         
                     </div>
 
@@ -85,20 +125,25 @@
                                 rows="5"
                                 name="description"
                                 autocomplete="off"
+                                maxlength="5000"
+                                value={form?.values?.description ?? ''}
                                 required
                             ></textarea>
                         </div>
+                        {#if form?.errors?.description}<p class="field-error ml-6.5" role="alert">{form.errors.description}</p>{/if}
                        
                     </div>
+                    <!--Prevent Bot-->
+                    <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
 
                     <div class="form-button flex justify-center mb-3 mt-3 text-center">
-                        <button class="flex w-1/2 h-15 items-center "  type="submit">
-                            
-                            <div class="text-center w-full ">
-                                Envoyer
-                            </div>
+                        <button class="flex w-1/2 h-15 items-center" type="submit" disabled={sending}>
+                            <div class="text-center w-full">{sending ? 'Envoi…' : 'Envoyer'}</div>
                         </button>
                     </div>
+
+                    {#if form?.success}<p class="text-center" role="status">Message envoyé, merci !</p>{/if}
+                    {#if form?.error}<p class="text-center field-error" role="alert">{form.error}</p>{/if}
                 </form>
 
             </div>
@@ -216,5 +261,10 @@
     .imgs-icons {
         height: 40px;
         width: 40px;
+    }
+
+    .field-error {
+        font-size: 0.9em;
+        font-weight: 500;
     }
 </style>

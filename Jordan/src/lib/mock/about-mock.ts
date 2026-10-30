@@ -160,5 +160,5 @@ export const aboutMock: About = {
             },
         ],
     },
-    description: " Je m'appelle Jordan Sama, Developpeur Front End / Intégrateur Web avec 4 ans d'expérience professionnels actuel. Passionné par la culture web et vidéoludique, j'aime a la fois développé et faire un peu de graphisme pendant mon temps libre. Spécialisé sur les langages front depuis mes débuts professionnels, je me spécialise sur les frameworks react et suis capable d'intervenir sur les projets back-end si néccessaire  (python, php)"
+    description: " Je suis Jordan, développeur front-end. Ce que je préfère, c’est le moment où une maquette devient une interface qui bouge. Chez Elap, j’ai conçu et intégré de zéro une web app de planning en Angular. Depuis, je me forme en continu sur React, Vue, Next.js et Svelte en construisant des projets réels. Ce portfolio, volontairement construit comme un menu de jeu vidéo, montre ma façon de travailler."
 }
