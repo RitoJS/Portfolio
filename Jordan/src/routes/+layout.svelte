@@ -143,12 +143,12 @@
 </header>
 
 
-<div class="relative grid grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)] flex-1 min-h-0">
+<div class="relative grid grid-cols-[minmax(0,1fr)] grid-rows-[minmax(0,1fr)] flex-1 min-h-0 ">
     {#key data.pathname}
         <div class="grid-bg absolute w-full h-full"></div>
         <main
             style="grid-area: 1 / 1"
-            class="main-content mt-15 mr-5 ml-5 mb-15 min-h-0 "
+            class="main-content mt-15 mr-5 ml-5 mb-15 min-h-0  "
             in:fly={transitionIn}
             out:fly={transitionOut}
             use:stagger={pageStagger}

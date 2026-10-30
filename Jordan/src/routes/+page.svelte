@@ -53,25 +53,25 @@
     }
 </script>
 
-<article class="w-full h-full flex flex-col lg:flex-row gap-4 lg:gap-14 lg:px-8 overflow-y-auto lg:overflow-visible">
+<article class="text-base lg:text-[1px] w-full h-full flex flex-col lg:flex-row gap-4 lg:gap-14 lg:px-8 overflow-y-auto lg:overflow-visible">
 
     
     <div class="flex flex-col gap-4 lg:w-5/12 lg:shrink-0 lg:h-full">
         <p class="text-xs lg:text-sm tracking-[0.3em] font-medium"><Date day="Bonjour" night="Bonsoir" /></p>
 
         <div>
-            <h1 class="title text-5xl lg:text-7xl font-light leading-none mb-3">
+            <h1 class="font-title title text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-light leading-none mb-3">
                 <AnimationLetter data="Jordan Sama" className="" />
             </h1>
             <div class="job px-3 py-2 lg:px-4 text-base lg:text-lg font-medium">
-                Développeur Web Front-End / Intégrateur Web
+                <span class="font-bold">D</span>éveloppeur <span class="font-bold">W</span>eb <span class="font-bold">F</span>ront-<span class="font-bold">E</span>nd / <span class="font-bold">I</span>ntégrateur <span class="font-bold">W</span>eb
             </div>
         </div>
 
         <!-- Mobile -->
         <div class="flex gap-2.5 h-1/3 shrink-0 lg:hidden">
             <div class="panel w-1/3 shrink-0 flex flex-col">
-                <div class="panel-bar text-xs"><span class="square h-1/2 aspect-square"></span>Profil</div>
+                <div class="panel-bar tracking-wider"><span class="square h-1/2 aspect-square"></span>Profil</div>
                 <div class="flex-1 min-h-0">
                     <Gallery
                         startIndex={0}
@@ -83,15 +83,15 @@
                 </div>
             </div>
             <div class="panel flex-1 min-w-0 flex flex-col">
-                <div class="panel-bar text-xs"><span class="square h-1/2 aspect-square"></span>Disponibilités</div>
+                <div class="panel-bar tracking-wider"><span class="square h-1/2 aspect-square"></span>Disponibilités</div>
                 <div class="panel-body flex-1 min-h-0 p-3 flex flex-col justify-between gap-2">
-                    <p class="status text-sm font-semibold">
+                    <p class="status text-lg font-semibold">
                         <span class="dot {availability.open ? 'is-open' : ''}"></span>{availability.status}
                     </p>
-                    <dl class="text-xs leading-5">
+                    <dl class="leading-5">
                         {#each availability.rows as row (row.label)}
                             <div class="flex gap-1">
-                                <dt class="font-medium">{row.label} :</dt>
+                                <dt class=" font-bold">{row.label} :</dt>
                                 <dd>{row.value}</dd>
                             </div>
                         {/each}
@@ -117,7 +117,7 @@
                 >
                     <span class="square-sm"></span>
                     <span class="flex-1 text-xl lg:text-2xl font-medium">{link.label}</span>
-                    <span class="text-xs lg:text-base font-normal">{link.sub}</span>
+                    <span class="text-sm  lg:text-base tracking-wider">{link.sub}</span>
                 </a>
             {/each}
         </nav>
@@ -147,10 +147,10 @@
                 <p class="status text-lg font-semibold">
                     <span class="dot {availability.open ? 'is-open' : ''}"></span>{availability.status}
                 </p>
-                <dl class="text-base leading-6">
+                <dl class="text-base lg:text-[1.2rem] lg:tracking-wider leading-6">
                     {#each availability.rows as row (row.label)}
                         <div class="flex gap-2 border-b border-(--shadow-elements-color) py-1">
-                            <dt class="font-medium w-1/4">{row.label}</dt>
+                            <dt class="font-bold w-1/4">{row.label}</dt>
                             <dd>{row.value}</dd>
                         </div>
                     {/each}

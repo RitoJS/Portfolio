@@ -14,7 +14,7 @@
 {#if options.visible}
     {#each menu as link, index (index) }
         <!--Mobile-->
-        <div role="button" tabindex="0" class={ `w-full p-2 parent-link  ${(menu.length-1 === index && !(menu.length-1 & 1) ? 'col-span-full' : '')} lg:hidden`}>
+        <div role="button" tabindex="0" class={ `font-bold text-[1.3rem] w-full p-2 parent-link  ${(menu.length-1 === index && !(menu.length-1 & 1) ? 'col-span-full' : '')} lg:hidden`}>
             <div class="content-menu flex flex-col  w-full h-full">
                 <div class="icon-menu w-full basis-0 grow-7  flex justify-center min-h-0  overflow-hidden">
                     <div class="min-h-0 m-auto" transition:fly|global={{x: -100, duration: 400, delay: index * 100}} >
@@ -28,7 +28,7 @@
         </div>
         
         <!--Desk-->
-        <div class="hidden lg:flex flex-col w-full h-full selected-hover pt-1 pb-1 justify-center items-center">
+        <div class="hidden lg:text-[1.8rem] lg:flex flex-col w-full h-full selected-hover pt-1 pb-1 justify-center items-center">
             <hr class="w-full mb-0.5 line-hover " />
             <div class="flex selected-block items-center" transition:fly|global={{x: -100, duration: 400, delay: index * 100}} >
                 <div class="decorator-cube"></div> <a class="w-full  " href={link.link}>{link.label}</a> 

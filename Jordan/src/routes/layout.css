@@ -2,6 +2,7 @@
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
 
+
 /*Chart colors and variable*/
 :root {
     --main-background: #C6C1AB;
@@ -35,10 +36,21 @@
     background-color: blue;
 }
 
+/** Fonts **/
+.font-title {
+    font-family: "Major Mono Display", monospace;
+    font-weight: 400;
+    font-style: normal;
+}
+
 
 html {
     overflow-y: hidden;
     overflow-x: hidden;
+    font-family: "Chakra Petch", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+   
 }
 
 html, body {

@@ -34,7 +34,7 @@
 </script>
 
 <!--Mobile-->
-<article class="w-full h-full ">
+<article class="w-full h-full text-[1.2rem] sm:text-[1.3rem] ">
      <div>
         <AnimationLetter data="A propos de moi" className="page-title w-full text-left" />
     </div>
@@ -51,9 +51,9 @@
             <div class="main-stats-info flex flex-col  w-2/3">
                 <div class="names-and-jobs w-full h-full p-1">
                     <OpenedBlock title="Informations">
-                        <p>Name: {about.name} </p>
-                        <p>Age: {getAge(about.age)} ans</p>
-                        <p>Job: {about.job}</p>
+                        <p class="sm:mb-3"> <span class="hidden sm:inline font-bold "> Nom: </span> {about.name} </p>
+                        <p class="sm:mb-3"> <span class="hidden sm:inline font-bold"> Age: </span> {getAge(about.age)} ans</p>
+                        <p class="sm:mb-3"><span class=" hidden sm:inline font-bold"> Profession: </span> <br class="hidden md:block lg:hidden" /> {about.job}</p>
                     </OpenedBlock>
                 </div>
 
@@ -169,7 +169,7 @@
                     closedWidth = "100%" 
                     closedHeight = "50px"
                     openWidth = "90%"
-                    openHeight = "50%"
+                    openHeight = "70%"
                     moveDuration = {600}
                     resizeDuration = {400}
                     startTop = "0%"
@@ -194,11 +194,11 @@
                             <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
                         </div>
                     </div>
-                    <p class="p-5">
+                    <p class="p-5 text-[1.1rem]">
                         {about.description}
                     </p>
 
-                    <div class="flex items-center mb-1 mt-8 p-5">
+                    <div class="flex items-center mb-1 mt-1 p-5">
                         <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
                     </div>
                 </AnimatedBlock>
