@@ -4,12 +4,11 @@
     import { beforeNavigate } from '$app/navigation';
     import Gallery from '$lib/components/gallery.svelte';
     import AnimationLetter from '$lib/components/animation-letter.svelte';
-    import Date from '$lib/components/date.svelte';
+	import AnimationHome from '$lib/components/animation-home.svelte';
 
     const info = getContext<{ text: string | null }>('info');
 
     const avatarMobile: string = 'assets/imgs/home2.png';
-    const avatarDesktop: string = 'assets/imgs/home6.png';
 
     const links = [
         { href: '/works',   label: 'Works',   sub: 'Parcours et projets',   desc: 'Mon parcours, mes formations et mes projets.' },
@@ -53,19 +52,21 @@
     }
 </script>
 
-<article class="text-base lg:text-[1px] w-full h-full flex flex-col lg:flex-row gap-4 lg:gap-14 lg:px-8 overflow-y-auto lg:overflow-visible">
+<article
+    class="text-base w-full h-full flex flex-col gap-4
+           lg:grid lg:grid-cols-[5fr_7fr] lg:grid-rows-[auto_minmax(0,1fr)] lg:content-start
+           lg:h-5/6 lg:gap-x-14 lg:gap-y-0 lg:px-8
+           overflow-y-auto lg:overflow-visible"
+>
+    <!-- Ligne 1 : titre -->
+    <h1 class="title text-4xl lg:text-5xl xl:text-6xl font-light leading-none lg:mb-3 lg:col-start-1 lg:row-start-1">
+        <AnimationLetter data="Jordan Sama" className="" />
+    </h1>
 
-    
-    <div class="flex flex-col gap-4 lg:w-5/12 lg:shrink-0 lg:h-full">
-        <p class="text-xs lg:text-sm tracking-[0.3em] font-medium"><Date day="Bonjour" night="Bonsoir" /></p>
-
-        <div>
-            <h1 class="font-title title text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-light leading-none mb-3">
-                <AnimationLetter data="Jordan Sama" className="" />
-            </h1>
-            <div class="job px-3 py-2 lg:px-4 text-base lg:text-lg font-medium">
-                <span class="font-bold">D</span>éveloppeur <span class="font-bold">W</span>eb <span class="font-bold">F</span>ront-<span class="font-bold">E</span>nd / <span class="font-bold">I</span>ntégrateur <span class="font-bold">W</span>eb
-            </div>
+    <!-- Ligne 2, colonne gauche : métier + (profil mobile) + menu -->
+    <div class="flex flex-col gap-4 lg:col-start-1 lg:row-start-2 lg:min-h-0">
+        <div class="job px-3 py-2 lg:px-4 text-base lg:text-lg font-medium">
+            <span class="font-bold">D</span>éveloppeur <span class="font-bold">W</span>eb <span class="font-bold">F</span>ront-<span class="font-bold">E</span>nd / <span class="font-bold">I</span>ntégrateur <span class="font-bold">W</span>eb
         </div>
 
         <!-- Mobile -->
@@ -91,7 +92,7 @@
                     <dl class="leading-5">
                         {#each availability.rows as row (row.label)}
                             <div class="flex gap-1">
-                                <dt class=" font-bold">{row.label} :</dt>
+                                <dt class="font-bold">{row.label} :</dt>
                                 <dd>{row.value}</dd>
                             </div>
                         {/each}
@@ -117,24 +118,18 @@
                 >
                     <span class="square-sm"></span>
                     <span class="flex-1 text-xl lg:text-2xl font-medium">{link.label}</span>
-                    <span class="text-sm  lg:text-base tracking-wider">{link.sub}</span>
+                    <span class="text-sm lg:text-base tracking-wider">{link.sub}</span>
                 </a>
             {/each}
         </nav>
     </div>
 
-    <!-- Desktop -->
-    <div class="panel hidden lg:flex flex-1 min-w-0 h-full flex-col">
+    <!-- Desktop : ligne 2, colonne droite -->
+    <div class="panel hidden lg:flex min-w-0 min-h-0 flex-col lg:col-start-2 lg:row-start-2">
         <div class="panel-bar text-lg"><span class="square h-1/2 aspect-square"></span>Mon Profil</div>
         <div class="panel-body flex-1 min-h-0 p-5 flex flex-col gap-5">
             <div class="h-1/2 min-h-0 border-2">
-                <Gallery
-                    startIndex={0}
-                    images={[avatarDesktop]}
-                    miniature={avatarDesktop}
-                    className="w-full h-full object-cover object-top"
-                    detail={false}
-                />
+               <AnimationHome />
             </div>
 
             <ul class="flex flex-wrap gap-2">

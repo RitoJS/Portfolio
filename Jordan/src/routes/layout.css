@@ -285,6 +285,31 @@ html, body {
     }
 }
 
+/*Link*/
+a.link {
+    font-weight: 600;
+    color: var(--bg-block-decorator);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+    padding: 0 0.15em;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+a.link:hover,
+a.link:focus-visible {
+    background-color: var(--bg-block-decorator);
+    color: var(--focus-text-color);
+    text-decoration-color: transparent;
+    outline: none;
+}
+
+
+a.link[target='_blank']::after {
+    content: ' ↗';
+    font-size: 0.85em;
+}
+
 
 
 /** Animation transition page **/
