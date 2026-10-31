@@ -27,7 +27,7 @@ Portfolio personnel de développeur front-end, conçu comme un menu de jeu vidé
 
 ```sh
 git clone https://github.com/RitoJS/Portfolio.git
-cd …
+cd Jordan/
 npm install
 ```
 
@@ -71,15 +71,21 @@ npm run dev -- --open
 ## Structure
 
 ```
-src/
-├── lib/
-│   ├── components/   # Composants réutilisables (blocs, galerie, menu…)
-│   ├── mock/         # Données du site (about, works…)
-│   ├── server/       # Code serveur uniquement (envoi d'e-mails)
-│   └── types/        # Types TypeScript
-├── routes/           # Pages (accueil, about, works, hobbies, contact)
-└── app.html
-static/               # Favicon, image Open Graph, icônes
+(racine du dépôt)/
+├── README.md
+└── Jordan/
+    ├── docs/             # Capture d'écran du README
+    ├── src/
+    │   ├── lib/
+    │   │   ├── components/   # Composants réutilisables (blocs, galerie, menu…)
+    │   │   ├── mock/         # Données du site (about, works…)
+    │   │   ├── server/       # Code serveur uniquement (envoi d'e-mails)
+    │   │   └── types/        # Types TypeScript
+    │   ├── routes/           # Pages (accueil, about, works, hobbies, contact)
+    │   └── app.html
+    ├── static/               # Favicon, image Open Graph, icônes
+    ├── .env.example
+    └── package.json
 ```
 
 ## Déploiement
