@@ -1,48 +1,98 @@
-# sv
+# Portfolio — Jordan Sama
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Portfolio personnel de développeur front-end, conçu comme un menu de jeu vidéo
+(inspiré de l'esthétique des menus de NieR:Automata).
 
-## Creating a project
+🔗 **Site :** 
 
-If you're seeing this, you've probably already done this step. Congrats!
+![Aperçu du portfolio](./docs/apercu.png)
+
+## Fonctionnalités
+
+- Navigation façon menu de jeu, avec barre de description au survol
+- Pages : Accueil, About, Works (parcours et projets), Hobbies, Contact
+- Animations d'entrée échelonnées, compatibles `prefers-reduced-motion`
+- Formulaire de contact avec envoi d'e-mails (Resend), champ anti-spam et limitation d'envois
+- Responsive : menu burger sur mobile et tablette
+- Aperçu de lien (Open Graph) et favicon personnalisés
+
+## Stack
+
+- [SvelteKit](https://svelte.dev/docs/kit) (Svelte 5) + TypeScript
+- [Tailwind CSS](https://tailwindcss.com/) v4
+- [Resend](https://resend.com/) pour l'envoi des e-mails
+- Tests : Vitest, Playwright · Qualité : ESLint, Prettier
+
+## Installation
 
 ```sh
-# create a new project
-npx sv create my-app
+git clone https://github.com/RitoJS/….git
+cd …
+npm install
 ```
 
-To recreate this project with the same configuration:
+## Configuration
+
+Copie le fichier d'exemple puis renseigne les valeurs :
 
 ```sh
-# recreate this project
-npx sv@0.15.2 create --template minimal --types ts --add prettier eslint vitest="usages:unit,component" playwright tailwindcss="plugins:typography,forms" sveltekit-adapter="adapter:auto" --install npm Jordan
+cp .env.example .env
 ```
 
-## Developing
+| Variable             | Description                                         |
+| -------------------- | --------------------------------------------------- |
+| `RESEND_API_KEY`     | Clé API Resend                                      |
+| `CONTACT_TO_EMAIL`   | Adresse qui reçoit les messages du formulaire       |
+| `CONTACT_FROM_EMAIL` | Expéditeur, ex. `Portfolio <contact@xxx.xxx.fr>`    |
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+> Tant que le domaine n'est pas vérifié chez Resend, utilise
+> `Portfolio <onboarding@resend.dev>` et ton adresse de compte Resend en destinataire.
+
+## Développement
 
 ```sh
 npm run dev
 
-# or start the server and open the app in a new browser tab
+# ou en ouvrant directement le navigateur
 npm run dev -- --open
 ```
 
-## Building
+## Scripts
 
-To create a production version of your app:
+| Commande          | Rôle                              |
+| ----------------- | --------------------------------- |
+| `npm run dev`     | Serveur de développement          |
+| `npm run build`   | Build de production               |
+| `npm run preview` | Prévisualiser le build            |
+| `npm run check`   | Vérification des types            |
+| `npm run lint`    | ESLint + Prettier                 |
+| `npm run test`    | Tests unitaires et composants     |
 
-```sh
-npm run build
+## Structure
+
+```
+src/
+├── lib/
+│   ├── components/   # Composants réutilisables (blocs, galerie, menu…)
+│   ├── mock/         # Données du site (about, works…)
+│   ├── server/       # Code serveur uniquement (envoi d'e-mails)
+│   └── types/        # Types TypeScript
+├── routes/           # Pages (accueil, about, works, hobbies, contact)
+└── app.html
+static/               # Favicon, image Open Graph, icônes
 ```
 
-You can preview the production build with `npm run preview`.
+## Déploiement
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Le projet utilise `adapter-auto`. Pour un hébergeur précis, installe l'
+[adapter](https://svelte.dev/docs/kit/adapters) correspondant et définis les
+variables d'environnement ci-dessus sur la plateforme.
 
-## Credits
+## Crédits
 
-RitoJS - Developper
+- **Développement et design :** RitoJS (Jordan Sama)
+- **Icônes :** [SVG Repo](https://www.svgrepo.com/)
+- **Police :** [Chakra Petch](https://fonts.google.com/specimen/Chakra+Petch) (SIL Open Font License)
 
-SVG Repo - Icons used
+
+## Licence
