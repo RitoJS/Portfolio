@@ -27,7 +27,6 @@
 		opacity?: number;
 		transition?: string;
 		className?: string;
-		animatedBorder?: boolean;
 		anchored?: boolean; // true: closed state follows an in-flow placeholder
 		intro?: (node: Element, params?: Record<string, unknown>) => TransitionConfig; // params for intro animation
 		introParams?:  Record<string, unknown>;
@@ -52,7 +51,6 @@
 		opacity = 1,
 		transition = "1s",
 		className = "",
-		animatedBorder = false,
 		anchored = false,
 		intro = () => ({}),
 		introParams = {},
@@ -280,7 +278,6 @@
 		class:instant
 		class:dragging
 		class:offscreen={anchored && !anchorVisible && !moved}
-		class:animated-border={animatedBorder}
 		style="
 			--closed-width: {cWidth};
 			--closed-height: {cHeight};
@@ -430,40 +427,6 @@
 	}
 	.animated-block.dragging .drag-handle {
 		cursor: grabbing;
-	}
-	/* --- animated border --- */
-	.animated-block.animated-border::after {
-		content: "";
-		position: absolute;
-		inset: 0;
-		padding: 2px;
-		border-radius: inherit;
-		background: conic-gradient(
-			from var(--border-angle),
-			transparent 0deg,
-			transparent 40deg,
-			var(--default-bg-elements, --focus-text-color) 45deg,
-			transparent 50deg,
-			transparent 130deg,
-			var(--default-bg-elements, --focus-text-color) 135deg,
-			transparent 140deg,
-			transparent 220deg,
-			var(--default-bg-elements, --focus-text-color) 225deg,
-			transparent 230deg,
-			transparent 310deg,
-			var(--default-bg-elements, --focus-text-color) 315deg,
-			transparent 320deg,
-			transparent 360deg
-		);
-		-webkit-mask:
-			linear-gradient(#fff 0 0) content-box,
-			linear-gradient(#fff 0 0);
-		-webkit-mask-composite: xor;
-		mask-composite: exclude;
-		pointer-events: none;
-		z-index: 1;
-
-		animation: border-rotate-fade 4s ease-in-out infinite;
 	}
 
 	.trigger {

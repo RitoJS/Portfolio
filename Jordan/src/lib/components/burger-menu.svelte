@@ -118,12 +118,25 @@
         background: currentColor;
         transition: top 0.3s, transform 0.3s, opacity 0.2s;
     }
-    .bar:nth-child(1) { top: 32%; }
-    .bar:nth-child(2) { top: 50%; }
-    .bar:nth-child(3) { top: 68%; }
-    .open .bar:nth-child(1) { top: 50%; transform: rotate(45deg); }
-    .open .bar:nth-child(2) { opacity: 0; }
-    .open .bar:nth-child(3) { top: 50%; transform: rotate(-45deg); }
+    .bar:nth-child(1) { 
+        top: 32%; 
+    }
+    .bar:nth-child(2) { 
+        top: 50%; 
+    }
+    .bar:nth-child(3) { 
+        top: 68%; 
+    }
+    .open .bar:nth-child(1) { 
+        top: 50%; transform: rotate(45deg); 
+    }
+    .open .bar:nth-child(2) { 
+        opacity: 0; 
+    }
+    .open .bar:nth-child(3) { 
+        top: 50%; 
+        transform: rotate(-45deg); 
+    }
 
     /* --- panneau --- */
     .panel {
