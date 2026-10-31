@@ -5,7 +5,7 @@ Portfolio personnel de développeur front-end, conçu comme un menu de jeu vidé
 
 🔗 **Site :** 
 
-![Aperçu du portfolio](./docs/apercu.png)
+![Aperçu du portfolio](./Jordan/docs/apercu.png)
 
 ## Fonctionnalités
 
