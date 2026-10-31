@@ -26,7 +26,7 @@ Portfolio personnel de développeur front-end, conçu comme un menu de jeu vidé
 ## Installation
 
 ```sh
-git clone https://github.com/RitoJS/….git
+git clone https://github.com/RitoJS/Portfolio.git
 cd …
 npm install
 ```
