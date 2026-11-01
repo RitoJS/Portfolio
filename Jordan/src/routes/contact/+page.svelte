@@ -15,7 +15,6 @@
     let { form } = $props();
     let sending = $state(false);
 
-    // Le résultat de l'envoi s'affiche aussi dans ta barre de description
     $effect(() => {
         if (form?.success) description.text = 'Message envoyé, merci ! Je vous réponds dès que possible.';
         else if (form?.error) description.text = form.error;
