@@ -7,6 +7,7 @@
 	import { setContext } from 'svelte';
     import { beforeNavigate } from '$app/navigation';
     import favicon from '$lib/assets/favicon.svg';
+    import faviconApple from '$lib/assets/apple-touch-icon.png'
     import CanvasBackground from '$lib/components/canvas-background.svelte';
 	import Description from '$lib/components/description.svelte';
 
@@ -87,7 +88,25 @@
 </script>
 
 <CanvasBackground />
-<svelte:head><link rel="icon" href={favicon} /></svelte:head>
+<svelte:head>
+    <link rel="icon" href={favicon} />
+    <link rel="apple-touch-icon" href={faviconApple} />
+
+    <title>Jordan Sama — Développeur Front-End</title>
+    <meta name="description" content="Portfolio de Jordan Sama, développeur front-end et intégrateur web." />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Jordan Sama" />
+    <meta property="og:title" content="Jordan Sama — Développeur Front-End" />
+    <meta property="og:description" content="Portfolio de Jordan Sama, développeur front-end et intégrateur web." />
+    <meta property="og:url" content="https://tondomaine.fr/" />
+    <meta property="og:image" content="https://tondomaine.fr/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Aperçu du portfolio de Jordan Sama" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+</svelte:head>
 {#if modalBgShow}
     <div class="fixed z-1 w-full h-full top-0 left-0 modal-bg lg:hidden"></div>
 {/if}

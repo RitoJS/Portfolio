@@ -59,7 +59,7 @@
            overflow-y-auto lg:overflow-visible"
 >
     <!-- Ligne 1 : titre -->
-    <h1 class="title text-4xl lg:text-5xl xl:text-6xl font-light leading-none lg:mb-3 lg:col-start-1 lg:row-start-1">
+    <h1 class="text-4xl lg:text-5xl xl:text-6xl font-light leading-none lg:mb-3 lg:col-start-1 lg:row-start-1">
         <AnimationLetter data="Jordan Sama" className="" />
     </h1>
 
@@ -156,9 +156,6 @@
 </article>
 
 <style>
-    .title {
-        text-shadow: 3px 3px 0 var(--shadow-elements-color);
-    }
 
     .job {
         padding-block: 0.5rem;
