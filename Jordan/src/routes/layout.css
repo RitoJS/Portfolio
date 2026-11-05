@@ -310,6 +310,15 @@ a.link[target='_blank']::after {
     font-size: 0.85em;
 }
 
+/** Toaster **/
+.toaster-mail {
+    background-color: var(--default-bg-elements2);
+    color: red;
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--bg-block-decorator);
+    
+}
 
 
 /** Animation transition page **/

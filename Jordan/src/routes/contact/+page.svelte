@@ -6,6 +6,8 @@
     import type { ContactPage } from "$lib/types/contact";
     import { getContext } from "svelte";
     import { enhance } from '$app/forms';
+    import {  toast } from "svelte-sonner";
+    import ToasterCustom from '$lib/components/toaster-custom.svelte';
     const description = getContext<{ text: string | null }>('info');
 
     let contactPageInfo: ContactPage = contactPageMock;
@@ -23,9 +25,18 @@
     onMount(() => {
         description.text = noInfo;
     })
+
+    function toastConfirm() {
+        console.log("Je passe");
+        toast.custom(ToasterCustom, {
+            componentProps: {title: 'Test Ttitle', text: 'Je suis toaster component custom lalalalalala !!!'},
+            duration: 5000
+        })
+    }
 </script>
 
 <article class="w-full h-full overflow-y-auto">
+    <button onclick={toastConfirm}>Clique moi !!!!</button>
     <div>
         <AnimationLetter data="Contactez - moi" className="page-title w-full text-left" />
     </div>

@@ -13,6 +13,7 @@
 
 	import Menu from '$lib/components/menu.svelte';
 	import BurgerMenu from '$lib/components/burger-menu.svelte';
+	import { Toaster } from 'svelte-sonner';
 
     type Icons = {
         name: string;
@@ -107,6 +108,8 @@
 
     <meta name="twitter:card" content="summary_large_image" />
 </svelte:head>
+<!--Set toaster -->
+<Toaster position="top-center" />
 {#if modalBgShow}
     <div class="fixed z-1 w-full h-full top-0 left-0 modal-bg lg:hidden"></div>
 {/if}
