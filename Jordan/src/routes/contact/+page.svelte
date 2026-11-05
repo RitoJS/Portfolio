@@ -168,7 +168,7 @@
                         onmouseenter={() => (description.text = `Voir mon CV traditionnel`)}
                         onmouseleave={() => (description.text = noInfo)}
                     >
-                        <a href="/assets/files/Jordan-Sama_cv-1.pdf" target="_blank" rel="noopener noreferrer">
+                        <a href="/assets/files/CV_Jordan_Sama.pdf" target="_blank" rel="noopener noreferrer">
                             <img class="cursor-pointer m-auto imgs-icons" src="/assets/icons/resume.svg" alt="icone de mon cv" />
                         </a>
                     </div>
