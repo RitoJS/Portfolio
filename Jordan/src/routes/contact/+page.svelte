@@ -18,25 +18,29 @@
     let sending = $state(false);
 
     $effect(() => {
-        if (form?.success) description.text = 'Message envoyé, merci ! Je vous réponds dès que possible.';
-        else if (form?.error) description.text = form.error;
+        if (form?.success) {
+            description.text = 'Message envoyé, merci ! Je vous réponds dès que possible.';
+            toastConfirm("Message reçu", "Message envoyé, merci ! Je vous réponds dès que possible.")
+        } 
+        else if (form?.error) { 
+            description.text = form.error;
+            toastConfirm("Erreur", form.error);
+        }
     });
 
     onMount(() => {
         description.text = noInfo;
     })
 
-    function toastConfirm() {
-        console.log("Je passe");
+    function toastConfirm(title: string, text: string) {
         toast.custom(ToasterCustom, {
-            componentProps: {title: 'Test Ttitle', text: 'Je suis toaster component custom lalalalalala !!!'},
+            componentProps: {title: title, text: text},
             duration: 5000
         })
     }
 </script>
 
 <article class="w-full h-full overflow-y-auto">
-    <button onclick={toastConfirm}>Clique moi !!!!</button>
     <div>
         <AnimationLetter data="Contactez - moi" className="page-title w-full text-left" />
     </div>

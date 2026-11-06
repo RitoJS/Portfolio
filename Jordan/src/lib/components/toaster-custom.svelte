@@ -14,6 +14,10 @@
 </div>
 
 <style>
+    h4 {
+        font-size: 1.6rem;
+        color: var(--default-bg-elements2)
+    }
     .toast-parent {
         background-color: var(--default-bg-elements2);
         box-shadow: 4px 4px 0 var(--shadow-elements-color);
