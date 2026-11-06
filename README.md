@@ -97,6 +97,7 @@ variables d'environnement ci-dessus sur la plateforme.
 ## Crédits
 
 - **Développement et design :** RitoJS (Jordan Sama)
+- **Toaster :** [Svelte Sonner](https://svelte-sonner.vercel.app/)
 - **Icônes :** [SVG Repo](https://www.svgrepo.com/)
 - **Police :** [Chakra Petch](https://fonts.google.com/specimen/Chakra+Petch) (SIL Open Font License)
 

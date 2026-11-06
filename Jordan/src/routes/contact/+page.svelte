@@ -6,6 +6,8 @@
     import type { ContactPage } from "$lib/types/contact";
     import { getContext } from "svelte";
     import { enhance } from '$app/forms';
+    import {  toast } from "svelte-sonner";
+    import ToasterCustom from '$lib/components/toaster-custom.svelte';
     const description = getContext<{ text: string | null }>('info');
 
     let contactPageInfo: ContactPage = contactPageMock;
@@ -16,13 +18,26 @@
     let sending = $state(false);
 
     $effect(() => {
-        if (form?.success) description.text = 'Message envoyé, merci ! Je vous réponds dès que possible.';
-        else if (form?.error) description.text = form.error;
+        if (form?.success) {
+            description.text = 'Message envoyé, merci ! Je vous réponds dès que possible.';
+            toastConfirm("Message reçu", "Message envoyé, merci ! Je vous réponds dès que possible.")
+        } 
+        else if (form?.error) { 
+            description.text = form.error;
+            toastConfirm("Erreur", form.error);
+        }
     });
 
     onMount(() => {
         description.text = noInfo;
     })
+
+    function toastConfirm(title: string, text: string) {
+        toast.custom(ToasterCustom, {
+            componentProps: {title: title, text: text},
+            duration: 5000
+        })
+    }
 </script>
 
 <article class="w-full h-full overflow-y-auto">
