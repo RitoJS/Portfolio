@@ -11,6 +11,16 @@ type Skills = {
     workflow: gauge[];
     plugin: gauge[];
 }
+
+type formation = {
+    startDate: Date,
+    endDate: Date,
+    jobName: string,
+    company: string,
+    description: string,
+    role: string,
+}
+
 export type About = {
     avatarDesktop: string;
     avatarMobile: string;
@@ -21,4 +31,5 @@ export type About = {
     creativity: number;
     skills: Skills;
     description: string;
+    formations: formation[];
 };

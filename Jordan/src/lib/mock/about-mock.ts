@@ -160,5 +160,23 @@ export const aboutMock: About = {
             },
         ],
     },
-    description: " Je suis Jordan, développeur front-end. Ce que je préfère, c’est le moment où une maquette devient une interface qui bouge. Chez Elap, j’ai conçu et intégré de zéro une web app de planning en Angular. Depuis, je me forme en continu sur React, Vue, Next.js et Svelte en construisant des projets réels. Ce portfolio, volontairement construit comme un menu de jeu vidéo, montre ma façon de travailler."
+    description: " Je suis Jordan, développeur front-end. Ce que je préfère, c’est le moment où une maquette devient une interface qui bouge. Chez Elap, j’ai conçu et intégré de zéro une web app de planning en Angular. Depuis, je me forme en continu sur React, Vue, Next.js et Svelte en construisant des projets réels.",
+    formations: [
+        {
+            startDate: new Date("2010"),
+            endDate: new Date("2014"),
+            jobName: 'Bac Littéraire',
+            company: 'Lycée Gustave Eiffel',
+            description: 'Bac Littéraire',
+            role: '',
+        },
+        {
+            startDate: new Date("2015"),
+            endDate: new Date("2017"),
+            jobName: 'Formation - Web & Apps Coding (Bac+2)',
+            company: 'Samsung Campus - Epitech',
+            description: 'Formation gratuite filiale de Epitech orienté sur les métier du web.',
+            role: 'Etudiant',
+        },
+    ]
 }
