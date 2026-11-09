@@ -84,66 +84,91 @@
             <!--Desktop-->
             
             <div class=" flex-1 min-h-0 skills-block  ">
-                <OpenedBlock title="Compétences">
-                     <!--Front-->
-                    <div class="flex items-center mb-1 p-5">
-                        <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
-                    </div>
-                    <h3 class="font-semibold sections-text">Front-End: </h3>
-                    <ul class=" grid grid-cols-1 sm:grid-cols-2 gap-1 w-full   p-2 mb-5">
-                        <!--loop-->
-                        {#each about.skills.front as front, index (index) }
-                            <li class="language-block flex justify-center items-center font-bold h-20">
-                                <img class="icons-general mr-2" src="/{front.icon}" alt="icone {front.name}" /> <div>{ front.name }</div>
-                            </li>    
+                <div class="h-2/5 xl:hidden mb-2">
+                    <OpenedBlock title="Formation">
+                        <!--Formations-->
+                        {#each about.formations as  formation, index (index)}
+                            <div class="flex items-center mb-2">
+                                <div class="dates-formations">
+                                    <p class="font-bold">
+                                        {formation.startDate.getFullYear()}
+                                    </p>
+                                </div>
+                                <div >
+                                    <h3 class="font-bold">
+                                        {formation.jobName}
+                                    </h3>
+                                    <p class="font-light">
+                                        {formation.company}
+                                    </p>
+                                </div>
+                            </div>
                         {/each}
-                    </ul>
+                    </OpenedBlock>
+                </div>
 
-                    <!--Back-->
-                    <div class="flex items-center mb-1 p-5">
-                        <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
-                    </div>
-                    <h3 class="font-semibold sections-text">Back-End: </h3>
-                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-1 w-full   p-2 mb-3">
-                        <!--loop-->
-                        {#each about.skills.back as back, index (index) }
-                            <li class="language-block flex justify-center items-center font-bold h-20">
-                                <img class="icons-general mr-2" src="/{back.icon}" alt="icone {back.name}" /> <div>{ back.name }</div>
-                            </li>    
-                        {/each} 
-                    </ul>
+                <div class="h-3/5 xl:h-full pb-2 xl:pb-0">
+                    <OpenedBlock title="Compétences">
+                        <!--Front-->
+                        <div class="flex items-center mb-1 p-5">
+                            <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
+                        </div>
+                        <h3 class="font-semibold sections-text">Front-End: </h3>
+                        <ul class=" grid grid-cols-1 sm:grid-cols-2 gap-1 w-full   p-2 mb-5">
+                            <!--loop-->
+                            {#each about.skills.front as front, index (index) }
+                                <li class="language-block flex justify-center items-center font-bold h-20">
+                                    <img class="icons-general mr-2" src="/{front.icon}" alt="icone {front.name}" /> <div>{ front.name }</div>
+                                </li>    
+                            {/each}
+                        </ul>
 
-                    <!--Workflows-->
-                    <div class="flex items-center mb-1 p-5">
-                        <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
-                    </div>
-                    <h3 class="font-semibold sections-text">Workflows: </h3>
-                    <ul class=" grid grid-cols-1 sm:grid-cols-2 gap-1 w-full  p-2 mb-3">
-                        <!--loop-->
-                        {#each about.skills.workflow as workflow, index (index) }
-                            <li class="language-block flex justify-center items-center font-bold h-20">
-                                <img class="icons-general mr-2" src="/{workflow.icon}" alt="icone {workflow.name}" /> <div>{ workflow.name }</div>
-                            </li>    
-                        {/each}
-                    </ul>
+                        <!--Back-->
+                        <div class="flex items-center mb-1 p-5">
+                            <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
+                        </div>
+                        <h3 class="font-semibold sections-text">Back-End: </h3>
+                        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-1 w-full   p-2 mb-3">
+                            <!--loop-->
+                            {#each about.skills.back as back, index (index) }
+                                <li class="language-block flex justify-center items-center font-bold h-20">
+                                    <img class="icons-general mr-2" src="/{back.icon}" alt="icone {back.name}" /> <div>{ back.name }</div>
+                                </li>    
+                            {/each} 
+                        </ul>
 
-                    <!--Logiciel et plugin-->
-                    <div class="flex items-center mb-1 p-5">
-                        <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
-                    </div>
-                    <h3 class="font-semibold sections-text">Logiciel et plugin: </h3>
-                    <ul class="front-block grid grid-cols-1 sm:grid-cols-2 gap-1 w-full   p-2">
-                        <!--loop-->
-                        {#each about.skills.plugin as plugin, index (index) }
-                            <li class="language-block flex justify-center items-center font-bold h-20">
-                            <img class="icons-general mr-2" src="/{plugin.icon}" alt="icone {plugin.name}" /> <div>{ plugin.name }</div>
-                            </li>    
-                        {/each}
-                    </ul>
-                    <div class="flex items-center mb-1 p-5">
-                        <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
-                    </div>
-                </OpenedBlock>
+                        <!--Workflows-->
+                        <div class="flex items-center mb-1 p-5">
+                            <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
+                        </div>
+                        <h3 class="font-semibold sections-text">Workflows: </h3>
+                        <ul class=" grid grid-cols-1 sm:grid-cols-2 gap-1 w-full  p-2 mb-3">
+                            <!--loop-->
+                            {#each about.skills.workflow as workflow, index (index) }
+                                <li class="language-block flex justify-center items-center font-bold h-20">
+                                    <img class="icons-general mr-2" src="/{workflow.icon}" alt="icone {workflow.name}" /> <div>{ workflow.name }</div>
+                                </li>    
+                            {/each}
+                        </ul>
+
+                        <!--Logiciel et plugin-->
+                        <div class="flex items-center mb-1 p-5">
+                            <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
+                        </div>
+                        <h3 class="font-semibold sections-text">Logiciel et plugin: </h3>
+                        <ul class="front-block grid grid-cols-1 sm:grid-cols-2 gap-1 w-full   p-2">
+                            <!--loop-->
+                            {#each about.skills.plugin as plugin, index (index) }
+                                <li class="language-block flex justify-center items-center font-bold h-20">
+                                <img class="icons-general mr-2" src="/{plugin.icon}" alt="icone {plugin.name}" /> <div>{ plugin.name }</div>
+                                </li>    
+                            {/each}
+                        </ul>
+                        <div class="flex items-center mb-1 p-5">
+                            <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
+                        </div>
+                    </OpenedBlock>
+                </div>
                
             </div>
         </div>
@@ -192,26 +217,46 @@
 
             <!--Desktop XL-->
             <div class="hidden xl:block w-full h-full">
-                <OpenedBlock title="A propos">
-                    <div class="flex items-center mb-1">
-                        <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
-                    </div>
+                <div class="h-3/5 mb-2">
+                    <OpenedBlock title="A propos">
+                        <p class="p-1  ">
+                            {about.description}
+                        </p>
 
-                    <p class="p-4 text-xl leading-8 2xl:text-2xl 2xl:leading-9">
-                        {about.description}
-                    </p>
+                        <div class="flex items-center mb-1">
+                            <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
+                        </div>
 
-                    <div class="flex items-center mb-1">
-                        <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
-                    </div>
-
-                    <p class="px-4 pt-2 font-bold">● {availability.status}</p>
-                    <ul class="flex flex-wrap gap-2 px-4 pt-2">
-                        {#each availability.tags as tag, index (index)}
-                            <li class="language-block px-3 py-1 font-bold">{tag}</li>
+                        <p class="px-4 pt-2 font-bold">● {availability.status}</p>
+                        <ul class="flex flex-wrap gap-2 px-4 pt-2">
+                            {#each availability.tags as tag, index (index)}
+                                <li class="language-block px-3 py-1 font-bold">{tag}</li>
+                            {/each}
+                        </ul>
+                    </OpenedBlock>
+                </div>
+                <div class="h-2/5 flex flex-col content-between pb-2">
+                    <OpenedBlock title="Formation">
+                        <!--Formations-->
+                        {#each about.formations as  formation, index (index)}
+                            <div class="flex items-center mb-2">
+                                <div class="dates-formations">
+                                    <p class="font-bold">
+                                        {formation.startDate.getFullYear()}
+                                    </p>
+                                </div>
+                                <div >
+                                    <h3 class="font-bold">
+                                        {formation.jobName}
+                                    </h3>
+                                    <p class="font-light">
+                                        {formation.company}
+                                    </p>
+                                </div>
+                            </div>
                         {/each}
-                    </ul>
-                </OpenedBlock>
+                    </OpenedBlock>
+                </div>
             </div>
                 
         </div>
@@ -231,5 +276,15 @@
         font-size: 1.8rem;
         font-weight: 700;
         cursor: pointer;
+    }
+
+    .dates-formations {
+        padding: 10px;
+        background: var(--focus-text-color);
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+        height: 65px;
+        box-shadow: 3px 3px 0px var(--shadow-elements-color);
     }
 </style>

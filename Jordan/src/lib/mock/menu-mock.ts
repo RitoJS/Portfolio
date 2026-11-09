@@ -15,11 +15,11 @@ export const menuMock: Menu[] = [
         link: '/works',
         icon: '',
     },
-    {
+    /*{
         label: 'Hobbies',
         link: '/hobbies',
         icon: '',
-    },
+    },*/
     {
         label: 'Contact',
         link: '/contact',
