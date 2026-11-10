@@ -297,7 +297,7 @@
 		"
 	>
 		<div
-			class={`${contentVisible ? 'h-5' : ''} drag-handle`}
+			class={`${contentVisible ? 'h-12' : ''} drag-handle`}
 			onpointerdown={onDragStart}
 			onpointermove={onDragMove}
 			onpointerup={onDragEnd}
