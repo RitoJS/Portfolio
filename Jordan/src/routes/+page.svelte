@@ -8,7 +8,7 @@
 
     const info = getContext<{ text: string | null }>('info');
 
-    const avatarMobile: string = 'assets/imgs/home2.png';
+    const avatarMobile: string = 'assets/imgs/profil.png';
 
     const links = [
         { href: '/works',   label: 'Works',   sub: 'Parcours et projets',   desc: 'Mon parcours, mes formations et mes projets.' },
