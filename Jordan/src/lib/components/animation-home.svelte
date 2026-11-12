@@ -31,11 +31,6 @@
             </div>
         {/each}
     </div>
-
-    <p class="hint">
-        <span class="when-idle">SURVOLER POUR ASSEMBLER</span>
-        <span class="when-hover">PAGE ASSEMBLÉE</span>
-    </p>
 </div>
 
 <style>
@@ -117,16 +112,11 @@
         letter-spacing: 0.08em;
         color: var(--ink);
     }
-    .when-hover { display: none; }
-    .scene:hover .when-idle { display: none; }
-    .scene:hover .when-hover { display: inline; }
 
     /* mouvement réduit : page assemblée, sans animation */
     @media (prefers-reduced-motion: reduce) {
         .piece { transform: none; transition: none; }
         .bob { animation: none; background-color: var(--fill); }
         .slot { opacity: 0; }
-        .when-idle { display: none; }
-        .when-hover { display: inline; }
     }
 </style>
