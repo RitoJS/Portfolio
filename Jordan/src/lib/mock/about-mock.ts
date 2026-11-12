@@ -1,7 +1,7 @@
 import type { About } from "$lib/types/about";
 export const aboutMock: About = {
-    avatarDesktop: 'assets/imgs/home6.png',
-    avatarMobile: 'assets/imgs/home2.png',
+    avatarDesktop: 'assets/imgs/profil.png',
+    avatarMobile: 'assets/imgs/profil.png',
     name: 'Jordan Sama',
     age: new Date("1994-08-02"),
     job: 'Developpeur Web Front-End / Intégrateur Web',
