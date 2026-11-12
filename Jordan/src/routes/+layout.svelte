@@ -177,6 +177,15 @@
     <!--Desktop-->
     <div class="hidden md:flex w-1/2 h-full items-center justify-end pr-3">
         <div class="footer-note flex items-center gap-2">
+            {#each links as link, index (index)}
+                {#if link.showMobile}
+                    <div class="ml-2">
+                        <a class="link" href={link.link}>
+                            <img class=" w-9 h-9 m-auto" src="/{link.icon}" alt="icone {link.name}" />
+                        </a>
+                    </div>
+                {/if}
+            {/each}
             <span>Fait avec</span>
             <a  class="link flex items-center gap-1 font-semibold" href={links[0].link}>
                 {links[0].name}
