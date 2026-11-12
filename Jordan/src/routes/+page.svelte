@@ -11,8 +11,8 @@
     const avatarMobile: string = 'assets/imgs/profil.png';
 
     const links = [
-        { href: '/works',   label: 'Works',   sub: 'Parcours et projets',   desc: 'Mon parcours, mes formations et mes projets.' },
         { href: '/about',   label: 'About',   sub: 'Profil et compétences', desc: 'Qui je suis et ce que je sais faire.' },
+        { href: '/works',   label: 'Works',   sub: 'Parcours et projets',   desc: 'Mon parcours, mes formations et mes projets.' },
         /*{ href: '/hobbies', label: 'Hobbies', sub: 'Hors du code',          desc: 'Ce que je fais quand je ne code pas.' },*/
         { href: '/contact', label: 'Contact', sub: 'Formulaire et liens',   desc: 'Un message, un projet ? Écris-moi.' }
     ];
