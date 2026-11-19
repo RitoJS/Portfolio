@@ -4,7 +4,7 @@
     import { beforeNavigate } from '$app/navigation';
     import Gallery from '$lib/components/gallery.svelte';
     import AnimationLetter from '$lib/components/animation-letter.svelte';
-	import AnimationHome from '$lib/components/animation-home.svelte';
+    import AnimationHome from '$lib/components/animation-home.svelte';
 
     const info = getContext<{ text: string | null }>('info');
 
@@ -12,12 +12,12 @@
 
     const links = [
         { href: '/about',   label: 'About',   sub: 'Profil et compétences', desc: 'Qui je suis et ce que je sais faire.' },
-        { href: '/works',   label: 'Works',   sub: 'Parcours et projets',   desc: 'Mon parcours, mes formations et mes projets.' },
+        { href: '/works', label: 'Works', sub: 'Parcours et projets', desc: 'Mes expériences et mes projets.' },
         /*{ href: '/hobbies', label: 'Hobbies', sub: 'Hors du code',          desc: 'Ce que je fais quand je ne code pas.' },*/
         { href: '/contact', label: 'Contact', sub: 'Formulaire et liens',   desc: 'Un message, un projet ? Écris-moi.' }
     ];
 
-    const tags: string[] = ['react', 'svelte', 'vue', 'nextjs'];
+    const tags: string[] = ['React', 'Svelte', 'Vue', 'Next.js'];
 
     const availability = {
         open: true,
@@ -25,7 +25,7 @@
         rows: [
             { label: 'Contrat', value: 'CDI, CDD' },
             { label: 'Début',   value: 'Immédiat' },
-            { label: 'Lieu',    value: 'Paris  / Télétravail' }
+            { label: 'Lieu',    value: 'Paris / Télétravail' }
         ]
     };
 
@@ -234,7 +234,7 @@
         background-color: var(--focus-text-color);
     }
 
-    /* Desktop  */
+    /* Desktop */
     @media (min-width: 1024px) {
         .menu-item {
             background-color: transparent;

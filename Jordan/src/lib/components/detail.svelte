@@ -18,6 +18,20 @@
             <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
         </div>
 
+        {#if work.screenshots?.length}
+            <div class="section-imgs">
+                <h3>Images :</h3>
+                <div class="gallery-block grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  justify-items-center">
+                    {#each work.screenshots as screenshot, index (index) }
+                        <div class="p-2">
+                            <Gallery images={work.screenshots} miniature={screenshot} startIndex={index} className="h-full w-full object-cover " />
+                        </div>
+                        
+                    {/each}
+                </div>
+            </div>
+        {/if}
+
         <div class="sections">
             <h3>Poste:</h3>
             <p>
@@ -83,20 +97,6 @@
          <div class="flex items-center mb-1 mt-8">
             <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
         </div>
-
-        {#if work.screenshots?.length}
-            <div class="section-imgs">
-                <h3>Images :</h3>
-                <div class="gallery-block grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  justify-items-center">
-                    {#each work.screenshots as screenshot, index (index) }
-                        <div class="p-2">
-                            <Gallery images={work.screenshots} miniature={screenshot} startIndex={index} className="h-full w-full object-cover " />
-                        </div>
-                        
-                    {/each}
-                </div>
-            </div>
-        {/if}
         
 
     </div>

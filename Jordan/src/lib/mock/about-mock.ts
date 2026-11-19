@@ -160,7 +160,7 @@ export const aboutMock: About = {
             },
         ],
     },
-    description: " Je suis Jordan, développeur front-end. Ce que je préfère, c’est le moment où une maquette devient une interface qui bouge. Chez Elap, j’ai conçu et intégré de zéro une web app de planning en Angular. Depuis, je me forme en continu sur React, Vue, Next.js et Svelte en construisant des projets réels.",
+    description: " Je suis Jordan, développeur front-end. \nCe que je préfère, c’est le moment où une maquette devient une interface qui bouge. \nChez Elap, j’ai conçu et intégré de zéro une web app de planning en Angular. \nDepuis, je me forme en continu sur React, Vue, Next.js et Svelte en construisant des projets réels.",
     formations: [
         {
             startDate: new Date("2010"),

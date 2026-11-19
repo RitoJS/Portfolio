@@ -13,7 +13,7 @@
     
     const info = getContext<{ text: string | null }>('info');
     const dataWorks: Works[] = worksMock;
-    const noInfo: string = "Cliquez sur les icônes pour afficher les détails"
+    const noInfo: string = "Cliquez sur les icônes pour afficher les détails.";
 
     onMount(() => {
         info.text = noInfo;

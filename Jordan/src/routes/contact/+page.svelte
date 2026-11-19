@@ -6,7 +6,7 @@
     import type { ContactPage } from "$lib/types/contact";
     import { getContext } from "svelte";
     import { enhance } from '$app/forms';
-    import {  toast } from "svelte-sonner";
+    import { toast } from "svelte-sonner";
     import ToasterCustom from '$lib/components/toaster-custom.svelte';
     const description = getContext<{ text: string | null }>('info');
 
@@ -42,7 +42,7 @@
 
 <article class="w-full h-full overflow-y-auto">
     <div>
-        <AnimationLetter data="Contactez - moi" className="page-title w-full text-left" />
+        <AnimationLetter data="Contactez-moi" className="page-title w-full text-left" />
     </div>
     <div class="flex flex-col  lg:flex-row-reverse justify-between lg:justify-center w-full p-5">
         <div class="lg:w-5/10">
@@ -60,7 +60,7 @@
                 >
                     <div class="form-input  mt-3 md:mt-5 lg:mt-0 ">
                         <label class="ml-6.5 label-form" for="nom">
-                            <AnimationLetter data="Nom: " className='' delays={20} />
+                            <AnimationLetter data="Nom : " className='' delays={20} />
                         </label>
                         <div class="flex w-full">
                             <div class=" w-3 md:block thick-line-pages mr-2"></div>
@@ -83,7 +83,7 @@
                     
                     <div class="form-input  mt-3 md:mt-5 lg:mt-0">
                         <label class="ml-6.5 label-form"  for="email">
-                             <AnimationLetter data="Adresse Email: " className='' delays={20} />
+                             <AnimationLetter data="Adresse e-mail : " className='' delays={20} />
                         </label>
                         <div class="flex w-full ">
                             <div class=" w-3 md:block thick-line-pages mr-2"></div>
@@ -106,7 +106,7 @@
 
                     <div class="form-input  mt-3 md:mt-5 lg:mt-0">
                         <label class="ml-6.5 label-form" for="sujet">
-                             <AnimationLetter data="Sujet: " className='' delays={20} />
+                             <AnimationLetter data="Sujet : " className='' delays={20} />
                         </label>
                         <div class="w-full flex">
                             <div class=" w-3 md:block thick-line-pages mr-2"></div>
@@ -128,7 +128,7 @@
 
                     <div class="form-textarea   mt-3 md:mt-5 lg:mt-0">
                         <label class="ml-6.5 label-form" for="description">
-                             <AnimationLetter data="Description: " className='' delays={20} />
+                             <AnimationLetter data="Description : " className='' delays={20} />
                         </label>
                         <div class="flex w-full">
                             <div class=" w-3 md:block thick-line-pages mr-2"></div>
@@ -170,10 +170,10 @@
                      <div 
                         class="external-link-block p-2 m-2 transition-transform duration-300 hover:scale-125"
                         role="presentation"
-                        onmouseenter={() => (description.text = `Mon adresse mail: jsscottsama@gmail.com`)}
+                        onmouseenter={() => (description.text = `Mon adresse mail : jsscottsama@gmail.com`)}
                         onmouseleave={() => (description.text = noInfo)}
                     >
-                        <img class="cursor-pointer m-auto imgs-icons" src="/assets/icons/mail.svg" alt="icone de l'addresse mail" />
+                        <img class="cursor-pointer m-auto imgs-icons" src="/assets/icons/mail.svg" alt="Icône de l'adresse mail" />
                     </div>
                 </li>
                  <li>
@@ -184,7 +184,7 @@
                         onmouseleave={() => (description.text = noInfo)}
                     >
                         <a href="/assets/files/CV_Jordan_Sama.pdf" target="_blank" rel="noopener noreferrer">
-                            <img class="cursor-pointer m-auto imgs-icons" src="/assets/icons/resume.svg" alt="icone de mon cv" />
+                            <img class="cursor-pointer m-auto imgs-icons" src="/assets/icons/resume.svg" alt="Icône de mon CV" />
                         </a>
                     </div>
                 </li>
@@ -192,11 +192,11 @@
                     <div 
                         class="external-link-block p-2 m-2 transition-transform duration-300 hover:scale-125"
                         role="presentation"
-                        onmouseenter={() => (description.text = `Aller sur ma page github`)}
+                        onmouseenter={() => (description.text = `Aller sur ma page GitHub`)}
                         onmouseleave={() => (description.text = noInfo)}
                     >
                         <a href="https://github.com/RitoJS" target="_blank" rel="noopener noreferrer">
-                            <img class="cursor-pointer m-auto imgs-icons" src="/assets/icons/git.svg" alt="icone de ma page github" />
+                            <img class="cursor-pointer m-auto imgs-icons" src="/assets/icons/git.svg" alt="Icône de ma page GitHub" />
                         </a>
                     </div>
                 </li>
@@ -209,7 +209,7 @@
                             onmouseleave={() => (description.text = noInfo)}
                          >
                             <a href={info.link} target="_blank" rel="noopener noreferrer">
-                                <img class="cursor-pointer m-auto imgs-icons" src="/{info.icon}" alt="icone de {info.name}" />
+                                <img class="cursor-pointer m-auto imgs-icons" src="/{info.icon}" alt="Icône de {info.name}" />
                             </a>
                         </div>
                     </li>

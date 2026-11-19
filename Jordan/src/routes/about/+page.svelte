@@ -73,7 +73,7 @@
             </div>
             <div class="hidden lg:block lg:h-3/5 xl:hidden flex-1 min-h-0 ">
                 <OpenedBlock title="A propos">
-                    <p>
+                    <p class="whitespace-pre-line">
                         {about.description}
                     </p>
                 </OpenedBlock>
@@ -205,7 +205,7 @@
                             <div class="mr-0.5">&bull;</div><hr class="block block-separator w-full m-1" /><div class="ml-0.5">&bull;</div>
                         </div>
                     </div>
-                    <p class="p-5 text-[1.1rem]">
+                    <p class="p-5 text-[1.1rem] whitespace-pre-line">
                         {about.description}
                     </p>
 
@@ -219,7 +219,7 @@
             <div class="hidden xl:block w-full h-full">
                 <div class="h-3/5 mb-2">
                     <OpenedBlock title="A propos">
-                        <p class="p-1  ">
+                        <p class="p-1  whitespace-pre-line">
                             {about.description}
                         </p>
 
